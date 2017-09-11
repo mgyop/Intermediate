@@ -3,7 +3,7 @@ return array(
     'db' => array(
         'user' => 'root',
         'password' => 'root',
-        'dbname' => 'myshop',
+        'dbname' => 'vipmanages',
         'host' => '127.0.0.1',
     ),
     'app' => array(
