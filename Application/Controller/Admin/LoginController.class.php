@@ -23,17 +23,16 @@ class LoginController extends Controller
             }
             //密码正确保存到session中
             //修改最后登录ip
-<<<<<<< HEAD
+
 
            // dump($_SERVER);die;
-=======
+
             $ip = getClientIP();
 //            dump($ip);die;
             $ip_int = ip2long($ip);
             //修改员工表 last_loginip
             $update_sql = $login->setUpdateSql(['last_loginip'=>$ip_int],$rows['member_id']);
             $login->editLoginIp($update_sql);
->>>>>>> 36dd0947aeb27b22e7a1e72f64381a83a1ee20d5
             $_SESSION['member_userinfo'] = $rows;//sesssion在底层代码已打开
             if (isset($post['bear'])) {//判断是否记住密码,保存cookie
                 setcookie('member_id',$rows['member_id'],time()+60*60*7,'/','.vipmanager.com');

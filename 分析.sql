@@ -87,9 +87,6 @@ INSERT INTO `users` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '�
 
 SET FOREIGN_KEY_CHECKS=0;
 
--- ----------------------------
--- Table structure for plans
--- ----------------------------
 DROP TABLE IF EXISTS `plans`;
 CREATE TABLE `plans` (
   `plan_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '预约id',
