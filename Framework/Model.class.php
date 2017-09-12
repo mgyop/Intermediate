@@ -10,7 +10,7 @@ abstract class Model
 {
     protected $table;   //保存表名
     //可以让继承提交中的类都使用该属性.
-    public $db;
+    protected $db;
 
     //存放错误信息
     protected  $error;
@@ -18,6 +18,8 @@ abstract class Model
     public function __construct()
     {
         $this->db = DB::getInstance($GLOBALS['config']['db']);
+        //初始化表名
+        $this->getTableName();
     }
 
 
@@ -33,7 +35,7 @@ abstract class Model
      * 获取表名
      * @return string tableName
      */
-    public function getTableName(){
+    private function getTableName(){
         $className = get_class($this); //获取类名
         $tableName = strtolower(strstr($className,'M',true)); //获取表名
         $this->table = $tableName; //保存表名
