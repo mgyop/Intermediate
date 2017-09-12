@@ -1,9 +1,8 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/8/30
+ * Class Base
+ * 自动验证
  */
 class Base extends Controller
 {
