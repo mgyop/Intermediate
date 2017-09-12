@@ -25,12 +25,9 @@
     <td style="text-align:right;">所属部分：</td>
     <td>
      <select class="textBox" name="group_id">
-      <optgroup label="西餐">
-      <option value="1">洗脚部</option>
-      </optgroup>
-      <optgroup label="中餐">
-      <option>洗剪吹</option>
-      </optgroup>
+         <?php foreach($data as $v):?>
+         <option value="<?=$v['group_id']?>"><?=$v['name']?></option>
+         <?php endforeach;?>
      </select>
     </td>
    </tr>

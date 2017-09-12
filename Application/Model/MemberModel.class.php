@@ -22,5 +22,9 @@ class MemberModel extends Model
         }
 
     }
+    public function insert($post){
+        $sql = $this->setInsertSql($post);
+        return $this->db->query($sql);
+    }
 
 }

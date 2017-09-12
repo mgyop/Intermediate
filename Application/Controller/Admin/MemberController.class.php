@@ -27,14 +27,17 @@ class MemberController extends Controller
            //post 提交处理表单
            $post = $_POST;
            $MemberModel = D('member');
-           $sql = $MemberModel->setInsertSql($post);
-           dump($sql);
-           die;
+           $result = $MemberModel->insert($post);
+           if($result){
+               $this->success('index.php?p=Admin&c=Member&a=index','添加成功',2);
+           }
+           $this->error('index.php?p=Admin&c=Member&a=add','添加失败',2);
        }
        //获取部门表数据
        $GroupModel = D('group');
        $data = $GroupModel->getData();
-       dump($data);die;
+       //分配数据
+       $this->assign('data',$data);
        //展示添加页面
        $this->display('add');
    }

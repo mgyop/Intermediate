@@ -67,7 +67,7 @@ abstract class Model
      * @return array|null|void
      */
     public function getAll(){
-        $sql = "select * from {$this->table}";
+        $sql = "select * from `{$this->table}`";
         $result = $this->db->fetchAll($sql);
         return $result;
     }
