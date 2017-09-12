@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function index(){
         //echo "后台首页";
-        $this->display('login');
+        $this->display('index');
     }
     /**
      * 菜单栏
