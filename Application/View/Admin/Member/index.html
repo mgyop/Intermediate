@@ -15,6 +15,30 @@
   </div>
   <table class="list-style Interlaced">
    <tr>
+    <td colspan="10">
+     <form action="" name="serach" method="get">
+      <input type="hidden" name="p" value="Admin">
+      <input type="hidden" name="c" value="Member">
+      <input type="hidden" name="a" value="index">
+        <img src="./Public/Admin/Member/images/icon_search.gif" width="26" height="22" border="0" alt="search" />
+        <!-- 分类 -->
+        <select name="group_id">
+         <option value="">所有部门</option>
+         <?php foreach($GroupData as $v):?>
+          <option value="<?=$v['group_id']?>"  <?=($serach['group_id']??"")==$v['group_id']?'selected':''?> > <?=$v['name']?> </option>
+         <?php endforeach;?>
+        </select>
+
+        用户名 <input type="text" name="username" size="15" value="<?=$serach['username']??''?>"/>
+        姓名 <input type="text" name="realname" size="15" value="<?=$serach['realname']??''?>"/>
+        手机号 <input type="text" name="telephone" size="15" value="<?=$serach['telepone']??''?>"/>
+        <!-- 关键字 -->
+        关键字 <input type="text" name="keyword" size="15" value="<?=$keyword??''?>"/>
+        <input type="submit" value=" 搜索 " class="button" />
+     </form>
+    </td>
+   </tr>
+   <tr>
     <th>头像</th>
     <th>管理员账户名</th>
     <th>真实姓名</th>
@@ -33,7 +57,7 @@
     <td class="center"><?=$v['realname']?></td>
     <td class="center"><?=$v['sex']== 1 ? '男': ($v['sex']== 0 ? '女':'保密') ?></td>
     <td class="center"><?=$v['telephone']?></td>
-    <td class="center"><?=$v['group_id']?></td>
+    <td class="center"><?=$GroupData[$v['group_id']]['name']?></td>
     <td class="center"><?=$v['is_admin']==1?'是':'否'?></td>
     <td class="center"><?=date("Y-m-d H:i:s",$v['last_login'])?></td>
     <td class="center"><?=long2ip($v['last_loginip'])?></td>
