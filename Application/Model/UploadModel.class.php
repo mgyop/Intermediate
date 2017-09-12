@@ -18,9 +18,13 @@ class UploadModel extends Model
 
         //上传失败返回false
         if($file['error'] == 0 ){
-            if($file['error'] == 4){ // 不修改
+            if($file['error'] == 4){ // 不修改,返回 1
                 return 1;
             }else{ //处理文件
+                if($file['size']>$this->max_size){
+                    $this->error = "图片最大不超过2M";
+                    return false;
+                }
                 //得到文件后缀
                 $ext = explode('/',$file['type'])[1];
                 //得到原路径

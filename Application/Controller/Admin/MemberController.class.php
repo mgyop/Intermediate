@@ -13,6 +13,18 @@ class MemberController extends Controller
    public function index(){
        $MemberModel = D('member');
        $rows = $MemberModel->getAll();
-       dump($rows);die;
+       //分配数据
+       $this->assign('rows',$rows);
+       //展示页面
+       $this->display('index');
    }
+
+    /**
+     * 添加员工
+     */
+   public function add(){
+       //展示添加页面
+       $this->display('add');
+   }
+   public function edit(){}
 }
