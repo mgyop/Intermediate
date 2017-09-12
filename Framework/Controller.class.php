@@ -10,8 +10,8 @@ class Controller
 {
 
     //默认member头像图片路径
-    protected $path=PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg";
-    protected $thumb_path = PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg";
+    protected $path;
+    protected $thumb_path;
     private $datas = []; //存放数据容器. 该容器中的数据需要在页面中使用到.
     public $startTime;
     public $lastTime;
@@ -19,6 +19,9 @@ class Controller
     public function __construct()
     {
         $this->startTime=explode(' ', microtime());
+        //初始化默认路径
+        $this->thumb_path = str_replace(ROOT_PATH,'./',PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg");
+        $this->path = str_replace(ROOT_PATH,'./',PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg");
     }
     public function __destruct()
     {

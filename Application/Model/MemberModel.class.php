@@ -38,6 +38,19 @@ class MemberModel extends Model
         return $this->db->query($sql);
     }
     public function update($data){
+        //密码为空不修改
+        if(empty($data['password'])){
+            unset($data['password']);
+        }else{
+            //密码必须为数字字符串
+            if(!is_numeric($data['password'])){
+                $this->error = "必须为数字";
+            }
+            if(count($data['password']) != 11){
+                $this->error =  "手机号长度须为11位";
+                return false;
+            }
+        }
         //用户名不能为空
         if(empty($data['username'])){
             $this->error = "用户名不能为空";
@@ -53,7 +66,10 @@ class MemberModel extends Model
             $this->error = "手机不能为空";
             return false;
         }
-        dump($data);die;
+        //准备sql
+        $update_sql = $this->setUpdateSql($data,$data['member_id']);
+        //执行
+        return $this->db->query($update_sql);
     }
 
     /**

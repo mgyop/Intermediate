@@ -36,7 +36,6 @@ class MemberController extends Controller
                //默认头像
                $post['photo']=$this->path;
                $post['thumb_photo'] = $this->thumb_path;
-               die;
            }else{
                $post['photo']=$path;
                $post['thumb_photo'] = $UploadModel->thumb($path,46,46);
@@ -74,8 +73,6 @@ class MemberController extends Controller
        }
    }
    public function edit(){
-       //接收id
-       $id = $_GET['id']??0;
        //创建member模型
        $MemberModel = D('member');
        //post 提交处理表单数据,保存修改
@@ -88,20 +85,20 @@ class MemberController extends Controller
            $path = $UploadModel->img_upload($file,'member_photo/');
            if( $path === false){
                $this->error("index.php?p=Admin&c=Member&a=edit&id={$post['member_id']}",$UploadModel->getError(),2);
-           }elseif($path === 1){
-               //不修改
-           }else{
+           }elseif($path != 1){
                $post['photo']=$path;
                $post['thumb_photo'] = $UploadModel->thumb($path,46,46);
            }
            //失败返回false
            $result = $MemberModel->update($post);
            if($result === false){
-               $this->error('index.php?p=Admin&c=Member&a=index&id={$id}',$MemberModel->getError(),2);
+               $this->error("index.php?p=Admin&c=Member&a=index&edit={$post['member_id']}",$MemberModel->getError(),2);
            }
            $this->success('index.php?p=Admin&c=Member&a=index','修改成功',2);
        }
        //get方式提交回显数据
+       //接收id
+       $id = $_GET['id']??0;
        //根据id获取一条member数据
        $row = $MemberModel->getOne($id);
        //分配数据
