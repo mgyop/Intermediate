@@ -11,7 +11,6 @@ class IndexController extends Controller
         //echo "后台首页";
         $this->display('login');
     }
-
     /**
      * 菜单栏
      */
