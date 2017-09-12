@@ -1,7 +1,7 @@
 day  1
 
 //数据库创建  mmsys
-后台 :
+后台登陆 :
    1 LoginController.class.php
 
    2 MembersController.class.php
