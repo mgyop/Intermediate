@@ -1,6 +1,5 @@
 day  1
 /**************************************常量表**********************************************/
-      ROOT_PATH    ---  网站根目录
       APP_PATH     ---  应用文件application的目录
       FRAMEWORK_PATH    ---  Framework的目录
       TOOLS_PATH   ---  Tools的目录
@@ -14,13 +13,10 @@ day  1
 /********操作记录*********/
 
 //数据库创建  mmsys
-  create database if not exists mmsys default charset utf8;
-后台 :
-   1 LoginController.class.php // 登录控制器
 
-   2 MemberModel.class.php     // 会员模型
+create database if not exists mmsys default charset utf8;
 
- //member 员工表
+//member 员工表
  create table member(
   member_id int unsigned auto_increment primary key,
   username varchar(100) not null default '' comment '员工名字',
@@ -34,5 +30,13 @@ day  1
   is_admin tinyint not null default 0 comment '是否管理员 1 是 0 否',
   photo varchar(200) not null default '' comment '头像'
  )engine=innodb default charset=utf8;
+
 //插入一条管理员
 insert into member values (null,'admin',md5('admin'),'admin',1,'15756877647',2,0,0,1,'photo');
+后台 :
+   1 LoginController.class.php // 登录控制器
+
+   1 MemberController.class.php // 员工控制器
+
+   2 MemberModel.class.php     // 会员模型
+
