@@ -72,6 +72,10 @@ class MemberModel extends Model
         return $this->db->query($update_sql);
     }
 
+<<<<<<< HEAD
+}
+
+=======
     /**
      * 执行修改last_loginip
      * @param $sql
@@ -81,3 +85,4 @@ class MemberModel extends Model
         return $this->db->query($sql);
     }
 }
+>>>>>>> 36dd0947aeb27b22e7a1e72f64381a83a1ee20d5
