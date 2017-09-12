@@ -10,7 +10,7 @@
  * @param string $dirName 文件名
  * @return string
  */
-function img_upload($files,$dirName='wt'){
+function img_upload($files,$dirName='logo/'){
 
     if($files['error'] === 0){
         //获取文件类型
@@ -19,7 +19,7 @@ function img_upload($files,$dirName='wt'){
             die("文件格式不正确");
         }
         $fileName = uniqid('logo_').'.'.$options[1];
-        $dir= './Uploads/'.$dirName.'/'.date('Y-m-d-H',time()).'/';
+        $dir= UPLOADS_PATH.$dirName.date('Y-m-d-H',time()).'/';
         if(!is_dir($dir)){
             mkdir($dir,0777,true);
         }
