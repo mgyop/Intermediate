@@ -6,6 +6,9 @@
  */
 class UserModel extends Model
 {
+    private $arr_condition = [];  //保存条件
+    private $str_condition = '';  //保存拼接过后的字符串
+    private $where='';
     /**
      * 验证前台登陆信息
      */
@@ -20,6 +23,66 @@ class UserModel extends Model
         } else {
             return $rows;
         }
+    }
+    /**
+     * 查询
+     * @param $data
+     * @return string
+     */
+    public function serach($data){
+        //username
+        if(!empty($data['username'])){
+            $this->arr_condition[] = "username='{$data['username']}'";
+        }
+        //status
+        if(!empty($data['realname'])){
+            $this->arr_condition[] = "realname='{$data['realname']}'";
+        }
+        //telephone
+        if(!empty($data['telephone'])){
+            $this->arr_condition[] = "telephone='{$data['telephone']}'";
+        }
+        //keyword
+        if(!empty($data['keyword'])){
+            $this->arr_condition[] = "(username like '%{$data['keyword']}%' or realname like '%{$data['keyword']}%')";
+        }
+        $this->str_condition =implode(" and ",$this->arr_condition);
+        if(!empty($this->str_condition)){
+            $this->where = " where ".$this->str_condition;
+        }
+        return $this->where;
+    }
+    /**
+     * 插入一条数据
+     * @param $data
+     */
+    public function insert($data){
+        foreach($data as $k=>&$v){
+            $data[$k] = htmlspecialchars($v);
+        }
+        if(empty($data['username'])){
+            $this->error = "用户名不能为空";
+            return false;
+        }
+        if(empty($data['realname'])){
+            $this->error = "真实姓名不能为空";
+            return false;
+        }
+        if(empty($data['telephone'])){
+            $this->error = "真实姓名不能为空";
+            return false;
+        }
+        if(empty($data['password'])){
+            $this->error = "密码不能为空";
+            return false;
+        }
+        if($data['password'] != $data['repassword']){
+            $this->error = "输入的密码不一致";
+            return false;
+        }
+        $data['password'] = md5($data['password']);
+        $sql = setInsertSql($data);
+        $this->db->query($sql);
     }
 
 }

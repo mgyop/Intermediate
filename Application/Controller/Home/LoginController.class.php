@@ -37,6 +37,34 @@ class LoginController extends Controller
             $this->error("index.php?p=Home&c=Login&a=");
         }
 
+    }/**
+ * 注册表单
+ */
+    public function register(){
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $post = $_POST;
+            $UserModel = D('user');
+            $result = $UserModel->insert($post);
+            if($result === false){
+                $this->error('index.php?p=Home&c=Login&a=register',$UserModel->getError(),2);
+                die;
+            }
+            $this->redirect('index.php?p=Admin&c=Login&a=login');
+            die;
+        }
+        $this->display('register');
+    }
+
+    /**
+     * 退出登录
+     * 清空session  和 cookie
+     */
+    public function logout(){
+        setcookie('PHPSESSID',null,time()-1,'/','.vipmanager');
+        session_unset();
+        session_destroy();
+        $this->redirect('index.php?p=Home&c=Login&a=login');
+        die;
     }
 
 }
