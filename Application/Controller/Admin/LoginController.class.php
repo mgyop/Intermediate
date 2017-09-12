@@ -14,13 +14,25 @@ class LoginController extends Controller
         } else {
             //验证登陆信息
             //接收数据
-            $post=$_POST;
-            dump($post);die;
+            $post = $_POST;
+            //dump($post);die;
             //处理数据
-            //页面显示
+            $login = D("member");
+            //var_dump($login);die;
+            $rows = $login->login($post);
+            //var_dump($rows);die;
+            //如果登陆失败
+            if ($rows == false) {
+                $this->error("index.php?p=Admin&c=Login&a=login", "用户名或者密码错误", 3);
+            }
+            //密码正确保存到session中
+            $_SESSION['userinfo'] = $rows;//sesssion在底层代码已打开
+            if (isset($post['bear'])) {//判断是否记住密码
+                $_COOKIE['member_id'] = $rows['member_id'];
+                $_COOKIE['password'] = $rows['password'];
+            }
+            $this->error("index.php?p=Admin&c=Index&a=index");
         }
-
-
     }
 
 }
