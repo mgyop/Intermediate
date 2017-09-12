@@ -52,4 +52,31 @@ abstract class Model
         return $id;
     }
 
+    /**
+     * 根据id查询一条记录,适用于修改 回显
+     * @param $id
+     * @return array|mixed|null
+     */
+    public function getOne($id){
+        //sql 准备
+        $sql = "select * from {$this->table} where id=$id";
+        return $this->db->fetchRow($sql);
+    }
+
+    /**
+     * 获取所有数据
+     * @return array|null|void
+     */
+    public function getAll(){
+        $sql = "select * from {$this->table}";
+        $result = $this->db->fetchAll($sql);
+        return $result;
+    }
+    public function setUpdateSql($arr){
+        $sql = "update {$this->table} set ";
+        dump($arr);die;
+        foreach($arr as $k=>){}
+        return $sql;
+    }
+
 }
