@@ -8,6 +8,9 @@ class MemberModel extends Model
 {
     public function login($post)
     {
+        /**
+         * 验证登陆功能
+         */
         $password = md5($post['password']);
         $sql = "select * from member where username='{$post['username']}'and password='{$password}'";
         $rows = $this->db->fetchRow($sql);

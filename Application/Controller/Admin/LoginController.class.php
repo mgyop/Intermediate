@@ -7,7 +7,7 @@
 class LoginController extends Controller
 {   //1.显示登陆页面
     public function login()
-    {//index.php?p=Admin&c=Login&a=login
+    {//login.php?p=Admin&c=Login&a=login
         // dump($_SERVER);DIE;
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $this->display("Login");
@@ -23,7 +23,7 @@ class LoginController extends Controller
             //var_dump($rows);die;
             //如果登陆失败
             if ($rows == false) {
-                $this->error("index.php?p=Admin&c=Login&a=login", "用户名或者密码错误", 3);
+                $this->error("login.php?p=Admin&c=Login&a=login", "用户名或者密码错误", 3);
             }
             //密码正确保存到session中
             $_SESSION['userinfo'] = $rows;//sesssion在底层代码已打开
@@ -31,7 +31,7 @@ class LoginController extends Controller
                 $_COOKIE['member_id'] = $rows['member_id'];
                 $_COOKIE['password'] = $rows['password'];
             }
-            $this->error("index.php?p=Admin&c=Index&a=index");
+            $this->error("login.php?p=Admin&c=Index&a=login");
         }
     }
 

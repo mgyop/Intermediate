@@ -9,7 +9,7 @@ class IndexController extends Controller
 {
     public function index(){
         //echo "后台首页";
-        $this->display('index');
+        $this->display('login');
     }
     public function bar(){
         $this->display('bar');
