@@ -7,8 +7,17 @@
  */
 class IndexController extends Controller
 {
-     public function index(){
-         echo "我是首页";
-         $MembersModel = D('members');//new MembersModel();
-     }
+    public function index(){
+        //echo "后台首页";
+        $this->display('index');
+    }
+    public function bar(){
+        $this->display('bar');
+    }
+    public function top(){
+        $this->display('top');
+    }
+    public function main(){
+        $this->display('main');
+    }
 }

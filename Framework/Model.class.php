@@ -37,9 +37,8 @@ abstract class Model
      */
     private function getTableName(){
         $className = get_class($this); //获取类名
-        $tableName = strtolower(strstr($className,'M',true)); //获取表名
+        $tableName = strtolower(str_replace('Model','',$className)); //获取表名
         $this->table = $tableName; //保存表名
-        return $this->table;
     }
 
     /**
@@ -72,13 +71,20 @@ abstract class Model
         $result = $this->db->fetchAll($sql);
         return $result;
     }
-    public function setUpdateSql($arr){
-        $sql = "update {$this->table} set ";
-        dump($arr);die;
-        foreach($arr as $k=>$V){
 
+    /**
+     * 生成update语句
+     * @param $arr  关联数组
+     * @return string $sql
+     */
+    public function setUpdateSql($arr,$id){
+        $arr = ['id'=>1,'name'=>'admin'];
+        $sql = "update {$this->table} set ";
+        foreach($arr as $k=>$V){
+            $new_arr[] ="{$k}='{$v}'";
         }
-        return $sql;
+        $str  = implode(',',$new_arr);
+        return $sql.$str." where id={$id}";
     }
 
 }
