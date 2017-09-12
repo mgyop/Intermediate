@@ -55,4 +55,13 @@ class MemberModel extends Model
         }
         dump($data);die;
     }
+
+    /**
+     * 执行修改last_loginip
+     * @param $sql
+     * @return bool|mysqli_result|void
+     */
+    public function editLoginIp($sql){
+        return $this->db->query($sql);
+    }
 }

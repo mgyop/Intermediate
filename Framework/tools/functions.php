@@ -3,7 +3,22 @@
  * Created by Administrator.
  * Date: 2017/8/29
  */
-
+/**
+ * 获取客户端IP地址
+ * @return array|false|string
+ */
+function getClientIP()
+{
+    global $ip;
+    if (getenv("HTTP_CLIENT_IP"))
+        $ip = getenv("HTTP_CLIENT_IP");
+    elseif(getenv("HTTP_X_FORWARDED_FOR"))
+        $ip = getenv("HTTP_X_FORWARDED_FOR");
+    elseif(getenv("REMOTE_ADDR"))
+        $ip = getenv("REMOTE_ADDR");
+    else $ip = "0";
+    return $ip;
+}
 /**
  * 功能: 图片上传,
  * @param $files
