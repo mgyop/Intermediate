@@ -53,8 +53,8 @@ function img_upload($files,$dirName='logo/'){
  * @param $len  页码长度
  * @return array [$str,$data]
  */
-function getPage($tableName,$offset,$p,$len,$orderby){
-    $sql = "select * from ".$tableName;
+function getPage($tableName,$offset,$p,$len,$orderby,$where){
+    $sql = "select * from ".$tableName.$where;
     $page = New Page($sql);
     return $page->page($offset,$p,$len,$orderby);
 }

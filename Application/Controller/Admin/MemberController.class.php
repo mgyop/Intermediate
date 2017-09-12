@@ -11,10 +11,34 @@ class MemberController extends Controller
      * 员工列表
      */
    public function index(){
+       $GroupModel = D('group');
        $MemberModel = D('member');
-       $rows = $MemberModel->getAll();
+       //获取条件
+       $get = $_GET;
+       //取得有效条件
+       $where = $MemberModel->serach($get);
+       $page = $_GET['page'] ?? 1;
+       //加入条件到分页中
+       $rows= getPage('member',3,$page,5,'member_id desc',$where);
+       //改装下搜索数据
+       $serach=[];
+       foreach ($get as $k=>&$v){
+           if(!empty($v)){
+               $serach[$k] = $v;
+           }
+       }
        //分配数据
+       $this->assign('serach',$serach);
        $this->assign('rows',$rows);
+       //获取部门表数据
+       $GroupData = $GroupModel->getData();
+       $group_data = [];
+       //改装部门数据
+       foreach($GroupData as $k=>$v){
+           $group_data[$v['group_id']] = $v;
+       }
+       //分配数据
+       $this->assign('GroupData',$group_data);
        //展示页面
        $this->display('index');
    }

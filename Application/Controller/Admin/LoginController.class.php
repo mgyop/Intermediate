@@ -23,12 +23,14 @@ class LoginController extends Controller
             }
             //密码正确保存到session中
             //修改最后登录ip
+<<<<<<< HEAD
 
 
            // dump($_SERVER);die;
 
+=======
+>>>>>>> f36d987640bf0b864ebfbd1feaf96aa8b269c8c5
             $ip = getClientIP();
-//            dump($ip);die;
             $ip_int = ip2long($ip);
             //修改员工表 last_loginip
             $update_sql = $login->setUpdateSql(['last_loginip'=>$ip_int],$rows['member_id']);
