@@ -8,7 +8,7 @@ return array(
     ),
     'app' => array(
         'default_platform' => 'Admin',
-        'default_controller' => 'member',
-        'default_action' => 'index'
+        'default_controller' => 'Login',
+        'default_action' => 'Login'
     )
 );
