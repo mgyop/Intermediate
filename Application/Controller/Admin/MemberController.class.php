@@ -23,6 +23,14 @@ class MemberController extends Controller
      * 添加员工
      */
    public function add(){
+       if($_SERVER['REQUEST_METHOD'] === 'POST'){
+           //post 提交处理表单
+           $post = $_POST;
+           $MemberModel = D('member');
+           $sql = $MemberModel->setInsertSql($post);
+           dump($sql);
+           die;
+       }
        //展示添加页面
        $this->display('add');
    }

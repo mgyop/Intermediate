@@ -86,5 +86,16 @@ abstract class Model
         $str  = implode(',',$new_arr);
         return $sql.$str." where id={$id}";
     }
-
+    public function setInsertSql($arr){
+        $names = [];
+        $values = [];
+        foreach($arr as $k=>$v){
+            $names[] = $k;
+            $values[] = "'{$v}'";
+        }
+        $str_name = implode(',',$names);
+        $str_values = implode(',',$values);
+        $sql = "insert into {$this->table} ({$str_name}) values ({$str_values})";
+        return $sql;
+    }
 }

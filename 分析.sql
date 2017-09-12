@@ -40,3 +40,10 @@ insert into member values (null,'admin',md5('admin'),'admin',1,'15756877647',2,0
 
    2 MemberModel.class.php     // 会员模型
 
+//创建部门表
+create table `group`(
+  `group_id` int unsigned not null auto_increment primary key,
+  `name` varchar(50) not null default '' comment '部门名称'
+)engine=innodb default charset=utf8;
+
+insert into `group` values(null,'上层部门'),(null,'财务部'),(null,'人事部'),(null,'市场部'),(null,'采购部'),(null,'策划部'),(null,'洗脚部'),(null,'洗剪吹部');
