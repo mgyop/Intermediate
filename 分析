@@ -1,0 +1,10 @@
+day  1
+
+//数据库创建  mmsys
+后台 :
+   1 LoginController.class.php
+
+   2 MembersController.class.php
+
+ //members 员工表
+ create table
