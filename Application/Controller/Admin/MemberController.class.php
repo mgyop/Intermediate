@@ -31,6 +31,10 @@ class MemberController extends Controller
            dump($sql);
            die;
        }
+       //获取部门表数据
+       $GroupModel = D('group');
+       $data = $GroupModel->getData();
+       dump($data);die;
        //展示添加页面
        $this->display('add');
    }
