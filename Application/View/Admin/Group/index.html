@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>部门列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="./Public/Admin/Member/js/jquery.js"></script>
+<script src="./Public/Admin/Member/js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>部门列表</em></span>
+    <span class="modular fr"><a href="?p=Admin&c=Group&a=add" class="pt-link-btn">+添加部门</a></span>
+  </div>
+  <table class="list-style Interlaced">
+   <tr>
+    <th>id</th>
+    <th>名称</th>
+    <th>操作</th>
+   </tr>
+   <?php foreach($rows as $v):?>
+   <tr>
+    <td class="center"><?=$v['group_id']?></td>
+    <td class="center"><?=$v['name']?></td>
+    <td class="center">
+     <a href="index.php?p=Admin&c=group&a=edit&id=<?=$v['group_id']?>">编辑 |</a>
+     <a href="index.php?p=Admin&c=group&a=delete&id=<?=$v['group_id']?>">删除</a>
+    </td>
+   </tr>
+   <?php endforeach;?>
+  </table>
+ </div>
+</body>
+</html>

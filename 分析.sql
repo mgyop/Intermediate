@@ -69,8 +69,8 @@ CREATE TABLE `user` (
   `sex` tinyint(4) DEFAULT NULL COMMENT '性别',
   `telephone` varchar(11) NOT NULL COMMENT '电话',
   `remark` varchar(50) DEFAULT NULL COMMENT '备注',
-  `money` decimal(9,2) NOT NULL COMMENT '余额',
-  `is_vip` tinyint NOT NULL COMMENT '是否vip 1 是',
+  `money` decimal(9,2) NOT NULL default 0.00 COMMENT '余额',
+  `is_vip` tinyint NOT NULL default 0 COMMENT '是否vip 1 是',
   `photo` varchar(150) NOT NULL COMMENT '头像',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -89,8 +89,8 @@ INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '�
 
 SET FOREIGN_KEY_CHECKS=0;
 
-DROP TABLE IF EXISTS `plans`;
-CREATE TABLE `plans` (
+DROP TABLE IF EXISTS `plan`;
+CREATE TABLE `plan` (
   `plan_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '预约id',
   `name` varchar(30) NOT NULL COMMENT '套餐名字',
   `des` text COMMENT '套餐描述',

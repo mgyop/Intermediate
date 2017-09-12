@@ -15,7 +15,7 @@ class UserModel extends Model
     public function login($post){
 
         $password = md5($post['password']);
-        $sql = "select * from users where username='{$post['username']}'and password='{$password}'";
+        $sql = "select * from user where username='{$post['username']}'and password='{$password}'";
         $rows = $this->db->fetchRow($sql);
         //dump($rows);die;
         if ($rows == false) {
@@ -57,9 +57,11 @@ class UserModel extends Model
      * @param $data
      */
     public function insert($data){
+        dump($data);
         foreach($data as $k=>&$v){
             $data[$k] = htmlspecialchars($v);
         }
+        dump($data);
         if(empty($data['username'])){
             $this->error = "用户名不能为空";
             return false;
@@ -69,7 +71,7 @@ class UserModel extends Model
             return false;
         }
         if(empty($data['telephone'])){
-            $this->error = "真实姓名不能为空";
+            $this->error = "手机号码不能为空";
             return false;
         }
         if(empty($data['password'])){
@@ -80,8 +82,12 @@ class UserModel extends Model
             $this->error = "输入的密码不一致";
             return false;
         }
+        //删除data中的repassword;
+        unset($data['repassword']);
         $data['password'] = md5($data['password']);
-        $sql = setInsertSql($data);
+        echo 1;
+        $sql = $this->setInsertSql($data);
+        echo $sql;
         $this->db->query($sql);
     }
 
