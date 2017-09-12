@@ -47,7 +47,8 @@ abstract class Model
      * @return int
      */
     public function delOne(int $id){
-        $this->db->query("delete from {$this->table} where id={$id}");
+        $column = $this->table."_id";
+        $this->db->query("delete from {$this->table} where {$column}={$id}");
         return $id;
     }
 
@@ -57,8 +58,10 @@ abstract class Model
      * @return array|mixed|null
      */
     public function getOne($id){
+        //获取列名
+        $column = $this->table."_id";
         //sql 准备
-        $sql = "select * from {$this->table} where id=$id";
+        $sql = "select * from {$this->table} where {$column}=$id";
         return $this->db->fetchRow($sql);
     }
 

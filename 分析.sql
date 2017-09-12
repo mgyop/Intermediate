@@ -30,6 +30,8 @@ create database if not exists mmsys default charset utf8;
   is_admin tinyint not null default 0 comment '是否管理员 1 是 0 否',
   photo varchar(200) not null default '' comment '头像'
  )engine=innodb default charset=utf8;
+//member表 增加一个缩略图字段
+ alter table member add column thumb_photo varchar(200) not null default '' comment '缩略图';
 
 //插入一条管理员
 insert into member values (null,'admin',md5('admin'),'admin',1,'15756877647',2,0,0,1,'photo');

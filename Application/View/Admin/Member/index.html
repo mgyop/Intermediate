@@ -28,7 +28,7 @@
    </tr>
    <?php foreach($rows as $v):?>
    <tr>
-    <td class="center"><?=$v['photo']?></td>
+    <td class="center"><img  style="border:1px solid skyblue;display: inline-block;width:46px;height:46px;border-radius: 23px;" src="<?=$v['thumb_photo']?>" alt="头像"></td>
     <td class="center"><?=$v['username']?></td>
     <td class="center"><?=$v['realname']?></td>
     <td class="center"><?=$v['sex']== 1 ? '男': ($v['sex']== 0 ? '女':'保密') ?></td>
@@ -38,8 +38,8 @@
     <td class="center"><?=date("Y-m-d H:i:s",$v['last_login'])?></td>
     <td class="center"><?=long2ip($v['last_loginip'])?></td>
     <td class="center">
-     <a href="revise_password.html"><img src="./Public/Admin/Member/images/icon_edit.gif"/></a>
-     <a><img src="./Public/Admin/Member/images/icon_drop.gif"/></a>
+     <a href="index.php?p=Admin&c=Member&a=edit&id=<?=$v['member_id']?>"><img src="./Public/Admin/Member/images/icon_edit.gif" alt="修改"/></a>
+     <a href="index.php?p=Admin&c=Member&a=delete&id=<?=$v['member_id']?>"><img src="./Public/Admin/Member/images/icon_drop.gif" alt="删除"/></a>
     </td>
    </tr>
    <?php endforeach;?>

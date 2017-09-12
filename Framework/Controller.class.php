@@ -9,6 +9,9 @@
 class Controller
 {
 
+    //默认member头像图片路径
+    protected $path=PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg";
+    protected $thumb_path = PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg";
     private $datas = []; //存放数据容器. 该容器中的数据需要在页面中使用到.
     public $startTime;
     public $lastTime;

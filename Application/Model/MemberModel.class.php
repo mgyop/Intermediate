@@ -6,6 +6,11 @@
  */
 class MemberModel extends Model
 {
+    /**
+     * 登录验证
+     * @param $post
+     * @return array|bool|mixed|null
+     */
     public function login($post)
     {
         /**
@@ -22,9 +27,32 @@ class MemberModel extends Model
         }
 
     }
+
+    /**
+     * 插入一条记录
+     * @param $post
+     * @return bool|mysqli_result|void
+     */
     public function insert($post){
         $sql = $this->setInsertSql($post);
         return $this->db->query($sql);
     }
-
+    public function update($data){
+        //用户名不能为空
+        if(empty($data['username'])){
+            $this->error = "用户名不能为空";
+            return false;
+        }
+        //姓名不能为空
+        if(empty($data['realname'])){
+            $this->error = "姓名不能为空";
+            return false;
+        }
+        //手机不能为空
+        if(empty($data['realname'])){
+            $this->error = "手机不能为空";
+            return false;
+        }
+        dump($data);die;
+    }
 }
