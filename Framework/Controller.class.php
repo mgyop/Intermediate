@@ -100,7 +100,11 @@ JS;
             if($time==0){ //立即跳转
                 header("Location: $url");
             }else{  //延迟跳转
-                require COMMEN_PATH."error.html"; //跳转之前输出提示信息
+                if(file_exists(COMMEN_PATH."error.html")){
+                    require COMMEN_PATH."error.html"; //跳转之前输出提示信息
+                }else{
+                    echo '<h2>'.$msg.'</h2>';  //跳转之前输出提示信息
+                }
                 header("Refresh: $time;url=$url");
             }
         }else{
@@ -132,7 +136,11 @@ JS;
             if($time==0){ //立即跳转
                 header("Location: $url");
             }else{  //延迟跳转
-                require COMMEN_PATH."success.html"; //跳转之前输出提示信息
+                if(file_exists(COMMEN_PATH."success.html")){
+                    require COMMEN_PATH."success.html"; //跳转之前输出提示信息
+                }else{
+                    echo '<h2>'.$msg.'</h2>';  //跳转之前输出提示信息
+                }
                 header("Refresh: $time;url=$url");
             }
         }else{
