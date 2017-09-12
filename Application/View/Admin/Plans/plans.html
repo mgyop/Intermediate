@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <frameset rows="76,*" framespacing="0" border="0">
+        <frame src="index.php?p=Admin&c=Index&a=top" id="header-frame" name="header-frame" frameborder="no" scrolling="no">
+        <frameset cols="180, 10, *" framespacing="0" border="0" id="frame-body">
+            <frame src="index.php?p=Admin&c=Index&a=menu" frameborder="no" scrolling="yes">
+            <frame src="index.php?p=Admin&c=Index&a=bar" frameborder="no" scrolling="no">
+            <frame src="index.php?p=Admin&c=Index&a=main" name="mainCont" frameborder="no" scrolling="yes">
+        </frameset>
+    </frameset><noframes></noframes>
+</head>
+<body>
+</body>
+<body>
+<div class="wrap">
+    <div class="page-title">
+        <span class="modular fl"><i class="user"></i><em>员工列表</em></span>
+        <span class="modular fr"><a href="?p=Admin&c=Plans&a=plans" class="pt-link-btn">+添加员工</a></span>
+    </div>
+    <table class="list-style Interlaced">
+        <tr>
+            <th>套餐名称</th>
+            <th>套餐描述</th>
+            <th>套餐金额</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        <?php foreach($rows as $v):?>
+        <tr>
+            <td class="center"><?=$v['name']?></td>
+            <td class="center"><?=$v['des']?></td>
+            <td class="center"><?=$v['money']?></td>
+            <td class="center"><?=$v['status']==1?'上线':'下线'?></td>
+
+            <td class="center">
+                <a href="index.php?p=Admin&c=plans&a=plans&id=<?=$v['plans_id']?>"><img src="./Public/Admin/Member/images/icon_edit.gif" alt="修改"/></a>
+            </td>
+        </tr>
+        <?php endforeach;?>
+    </table>
+</div>
+</body>
+</html>

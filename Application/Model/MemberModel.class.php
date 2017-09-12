@@ -55,4 +55,6 @@ class MemberModel extends Model
         }
         dump($data);die;
     }
+
 }
+

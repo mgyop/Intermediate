@@ -49,3 +49,56 @@ create table `group`(
 )engine=innodb default charset=utf8;
 
 insert into `group` values(null,'上层部门'),(null,'财务部'),(null,'人事部'),(null,'市场部'),(null,'采购部'),(null,'策划部'),(null,'洗脚部'),(null,'洗剪吹部');
+
+//前台登陆表
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `user_id` int(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员id',
+  `username` varchar(30) NOT NULL COMMENT '用户名',
+  `password` char(32) NOT NULL COMMENT '密码',
+  `realname` varchar(30) NOT NULL COMMENT '名字',
+  `sex` tinyint(4) DEFAULT NULL COMMENT '性别',
+  `telephone` varchar(11) NOT NULL COMMENT '电话',
+  `remark` varchar(50) DEFAULT NULL COMMENT '备注',
+  `money` decimal(8,2) NOT NULL COMMENT '余额',
+  `is_vip` tinyint(10) NOT NULL COMMENT '是否vip',
+  `photo` varchar(100) NOT NULL COMMENT '头像',
+  PRIMARY KEY (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '刘亦菲', '1', '1234545232', '明星', '10000.00', '1', '');
+
+
+
+
+//创建美发套餐表
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for plans
+-- ----------------------------
+DROP TABLE IF EXISTS `plans`;
+CREATE TABLE `plans` (
+  `plan_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '预约id',
+  `name` varchar(30) NOT NULL COMMENT '套餐名字',
+  `des` text COMMENT '套餐描述',
+  `money` decimal(5,2) unsigned NOT NULL COMMENT '套餐金额',
+  `status` tinyint(5) NOT NULL COMMENT '状态',
+  PRIMARY KEY (`plan_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of plans
+-- ----------------------------
+INSERT INTO `plans` VALUES ('1', '夏日', '靓丽动感', '188.88', '1');
