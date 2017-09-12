@@ -11,8 +11,8 @@ class MemberController extends Controller
      * 员工列表
      */
    public function index(){
-       $MemberModel = D('member');
-       $rows = $MemberModel->getAll();
+       $page = $_GET['page'] ?? 1;
+       $rows= getPage('member',1,$page,5,'member_id desc');
        //分配数据
        $this->assign('rows',$rows);
        //展示页面

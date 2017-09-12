@@ -5,16 +5,6 @@
  */
 
 /**
- * 分页类 -----实现效果-----> 分页对象调用page()方法,输出定长分页 页码
- *   1.方法: page(); 调用方法,实现分页
- *         1.获取分类数据
- *         2.返回 $data , $total
- *         3.页码显示范围设置
- *
- *   2.参数
- *        1.$offset (偏移量)  2.$sql (查询语句)  3.length (显示页码的范围)  4.
- */
-/**
  * Class Page
  */
 class Page{
@@ -67,7 +57,7 @@ class Page{
         //显示选中的页码
         $on = "color:red";
 
-        $str = "<div style='margin-top:50px;text-align: center;overflow:hidden '>";
+        $str = "<div style='align:right;text-align: center;overflow:hidden '>";
         $str .= "<a style='float:left;position:relative;top:5px;'>共{$pages}页</a>";
         $str .= '<a style="float:left;position:relative;top:5px;width:50px;height:20px;"  href="'.$url.'&page=1">首页</a>';
         //限制页码长度
@@ -100,11 +90,15 @@ class Page{
             }
         }
         //拼装页码  字符串
+        $str .= '<a style="position:relative;top:5px;float:left;width:50px;height:20px;" href="'.$url.'&page='.($p-1<1?1:$p-1).'">上一页</a>';
         for($i=$first;$i<=$last;++$i){
             $selected = $i == $p ? $on : '';
             $str .= "<a style='line-height:23px;font-size:14px;text-decoration:none;border:1px solid gray;display:block;float:left;margin:3px 5px;width:20px;height:20px;".$selected."'; href='{$url}&page={$i}'>{$i}</a>";
         }
+        $str .= '<a style="position:relative;top:5px;float:left;width:50px;height:20px;" href="'.$url.'&page='.($p+1>$pages?$pages:$p+1).'">下一页</a>';
         $str .= '<a style="position:relative;top:5px;float:left;width:50px;height:20px;" href="'.$url.'&page='.$pages.'">尾页</a>';
+
+        $str .= '<input id="go" style="float: left;margin-top: 5px;width: 35px;" type="text" name="go" > <a style="position:relative;top:5px;float:left;width:50px;height:20px;" href="'.$url.'&page=" onclick="this.href=this.href+document.getElementById(\'go\').value">go</a>';
         $str .= "</div><div style='clear: both;'></div>";
         return $res = [$str,$p_data];
      }
