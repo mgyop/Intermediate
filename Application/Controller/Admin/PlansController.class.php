@@ -6,10 +6,9 @@ class PlansController extends Controller
      */
     public function plans(){
         //查询所有的数据
-        $manager=D("plans");
-        $row= $manager->plans();
-        //dump($row);die;
-        $this->assign('rows',$row);
-        $this->redirect("index.php?p=Admin&c=plans&a=plans");
+        $PlanSModel = D("plans");
+        $rows= $PlanSModel->plans();
+        $this->assign('rows',$rows);
+        $this->display("plans");
     }
 }
