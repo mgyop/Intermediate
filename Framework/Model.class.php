@@ -81,13 +81,14 @@ abstract class Model
      * @return string $sql
      */
     public function setUpdateSql($arr,$id){
-        $arr = ['id'=>1,'name'=>'admin'];
-        $sql = "update {$this->table} set ";
-        foreach($arr as $k=>$V){
+        //获取列名
+        $column = $this->table."_id";
+        $sql = "update `{$this->table}` set ";
+        foreach($arr as $k=>$v){
             $new_arr[] ="{$k}='{$v}'";
         }
         $str  = implode(',',$new_arr);
-        return $sql.$str." where id={$id}";
+        return $sql.$str." where {$column}={$id}";
     }
     public function setInsertSql($arr){
         $names = [];

@@ -56,5 +56,17 @@ class MemberModel extends Model
         dump($data);die;
     }
 
+<<<<<<< HEAD
 }
 
+=======
+    /**
+     * 执行修改last_loginip
+     * @param $sql
+     * @return bool|mysqli_result|void
+     */
+    public function editLoginIp($sql){
+        return $this->db->query($sql);
+    }
+}
+>>>>>>> 36dd0947aeb27b22e7a1e72f64381a83a1ee20d5
