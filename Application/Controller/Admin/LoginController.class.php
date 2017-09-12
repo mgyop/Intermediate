@@ -26,10 +26,10 @@ class LoginController extends Controller
                 $this->error("index.php?p=Admin&c=Login&a=login", "用户名或者密码错误", 3);
             }
             //密码正确保存到session中
-            $_SESSION['userinfo'] = $rows;//sesssion在底层代码已打开
-            if (isset($post['bear'])) {//判断是否记住密码
-                $_COOKIE['member_id'] = $rows['member_id'];
-                $_COOKIE['password'] = $rows['password'];
+            $_SESSION['member_userinfo'] = $rows;//sesssion在底层代码已打开
+            if (isset($post['bear'])) {//判断是否记住密码,保存cookie
+                setcookie('member_id',$rows['member_id'],time()+60*60*7,'/','.vipmanager.com');
+                setcookie('member_password',$rows['password'],time()+60*60*7,'/','.vipmanager.com');
             }
             $this->success("index.php?p=Admin&c=Index&a=index");
         }
