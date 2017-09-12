@@ -33,49 +33,47 @@ class MemberModel extends Model
      * @param $post
      * @return bool|mysqli_result|void
      */
-    public function insert($post){
+    public function insert($post)
+    {
         $sql = $this->setInsertSql($post);
         return $this->db->query($sql);
     }
-    public function update($data){
+
+    public function update($data)
+    {
         //密码为空不修改
-        if(empty($data['password'])){
+        if (empty($data['password'])) {
             unset($data['password']);
-        }else{
+        } else {
             //密码必须为数字字符串
-            if(!is_numeric($data['password'])){
+            if (!is_numeric($data['password'])) {
                 $this->error = "必须为数字";
             }
-            if(count($data['password']) != 11){
-                $this->error =  "手机号长度须为11位";
+            if (count($data['password']) != 11) {
+                $this->error = "手机号长度须为11位";
                 return false;
             }
         }
         //用户名不能为空
-        if(empty($data['username'])){
+        if (empty($data['username'])) {
             $this->error = "用户名不能为空";
             return false;
         }
         //姓名不能为空
-        if(empty($data['realname'])){
+        if (empty($data['realname'])) {
             $this->error = "姓名不能为空";
             return false;
         }
         //手机不能为空
-        if(empty($data['realname'])){
+        if (empty($data['realname'])) {
             $this->error = "手机不能为空";
             return false;
         }
         //准备sql
-        $update_sql = $this->setUpdateSql($data,$data['member_id']);
+        $update_sql = $this->setUpdateSql($data, $data['member_id']);
         //执行
         return $this->db->query($update_sql);
     }
-
-<<<<<<< HEAD
-}
-
-=======
     /**
      * 执行修改last_loginip
      * @param $sql
@@ -85,4 +83,4 @@ class MemberModel extends Model
         return $this->db->query($sql);
     }
 }
->>>>>>> 36dd0947aeb27b22e7a1e72f64381a83a1ee20d5
+
