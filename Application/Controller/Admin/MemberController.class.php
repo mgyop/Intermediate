@@ -135,7 +135,4 @@ class MemberController extends Controller
        //展示页面
        $this->display('edit');
    }
-
-
-
 }
