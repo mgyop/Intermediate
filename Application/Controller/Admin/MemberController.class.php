@@ -12,6 +12,6 @@ class MemberController extends Controller
      */
    public function index(){
        $MemberModel = D('member');
-       $MemberModel->getAll();
+       $rows = $MemberModel->getAll();
    }
 }

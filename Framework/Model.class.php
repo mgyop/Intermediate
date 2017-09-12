@@ -75,7 +75,9 @@ abstract class Model
     public function setUpdateSql($arr){
         $sql = "update {$this->table} set ";
         dump($arr);die;
-        foreach($arr as $k=>){}
+        foreach($arr as $k=>$V){
+
+        }
         return $sql;
     }
 
