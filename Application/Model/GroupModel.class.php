@@ -7,5 +7,11 @@
  */
 class GroupModel extends Model
 {
-   public function get
+    /**
+     * 获取所有数据
+     * @return array|null|void
+     */
+   public function getData(){
+       return $this->getAll();
+   }
 }
