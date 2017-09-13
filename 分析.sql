@@ -52,6 +52,8 @@ insert into `group` values(null,'上层部门'),(null,'财务部'),(null,'人事
 <<<<<<< HEAD
 =======
 
+//这里遇到奇葩的问题,原因是表名为mysql的关键字导致curd都需要注意这个细节
+
 //前台登陆表
 
 

@@ -16,7 +16,7 @@ class UploadModel extends Model
      */
     public function img_upload($file,$filename='goods_logo/'){
         //上传失败返回false
-        if($file['error'] == 0 ){
+        if($file['error'] != 0 ){
             //上传失败
             $this->error = "文件上传出错";
             return false;
