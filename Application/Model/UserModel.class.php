@@ -9,6 +9,17 @@ class UserModel extends Model
     private $arr_condition = [];  //保存条件
     private $str_condition = '';  //保存拼接过后的字符串
     private $where='';
+
+    /**
+     * 根据 user_id 获取余额
+     * @param $user_id
+     * @return mix|mixed|null
+     */
+    public function getRemainder($user_id){
+        $sql = "select money from user where user_id={$user_id}";
+        $row = $this->db->fetchColumn($sql);
+        return $row;
+    }
     /**
      * 验证前台登陆信息
      */
@@ -92,8 +103,17 @@ class UserModel extends Model
      * @param $data
      */
     public function recharge($data){
+        //充值有惊喜哦
+        $money = $data['money'];
+        if($money >= 5000){
+            $money += 1000;
+        }elseif($money >= 1000){
+            $money += 800;
+        }elseif($money >= 500){
+            $money += 100;
+        }
         //准备sql
-        $sql = "update user set money=money+'{$data['money']}' where user_id='{$data['user_id']}'";
+        $sql = "update user set money=money+'{$money}' where user_id='{$data['user_id']}'";
         return $this->db->query($sql);
     }
     public function expense($data){

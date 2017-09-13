@@ -111,7 +111,7 @@ DROP TABLE  IF not EXISTS `history`;
 create table `history`(
   history_id int(8) unsigned not null auto_increment primary key,
   user_id int not null comment '会员id',
-  member_id int not null comment '服务员工id',
+  member_id int not null default 0 comment '服务员工id',
   type tinyint unsigned not null default 1 comment '类型 0 充值 1 消费',
   amount decimal(9,2) not null default 0 comment '金额',
   content varchar(50) not null default '' comment '消费内容',
@@ -119,7 +119,8 @@ create table `history`(
   remainder decimal(9,2) not null comment '余额'
 )engine=innodb default charset=utf8;
 
-
+//member_id添加默认值
+alter table `history` modify column member_id int not null default 0 comment '服务员工id';
 //创建order预约表
 //order 为关键字 注意
 create table `order`(

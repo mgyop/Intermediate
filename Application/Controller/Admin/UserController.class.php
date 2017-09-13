@@ -98,6 +98,19 @@ class UserController extends Controller
             if(!$result){
                 $this->error('index.php?p=Admin&c=User&a=recharge&id='.$post['user_id']);
             }else{
+                //生成充值记录
+                $HistoryModel = D('history');
+                $insert_data = [];
+                $insert_data['type'] = 0;
+                $insert_data['user_id'] = $post['user_id'];
+                $insert_data['amount'] = $post['money'];
+                $insert_data['content'] = "充值加薪";
+                $insert_data['time'] = time();
+                //获取会员的余额
+                $money = $UserModel->getRemainder($post['user_id']);
+                $insert_data['remainder'] = $money;
+                //执行写入记录
+                $HistoryModel->insert($insert_data);
                 $this->success('index.php?p=Admin&c=User&a=index','充值成功',2);
             }
         }
@@ -128,7 +141,6 @@ class UserController extends Controller
             }
             //成功,跳回首页
             $this->success('index.php?p=Admin&c=User&a=index','消费成功',2);
-            dump($post);die;
         }else{
             //展示消费表单
                //>>获取会员id

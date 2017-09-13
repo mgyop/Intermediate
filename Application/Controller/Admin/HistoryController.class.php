@@ -45,7 +45,7 @@ class HistoryController extends Controller
         $group_data = $GroupModel->getAll();
         //改装group_data 加入员工数据
         $new_arr = [];
-        foreach($group_data as $k=>&$v){
+        foreach($group_data as $k=>$v){
             foreach($mem_data as $k1=>$v1){
                 if($v['group_id'] == $v1['group_id']){
                     $new_arr[$v['name']][]= $v1;
