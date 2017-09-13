@@ -60,25 +60,27 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for users
 -- ----------------------------
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE `users` (
-  `user_id` int(5) unsigned NOT NULL AUTO_INCREMENT COMMENT '会员id',
-  `username` varchar(30) NOT NULL COMMENT '用户名',
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `user_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '会员id',
+  `username` varchar(50) NOT NULL COMMENT '用户名',
   `password` char(32) NOT NULL COMMENT '密码',
   `realname` varchar(30) NOT NULL COMMENT '名字',
   `sex` tinyint(4) DEFAULT NULL COMMENT '性别',
   `telephone` varchar(11) NOT NULL COMMENT '电话',
   `remark` varchar(50) DEFAULT NULL COMMENT '备注',
-  `money` decimal(8,2) NOT NULL COMMENT '余额',
-  `is_vip` tinyint(10) NOT NULL COMMENT '是否vip',
-  `photo` varchar(100) NOT NULL COMMENT '头像',
+  `money` decimal(9,2) NOT NULL default 0.00 COMMENT '余额',
+  `is_vip` tinyint NOT NULL default 0 COMMENT '是否vip 1 是',
+  `photo` varchar(150) NOT NULL COMMENT '头像',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+//user 增加一个缩略图字段
+ alter table user add column thumb_photo varchar(200) not null default '' comment '缩略图';
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '刘亦菲', '1', '1234545232', '明星', '10000.00', '1', '');
+INSERT INTO `user` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '刘亦菲', '1', '1234545232', '明星', '10000.00', '1', '');
 
 
 
@@ -87,8 +89,8 @@ INSERT INTO `users` VALUES ('1', 'admin', '21232f297a57a5a743894a0e4a801fc3', '�
 
 SET FOREIGN_KEY_CHECKS=0;
 
-DROP TABLE IF EXISTS `plans`;
-CREATE TABLE `plans` (
+DROP TABLE IF EXISTS `plan`;
+CREATE TABLE `plan` (
   `plan_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '预约id',
   `name` varchar(30) NOT NULL COMMENT '套餐名字',
   `des` text COMMENT '套餐描述',
@@ -101,4 +103,4 @@ CREATE TABLE `plans` (
 -- Records of plans
 -- ----------------------------
 INSERT INTO `plans` VALUES ('1', '夏日', '靓丽动感', '188.88', '1');
->>>>>>> 415f1d4415e6b899069d4d2366c66b50abddeeb8
+

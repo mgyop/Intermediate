@@ -50,7 +50,6 @@ class MemberController extends Controller
        if($_SERVER['REQUEST_METHOD'] === 'POST'){
            //post 提交处理表单
            $post = $_POST;
-//           dump($_FILES);die;
            //处理头像
            $UploadModel = new UploadModel();
            $path = $UploadModel->img_upload($_FILES['photo'],'member_photo/');

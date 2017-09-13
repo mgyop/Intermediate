@@ -20,7 +20,7 @@ class Controller
     {
         $this->startTime=explode(' ', microtime());
         //初始化默认路径
-        $this->thumb_path = str_replace(ROOT_PATH,'./',PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg");
+        $this->thumb_path = str_replace(ROOT_PATH,'./',PUBLIC_PATH."commen/logo_59b7bd174d368_46x46.jpeg");
         $this->path = str_replace(ROOT_PATH,'./',PUBLIC_PATH."commen/logo_59b7bd174d368.jpeg");
     }
     public function __destruct()

@@ -48,7 +48,7 @@ abstract class Model
      */
     public function delOne(int $id){
         $column = $this->table."_id";
-        $this->db->query("delete from {$this->table} where {$column}={$id}");
+        $this->db->query("delete from `{$this->table}` where {$column}={$id}");
         return $id;
     }
 
@@ -61,7 +61,7 @@ abstract class Model
         //获取列名
         $column = $this->table."_id";
         //sql 准备
-        $sql = "select * from {$this->table} where {$column}=$id";
+        $sql = "select * from `{$this->table}` where {$column}=$id";
         return $this->db->fetchRow($sql);
     }
 
@@ -99,7 +99,7 @@ abstract class Model
         }
         $str_name = implode(',',$names);
         $str_values = implode(',',$values);
-        $sql = "insert into {$this->table} ({$str_name}) values ({$str_values})";
+        $sql = "insert into `{$this->table}` ({$str_name}) values ({$str_values})";
         return $sql;
     }
 }

@@ -6,9 +6,9 @@
  */
 class MemberModel extends Model
 {
-    public $arr_condition = [];  //保存条件
+    private $arr_condition = [];  //保存条件
     private $str_condition = '';  //保存拼接过后的字符串
-    private $where='';
+    protected $where = "";
     /**
      * 登录验证
      * @param $post
@@ -91,7 +91,7 @@ class MemberModel extends Model
  */
     public function serach($data){
 //         dump($data);die;
-        //分类id
+        //部门id
         if(!empty($data['group_id'])){
             $this->arr_condition[] = "group_id='{$data['group_id']}'";
         }
@@ -100,12 +100,12 @@ class MemberModel extends Model
         if(!empty($data['username'])){
             $this->arr_condition[] = "username='{$data['username']}'";
         }
-        //status
+        //realname
         if(!empty($data['realname'])){
             $this->arr_condition[] = "realname='{$data['realname']}'";
         }
         //telephone
-        if(!empty($data['realname'])){
+        if(!empty($data['telephone'])){
             $this->arr_condition[] = "telephone='{$data['telephone']}'";
         }
         //keyword
