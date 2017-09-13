@@ -13,7 +13,12 @@ class OrderController extends Controller
         $orderModel = D("order");
         $row = $orderModel->order();
         //dump($row);die;
+        foreach ($row as &$value){
+            $value['status']==1?($value['status']="成功"):($value['status']==2?($value['status']="失败"):$value['status']='未处理');
+        }
+        dump($row);die;
         $this->assign('rows', $row);
+
 
         $this->display("index");
     }
