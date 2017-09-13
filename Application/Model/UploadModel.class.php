@@ -15,14 +15,15 @@ class UploadModel extends Model
      * @return string
      */
     public function img_upload($file,$filename='goods_logo/'){
+        //等于4 不修改
+        if($file['error'] == 4){ // 不修改,返回 1
+            return 1;
+        }
         //上传失败返回false
         if($file['error'] != 0 ){
             //上传失败
             $this->error = "文件上传出错";
             return false;
-        }
-        if($file['error'] == 4){ // 不修改,返回 1
-            return 1;
         }
         //处理文件
         if($file['size']>$this->max_size){

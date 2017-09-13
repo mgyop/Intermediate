@@ -150,4 +150,7 @@ class UserModel extends Model
             return $HistoryModel->insert($history_data);
         }
     }
+    public function update($data){
+        dump($data);die;
+    }
 }

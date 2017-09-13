@@ -29,6 +29,41 @@ class UserController extends Controller
        //展示页面
        $this->display('index');
    }
+    public function edit(){
+        //创建member模型
+        $UserModel = D('user');
+        //post 提交处理表单数据,保存修改
+        if($_SERVER['REQUEST_METHOD'] ==="POST"){
+            dump($_POST);
+            //接收表单数据
+            $post = $_POST;
+            //接收头像数据,处理头像
+            $file = $_FILES['photo'];
+            $UploadModel = new UploadModel();
+            $path = $UploadModel->img_upload($file,'user_photo/');
+            dump($path);
+            if( $path === false){
+                $this->error("index.php?p=Admin&c=User&a=edit&id={$post['user_id']}",$UploadModel->getError(),2);
+            }elseif($path != 1){
+                $post['photo']=$path;
+                $post['thumb_photo'] = $UploadModel->thumb($path,46,46);
+            }
+            //失败返回false
+            $result = $UserModel->update($post);
+            if($result === false){
+                $this->error("index.php?p=Admin&c=User&a=index&edit={$post['user_id']}",$UserModel->getError(),2);
+            }
+            $this->success('index.php?p=Admin&c=User&a=index','修改成功',2);
+        }else{
+            //get方式提交回显数据
+            //接收id
+            $id = $_GET['id']??0;
+            //根据id获取一条member数据
+            $row = $UserModel->getOne($id);
+            $this->assign('row',$row);
+            $this->display('edit');
+        }
+    }
     /**
      * 根据id删除
      */
@@ -121,17 +156,4 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * 充值和消费记录的查询
-     */
-    public function record(){
-         $user_id = $_GET['id']??0;
-         $UserModel = D('user');
-         //根据会员id获取记录
-         $history_data = $UserModel->getAll($user_id);
-         //分配数据到页面
-         $this->assign('history_data',$history_data);
-         //展示页面
-         $this->display('record');
-    }
 }
