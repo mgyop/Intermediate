@@ -30,6 +30,12 @@
     </td>
    </tr>
    <tr>
+    <td style="text-align:right;">确认密码：</td>
+    <td>
+     <input type="password" name="repassword" class="textBox length-long"/>
+    </td>
+   </tr>
+   <tr>
     <td style="text-align:right;">性别：</td>
     <td>
      男 <input type="radio" value="1" <?=$row['sex']==1?'checked':'';?> name="sex">
@@ -52,7 +58,7 @@
    <tr>
     <td style="text-align:right;">余额：</td>
     <td>
-     <input type="text" readonly name="money" value="<?=$row['money']?>" class="textBox length-long"/>
+     <input type="text" readonly value="<?=$row['money']?>" class="textBox length-long"/>
     </td>
    </tr>
    <tr>

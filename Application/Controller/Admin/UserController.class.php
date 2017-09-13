@@ -34,14 +34,12 @@ class UserController extends Controller
         $UserModel = D('user');
         //post 提交处理表单数据,保存修改
         if($_SERVER['REQUEST_METHOD'] ==="POST"){
-            dump($_POST);
             //接收表单数据
             $post = $_POST;
             //接收头像数据,处理头像
             $file = $_FILES['photo'];
             $UploadModel = new UploadModel();
             $path = $UploadModel->img_upload($file,'user_photo/');
-            dump($path);
             if( $path === false){
                 $this->error("index.php?p=Admin&c=User&a=edit&id={$post['user_id']}",$UploadModel->getError(),2);
             }elseif($path != 1){
@@ -71,6 +69,12 @@ class UserController extends Controller
         $id = $_GET['id']??0;
         //创建员工模型
         $UserModel = D('user');
+        //有记录的会员不能被删除
+        $HistoryModel = D('history');
+        $row = $HistoryModel->getUserData($id);
+        if(!empty($row)){
+            $this->error('index.php?p=Admin&c=User&a=index','我有记录,再删给你急',2);
+        }
         $result = $UserModel->delOne($id);
         if($result){
             $this->success('index.php?p=Admin&c=User&a=index');

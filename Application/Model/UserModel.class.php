@@ -57,11 +57,9 @@ class UserModel extends Model
      * @param $data
      */
     public function insert($data){
-        dump($data);
         foreach($data as $k=>&$v){
             $data[$k] = htmlspecialchars($v);
         }
-        dump($data);
         if(empty($data['username'])){
             $this->error = "用户名不能为空";
             return false;
@@ -85,9 +83,7 @@ class UserModel extends Model
         //删除data中的repassword;
         unset($data['repassword']);
         $data['password'] = md5($data['password']);
-        echo 1;
         $sql = $this->setInsertSql($data);
-        echo $sql;
         $this->db->query($sql);
     }
 
@@ -151,6 +147,44 @@ class UserModel extends Model
         }
     }
     public function update($data){
-        dump($data);die;
+        //去除xss
+        foreach($data as $k=>&$v){
+            $data[$k] = htmlspecialchars($v);
+        }
+        //用户名不能为空
+        if(empty($data['username'])){
+            $this->error = "用户名不能为空";
+            return false;
+        }
+        //真实姓名不能为空
+        if(empty($data['realname'])){
+            $this->error = "真实姓名不能为空";
+            return false;
+        }
+        //手机号码不能为空
+        if(empty($data['telephone'])){
+            $this->error = "手机号码不能为空";
+            return false;
+        }
+        //密码为空不修改
+        if(isset($data['password'])){
+            if(empty($data['password'])){
+                unset($data['password']);
+            }
+        }
+        if(isset($data['repassword'])){
+            //输入的密码不一致
+            if($data['password'] != $data['repassword']){
+                $this->error = "输入的密码不一致";
+                return false;
+            }
+        }
+        //删除data中的repassword;
+        unset($data['repassword']);
+        $data['password'] = md5($data['password']);
+//        $sql = $this->setInsertSql($data);
+        $user_id = array_shift($data);
+        $sql = $this->setUpdateSql($data,$user_id);
+        $this->db->query($sql);
     }
 }
