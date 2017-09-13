@@ -117,7 +117,8 @@ create table `history`(
   time int not null default 0 comment '消费时间',
   remainder decimal(9,2) not null comment '余额'
 )engine=innodb default charset=utf8;
-
+//修改history_id 的长度
+alter table  `history` change column history_id history_id int(8) unsigned not null auto_increment primary key;
 //创建order预约表
 //order 为关键字 注意
 create table `order`(

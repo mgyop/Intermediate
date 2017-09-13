@@ -100,4 +100,54 @@ class UserModel extends Model
         $sql = "update user set money=money+'{$data['money']}' where user_id='{$data['user_id']}'";
         return $this->db->query($sql);
     }
+    public function expense($data){
+        //在这里处理代金券
+        //待完成...........
+//        dump($data);die;
+        //根据user_id取得会员余额
+        $user_data = $this->getOne($data['user_id']);
+        //余额
+        $money = $user_data['money'];
+        //根据plan_id 获取套餐的价格
+        $PlanModel = D('plan');
+        $plan_data = $PlanModel->getOne($data['plan_id']);
+        //套餐价格
+        $price = $plan_data['money'];
+        //根据是否是会员自动打折5折
+        if($user_data['is_vip'] == 1){
+            if(floor($price/2) > $money){
+                $this->error = "余额不足";
+                return false;
+            }
+            //打折后的消费金额
+            $price = floor($price/2);
+        }else{
+            if($price > $money){
+                $this->error = "余额不足";
+                return false;
+            }
+        }
+        //可以消费,在这里更新余额
+        //构建关联数组
+        $money = $money-$price;
+        //准备sql
+        $sql = "update user set money='{$money}' where user_id={$data['user_id']}";
+        //执行sql
+        $result = $this->db->query($sql);
+        if($result){ //执行成功,写历史记录
+            //拼装关联数组,记录日志
+            $history_data = [];
+            $history_data['user_id'] = $data['user_id'];
+            $history_data['member_id'] = $data['member_id'];
+            $history_data['type'] = 1;
+            $history_data['amount'] = $price;
+            $history_data['content'] = $plan_data['des'];
+            $history_data['time'] = time();
+            $history_data['remainder'] = $money;
+            //创建history模型
+            $HistoryModel = D('history');
+            //插入记录
+            return $HistoryModel->insert($history_data);
+        }
+    }
 }
