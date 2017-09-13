@@ -1,14 +1,14 @@
 <?php
-class plansModel extends Model
+class planModel extends Model
 {
     /**
      * 美发套餐查询所有数据
      */
-    public function plans(){
+    public function plan(){
         return $this->getAll();
     }
     public function insert($post){
-        $sql="insert into plans set name='{$post['name']}',
+        $sql="insert into plan set name='{$post['name']}',
                 des='{$post['des']}',
                 money='{$post['money']}',
                 status='{$post['status']}'";

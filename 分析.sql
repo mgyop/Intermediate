@@ -93,18 +93,18 @@ SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS `plan`;
 CREATE TABLE `plan` (
-  `plan_id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '预约id',
-  `name` varchar(30) NOT NULL COMMENT '套餐名字',
+  `plan_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '预约id',
+  `name` varchar(200) NOT NULL COMMENT '套餐名字',
   `des` text COMMENT '套餐描述',
-  `money` decimal(5,2) unsigned NOT NULL COMMENT '套餐金额',
-  `status` tinyint(5) NOT NULL COMMENT '状态',
+  `money` decimal(9,2) unsigned NOT NULL COMMENT '套餐金额',
+  `status` tinyint NOT NULL COMMENT '状态',
   PRIMARY KEY (`plan_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of plans
 -- ----------------------------
-INSERT INTO `plans` VALUES ('1', '夏日', '靓丽动感', '188.88', '1');
+INSERT INTO `plan` VALUES ('1', '夏日', '靓丽动感', '188.88', '1');
 
 //创建history 消费记录表
 create table `history`(

@@ -48,14 +48,45 @@ class UserController extends Controller
      * 给会员充值金额
      */
     public function recharge(){
-        $user_id = $_GET['id']??0;
+        //获取user模型
+        $UserModel = D('user');
+
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
             //post 提交处理金额
             $post = $_POST;
-            dump($post);die;
+            //失败 返回 false
+            $result = $UserModel->recharge($post);
+            if(!$result){
+                $this->error('index.php?p=Admin&c=User&a=recharge&id='.$post['user_id']);
+            }else{
+                $this->success('index.php?p=Admin&c=User&a=index','充值成功',2);
+            }
         }
         //get方式展示页面
-        $this->assign('user_id',$user_id);
+        $user_id = $_GET['id']??0;
+        //根据id获取数据
+        $row = $UserModel->getOne($user_id);
+        if(!$row){
+            $this->error('index.php?p=Admin&c=User&a=index','会员不存在',2);
+        }
+        $this->assign('row',$row);
         $this->display('recharge');
+    }
+
+    /**
+     * 会员的消费,根据套餐消费
+     */
+    public function expense(){
+        //获取user模型
+        $UserModel = D('user');
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+        }else{
+            //展示消费表单
+               //>>获取套餐数据
+               $PlanModel = D('plan');
+               $plan_data = $PlanModel->getAll();
+               dump($plan_data);die;
+        }
     }
 }

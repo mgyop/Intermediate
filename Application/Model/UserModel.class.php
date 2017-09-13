@@ -91,4 +91,13 @@ class UserModel extends Model
         $this->db->query($sql);
     }
 
+    /**
+     * 保存充值金额
+     * @param $data
+     */
+    public function recharge($data){
+        //准备sql
+        $sql = "update user set money=money+'{$data['money']}' where user_id='{$data['user_id']}'";
+        return $this->db->query($sql);
+    }
 }

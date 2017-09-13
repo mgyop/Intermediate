@@ -15,7 +15,7 @@
 
     <div class="page-title">
         <span class="modular fl"><i class="user"></i><em>套餐列表</em></span>
-        <span class="modular fr"><a href="index.php?p=Admin&c=Plans&a=insert" class="pt-link-btn">+添加员工</a></span>
+        <span class="modular fr"><a href="index.php?p=Admin&c=Plan&a=insert" class="pt-link-btn">+添加套餐</a></span>
     </div>
 
     <tr>
@@ -32,8 +32,8 @@
         <td class="center"><?=$v['money']?></td>
         <td class="center"><?=$v['status']==1?'上线':'下线'?></td>
         <td>
-            <a href="index.php?p=Admin&c=Plans&a=delete&plan_id=<?=$v['plan_id']?>">删除</a>
-            <a href="index.php?p=Admin&c=plans&a=update&plan_id=<?=$v['plan_id']?>">修改</a>
+            <a href="index.php?p=Admin&c=Plan&a=delete&plan_id=<?=$v['plan_id']?>">删除</a>
+            <a href="index.php?p=Admin&c=plan&a=update&plan_id=<?=$v['plan_id']?>">修改</a>
         </td>
     </tr>
     <?php endforeach;?>
