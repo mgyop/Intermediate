@@ -56,22 +56,21 @@ class PlansController extends Controller
             $plan_id=$_GET['plan_id'];
             //回显数据,根据plan_id查询数据
             $plansModel=D("plans");
-           $rows= $plansModel->select($plan_id);
-           //var_dump($rows);die;
-           $this->assign('rows',$rows);
-        $this->display("update");
-
+            $rows= $plansModel->select($plan_id);
+            //var_dump($rows);die;
+            $this->assign('rows',$rows);
+            $this->display("update");
         }else{
             //接收数据
             $post=$_POST;
-           // var_dump($post);die;
+            // var_dump($post);die;
             //处理数据
             $plansModel=D("plans");
             $rows= $plansModel->update($post);
             if ($rows==false){
                 $this->error("index.php?p=Admin&c=Plans&a=update","修改失败",3);
             }
-           // var_dump($rows);die;
+            // var_dump($rows);die;
             //页面显示
             $this->success("index.php?p=Admin&c=Plans&a=plans");
 

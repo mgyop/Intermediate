@@ -33,8 +33,9 @@
             <tr>
                 <td style="text-align:right;">是否上线：</td>
                 <td>
-                    是 <input type="radio" name="status"  >
-                    否 <input type="radio"  name="status"  ></td>
+                    是 <input type="radio" name="status" value="1" <?=$rows['status']==1?'checked':''?>/>
+                    否 <input type="radio"  name="status"  value="0" <?=$rows['status']==0?'checked':''?>/>
+                </td>
             </tr>
             <tr>
                 <td style="text-align:right;"></td>

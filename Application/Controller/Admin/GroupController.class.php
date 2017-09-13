@@ -36,6 +36,10 @@ class GroupController extends Controller
      }
      $this->display('add');
    }
+
+    /**
+     * 修改部门
+     */
    public function edit(){
        $GroupModel = D('group');
        if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -52,6 +56,10 @@ class GroupController extends Controller
        $this->assign('row',$row);
        $this->display('edit');
    }
+
+    /**
+     * 删除一条记录
+     */
    public function delete(){
        $group_id = $_GET['id']??0;
        $GroupModel = D('group');
