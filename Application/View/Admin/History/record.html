@@ -42,7 +42,7 @@
     <th>真实姓名</th>
     <th>服务员姓名</th>
     <th>类型</th>
-    <th>消费金额</th>
+    <th>金额</th>
     <th>消费内容</th>
     <th>余额</th>
     <th>消费时间</th>
@@ -53,7 +53,7 @@
     <td class="center"><?=$user_data['username']?></td>
     <td class="center"><?=$user_data['is_vip']?></td>
     <td class="center"><?=$user_data['realname']?></td>
-    <td class="center"><?=$member_id_name[$v['member_id']]['username']?></td>
+    <td class="center"><?=$member_id_name[$v['member_id']]['username']??''?></td>
     <td class="center"><?=$v['type']==1?'消费':'充值'; ?></td>
     <td class="center"><?=$v['amount']?></td>
     <td class="center"><?=$v['content']?></td>
