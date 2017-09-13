@@ -43,4 +43,19 @@ class UserController extends Controller
             $this->error('index.php?p=Admin&c=User&a=index','删除失败',2);
         }
     }
+
+    /**
+     * 给会员充值金额
+     */
+    public function recharge(){
+        $user_id = $_GET['id']??0;
+        if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            //post 提交处理金额
+            $post = $_POST;
+            dump($post);die;
+        }
+        //get方式展示页面
+        $this->assign('user_id',$user_id);
+        $this->display('recharge');
+    }
 }

@@ -117,3 +117,43 @@ create table `history`(
   time int not null default 0 comment '消费时间',
   remainder decimal(9,2) not null comment '余额'
 )engine=innodb default charset=utf8;
+
+//创建order预约表
+//order 为关键字 注意
+create table `order`(
+  order_id int unsigned not null auto_increment primary key,
+  phone varchar(13) not null default '' comment '电话',
+  realname varchar(50) not null default '' comment '真实姓名',
+  barber int unsigned not null default 0 comment '美发师的member_id',
+  content varchar(200) not null default '' comment '备注',
+  date int not null default 0 comment '预约日期',
+  status tinyint not null default 0 comment '1 成功 2 失败 3 未处理',
+  reply varchar(200) not null default '' comment '回复消息'
+)engine=innodb default charset=utf8;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
