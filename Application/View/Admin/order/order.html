@@ -26,6 +26,7 @@
         <th>预约日期</th>
         <th>预约状态</th>
         <th>回复消息</th>
+        <th>操作</th>
 
     </tr>
     <?php foreach($order as $v):?>
@@ -35,9 +36,13 @@
         <td class="center"><?=$v['barber']?></td>
         <td class="center"><?=$v['content']?></td>
         <td class="center"><?=$v['date']?></td>
-        <td class="center"><?=$v['status']?></td>
+        <td class="center"><?=$v['status']==3?"未处理":"已处理"?></td>
         <td class="center"><?=$v['reply']?></td>
-
+        <td>
+            <a href="index.php?p=Admin&c=Order&a=update&order_id=<?=$v['order_id']?>&ty=1">同意</a>
+            <a href="index.php?p=Admin&c=Order&a=update_no&order_id=<?=$v['order_id']?>&ty=2">不同意</a>
+            <a href="index.php?p=Admin&c=Order&a=insert&order_id=<?=$v['order_id']?>">回复</a>
+        </td>
     </tr>
     <?php endforeach;?>
 </table>
