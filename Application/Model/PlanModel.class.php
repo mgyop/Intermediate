@@ -26,7 +26,7 @@ class planModel extends Model
      * 删除套餐功能
      */
     public function delete($plan_id){
-        $sql="delete from plans where plan_id='{$plan_id}'";
+        $sql="delete from plan where plan_id='{$plan_id}'";
         $this->db->query($sql);
     }
 
@@ -35,7 +35,7 @@ class planModel extends Model
      */
     public function select($plan_id){
         //根据id查询数据
-        $sql="select * from plans where plan_id='{$plan_id}'";
+        $sql="select * from plan where plan_id='{$plan_id}'";
         $rows=$this->db->fetchRow($sql);
         if ($rows==false){
             return false;
@@ -43,7 +43,7 @@ class planModel extends Model
         return $rows;
     }
     public function update($post){
-       $sql="update plans set name='{$post['name']}',des='{$post['des']}',
+       $sql="update plan set name='{$post['name']}',des='{$post['des']}',
           money='{$post['money']}',
           status='{$post['status']}'
           where plan_id='{$post['plan_id']}'";

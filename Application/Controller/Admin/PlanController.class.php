@@ -12,7 +12,7 @@ class PlanController extends Controller
         $row = $planModel->plan();
         //dump($row);die;
         $this->assign('rows', $row);
-        $this->display("plans");
+        $this->display("plan");
     }
 
     /**
@@ -42,10 +42,10 @@ class PlanController extends Controller
       //接收数据
       $plan_id=$_GET['plan_id'];
       //处理数据
-        $plansModel=D("plans");
+        $plansModel=D("plan");
         $plansModel->delete($plan_id);
         //页面显示
-        $this->success("index.php?p=Admin&c=Plans&a=plans");
+        $this->success("index.php?p=Admin&c=Plan&a=plan");
     }
     /**
      * 套餐修改功能
@@ -55,7 +55,7 @@ class PlanController extends Controller
             //接收数据
             $plan_id=$_GET['plan_id'];
             //回显数据,根据plan_id查询数据
-            $plansModel=D("plans");
+            $plansModel=D("plan");
             $rows= $plansModel->select($plan_id);
             //var_dump($rows);die;
             $this->assign('rows',$rows);
@@ -65,14 +65,14 @@ class PlanController extends Controller
             $post=$_POST;
             // var_dump($post);die;
             //处理数据
-            $plansModel=D("plans");
+            $plansModel=D("plan");
             $rows= $plansModel->update($post);
             if ($rows==false){
-                $this->error("index.php?p=Admin&c=Plans&a=update","修改失败",3);
+                $this->error("index.php?p=Admin&c=Plan&a=update","修改失败",3);
             }
             // var_dump($rows);die;
             //页面显示
-            $this->success("index.php?p=Admin&c=Plans&a=plans");
+            $this->success("index.php?p=Admin&c=Plan&a=plan");
 
         }
 

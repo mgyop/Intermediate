@@ -1,4 +1,5 @@
 <?php
+
 class OrderModel extends Model
 {
     /**
@@ -96,10 +97,12 @@ class OrderModel extends Model
 
         }
     }
-    public function update_no($roder_id, $ty){
+    //这是不同意的时候处理
+    public function update_no($roder_id, $ty)
+    {
 
         if ($ty == 2) {
-            //这是不同意的时候处理
+
             $sql = "update `order` set status=2 where order_id='{$roder_id}'";
             $rows = $this->db->query($sql);
             if ($rows == false) {
@@ -107,22 +110,16 @@ class OrderModel extends Model
             } else {
                 return $rows;
             }
+        }
     }
 
-
-    }
     /**
      * 将回复内容添加到数据库
      */
-    public function reply($order_id,$reply){
+    public function reply($order_id, $reply)
+    {
         //var_dump($roder_id,$reply);die;
-        $sql="update `order` set reply='{$reply}' where order_id='{$order_id}'";
+        $sql = "update `order` set reply='{$reply}' where order_id='{$order_id}'";
         $this->db->query($sql);
     }
-
-
-
-
-
-
 }
