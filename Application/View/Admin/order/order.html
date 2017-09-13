@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title></title>
+</head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="./Public/Admin/Member/js/jquery.js"></script>
+<script src="./Public/Admin/Member/js/public.js"></script>
+</head>
+<body>
+<table class="list-style Interlaced" border="1px" cellspacing="0" cellpadding="0" >
+
+    <div class="page-title">
+        <span class="modular fl"><i class="user"></i><em>预约列表</em></span>
+
+    </div>
+
+    <tr>
+        <th>电话</th>
+        <th>姓名</th>
+        <th>预约美发师</th>
+        <th>备注</th>
+        <th>预约日期</th>
+        <th>预约状态</th>
+        <th>回复消息</th>
+
+    </tr>
+    <?php foreach($order as $v):?>
+    <tr>
+        <td class="center"><?=$v['phone']?></td>
+        <td class="center"><?=$v['realname']?></td>
+        <td class="center"><?=$v['barber']?></td>
+        <td class="center"><?=$v['content']?></td>
+        <td class="center"><?=$v['date']?></td>
+        <td class="center"><?=$v['status']?></td>
+        <td class="center"><?=$v['reply']?></td>
+
+    </tr>
+    <?php endforeach;?>
+</table>
+</body>
+</html>

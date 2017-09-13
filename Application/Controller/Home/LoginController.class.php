@@ -30,8 +30,8 @@ class LoginController extends Controller
                 setcookie('user_id',$rows['user_id'],time()+60*60*7,'/','.vipmanager.com');
                 setcookie('user_password',$rows['password'],time()+60*60*7,'/','.vipmanager.com');
             }
-            die;
-            $this->error("index.php?p=Home&c=Login&a=");
+
+            $this->error("index.php?p=Home&c=Order&a=select");
         }
 
     }/**
@@ -74,8 +74,8 @@ class LoginController extends Controller
         setcookie('PHPSESSID',null,time()-1,'/','.vipmanager.com');
         session_unset();
         session_destroy();
-        $this->redirect('index.php?p=Home&c=Login&a=login');
-        die;
+        $this->redirect('index.php?p=Home&c=index&a=index');
+
     }
 
 }

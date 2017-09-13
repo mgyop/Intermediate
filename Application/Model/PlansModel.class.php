@@ -7,6 +7,12 @@ class plansModel extends Model
     public function plans(){
         return $this->getAll();
     }
+
+    /**
+     * @param $post
+     * @return array|mixed|null
+     * 添加
+     */
     public function insert($post){
         $sql="insert into plans set name='{$post['name']}',
                 des='{$post['des']}',
