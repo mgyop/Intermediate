@@ -134,7 +134,16 @@ create table `order`(
 )engine=innodb default charset=utf8;
 
 
-
+//article 活动表
+drop table if exists article;
+create table article(
+ article_id int unsigned not null auto_increment primary key,
+ title varchar(200) not null default '' comment '活动标题',
+ content text comment '活动内容',
+ start int not null default 0 comment '开始日期',
+ end   int not null default 0 comment '结束日期',
+ time  int not null default 0 comment '发布时间'
+)engine=innodb default charset=utf8;
 
 
 

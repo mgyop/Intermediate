@@ -38,4 +38,15 @@ class LoginController extends Controller
         }
     }
 
+    /**
+     * 退出登录
+     * 清空session  和 cookie
+     */
+    public function logout()
+    {
+        setcookie('PHPSESSID', null, time() - 1, '/', '.vipmanager.com');
+        session_unset();
+        session_destroy();
+        $this->redirect('index.php?p=Home&c=index&a=index');
+    }
 }
