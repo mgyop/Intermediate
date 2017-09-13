@@ -1,15 +1,15 @@
 <?php
 
-class PlansController extends Controller
+class PlanController extends Controller
 {
     /**
      * 美发套餐列表数据
      */
-    public function plans()
+    public function plan()
     {
         //查询所有的数据
-        $plansModel = D("plans");
-        $row = $plansModel->plans();
+        $planModel = D("plan");
+        $row = $planModel->plan();
         //dump($row);die;
         $this->assign('rows', $row);
         $this->display("plans");
@@ -28,10 +28,10 @@ class PlansController extends Controller
             //接收数据
             $post = $_POST;
             //处理数据
-            $plansModel = D("plans");
-            $rows = $plansModel->insert($post);
+            $planModel = D("plan");
+            $rows = $planModel->insert($post);
             //页面显示
-            $this->success("index.php?p=Admin&c=Plans&a=plans");
+            $this->success("index.php?p=Admin&c=Plan&a=plan");
         }
     }
 

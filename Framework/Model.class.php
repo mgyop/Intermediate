@@ -69,8 +69,13 @@ abstract class Model
      * 获取所有数据
      * @return array|null|void
      */
-    public function getAll(){
-        $sql = "select * from `{$this->table}`";
+    public function getAll($id=0){
+        $where = "";
+        if($id != 0){
+            $column = $this->table."_id";
+            $where = " where {$column}={$id}";
+        }
+        $sql = "select * from `{$this->table}` {$where}";
         $result = $this->db->fetchAll($sql);
         return $result;
     }
