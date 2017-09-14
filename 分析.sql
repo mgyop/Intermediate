@@ -76,6 +76,9 @@ CREATE TABLE `user` (
   `photo` varchar(150) NOT NULL COMMENT '头像',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+//增加会员积分字段
+alter table `user` add column integrate int unsigned not null default 0 comment '会员积分' after `money`;
 //修改vip等级制度
 alter table `user` change column is_vip vip tinyint NOT NULL default 0 COMMENT 'vip等级' after money;
 //user 增加一个缩略图字段
@@ -239,8 +242,14 @@ create table vip(
    discount decimal(3,2) not null default 9.9 comment '会员折扣'
 )engine=myisam default charset=utf8;
 
+//会员积分记录表
 
-
+create table integrate(
+  integrate_id int unsigned not null auto_increment primary key,
+  type tinyint not null comment '获得 1 兑换 2',
+  intro varchar(50) not null comment '描述',
+  integrate int not null default 0 comment '积分'
+)engine=innodb default charset=utf8;
 
 
 

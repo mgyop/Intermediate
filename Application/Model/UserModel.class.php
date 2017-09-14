@@ -200,6 +200,10 @@ class UserModel extends Model
             $this->error = "余额不足";
             return false;
         }
+        //根据消费的实际金额 $price 10元 -->>  1积分 换算所得积分
+        $integrats = round($price/10);  //四舍五入机制
+
+        dump($integrats);die;
         //准备sql
         $sql = "update user set money='{$money}' where user_id={$data['user_id']}";
         //执行sql
