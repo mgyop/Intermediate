@@ -46,4 +46,21 @@ class HistoryModel extends Model
         }
         return $this->where;
     }
+
+    /**
+     * 获取排行榜
+     */
+    public function sort(){
+        //获取充值排行榜
+        $sql_r = "select sum(amount) as money,user_id from `history` where type=0 group by user_id order by money desc limit 3";
+        $res_recharge = $this->db->fetchAll($sql_r);
+        //获取消费排行榜
+        $sql_r = "select sum(amount) as money,user_id from `history` where type=1 group by user_id order by money desc limit 3";
+        $res_expense = $this->db->fetchAll($sql_r);
+
+        //获取服务排行榜
+        $sql_m = "select count(member_id) as count,member_id from `history` group by member_id order by count desc limit 3";
+        $res_member = $this->db->fetchAll($sql_m);
+        return ['res_recharge'=>$res_recharge,'res_expense'=>$res_expense,'res_member'=>$res_member];
+    }
 }

@@ -103,6 +103,7 @@ class UserController extends Controller
                 $insert_data = [];
                 $insert_data['type'] = 0;
                 $insert_data['user_id'] = $post['user_id'];
+                $insert_data['member_id'] = 1;
                 $insert_data['amount'] = $post['money'];
                 $insert_data['content'] = "充值加薪";
                 $insert_data['time'] = time();
