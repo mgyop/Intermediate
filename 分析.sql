@@ -156,14 +156,16 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `code`;
 CREATE TABLE `code` (
-  `code_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code_id` int unsigned NOT NULL AUTO_INCREMENT,
   `code` varchar(100) NOT NULL COMMENT '代码',
   `user_id` varchar(50) NOT NULL COMMENT '所属会员',
-  `money` int(20) unsigned NOT NULL COMMENT '代金券金额',
-  `status` tinyint(10) unsigned NOT NULL DEFAULT '1' COMMENT '1为未使用0为已使用',
+  `money` int unsigned NOT NULL COMMENT '代金券金额',
+  `status` tinyint unsigned NOT NULL DEFAULT '1' COMMENT '1为未使用0为已使用',
   PRIMARY KEY (`code_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
+//修改user_id的类型
+alter table `code` modify column user_id int unsigned not null comment '所属会员ID';
 -- ----------------------------
 -- Records of code
 -- ----------------------------

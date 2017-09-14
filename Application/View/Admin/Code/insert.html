@@ -24,7 +24,13 @@
             <tr>
                 <td style="text-align:right;">所属会员：</td>
                 <td>
-                    <input type="text" name="user_id" class="textBox length-long"/>
+                    <select name="user_id" >
+                        <?php foreach($userData as $v):?>
+                          <option value="<?=$v['user_id']?>" <?=$user_id==$v['user_id']?"selected":'disabled';?> >
+                              <?=$v['realname']?>
+                          </option>
+                        <?php endforeach;?>
+                    </select>
                 </td>
             </tr>
 
