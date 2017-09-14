@@ -117,32 +117,50 @@ class UserModel extends Model
         return $this->db->query($sql);
     }
     public function expense($data){
-        //在这里处理代金券
-        //待完成...........
-//        dump($data);die;
+
         //根据user_id取得会员余额
         $user_data = $this->getOne($data['user_id']);
         //余额
         $money = $user_data['money'];
+
         //根据plan_id 获取套餐的价格
         $PlanModel = D('plan');
         $plan_data = $PlanModel->getOne($data['plan_id']);
         //套餐价格
         $price = $plan_data['money'];
+
         //根据是否是会员自动打折5折
         if($user_data['is_vip'] == 1){
-            if(floor($price/2) > $money){
-                $this->error = "余额不足";
-                return false;
-            }
             //打折后的消费金额
             $price = floor($price/2);
-        }else{
-            if($price > $money){
-                $this->error = "余额不足";
-                return false;
-            }
         }
+        //在这里处理代金券
+        $code = $data['code'];
+        //根据code 取得代金券金额
+        $CodeModel = D('code');
+        $sql_code = "select * from code where code='{$code}' and status=1 and user_id={$data['user_id']}";
+        $code_data = $CodeModel->db->fetchRow($sql_code);
+        if($code_data == null ){
+            $this->error = "代金券已使用";
+            return false;
+        }
+//        dump($code_data);die;
+        //代金券所指示金额
+        $code_money = $code_data['money'];
+        //代金券的金额小于套餐价格,抵消并更新代金券状态
+        if($code_money <= $price){
+            $price -= $code_money;
+            //更新code状态
+            $code_update_sql ="update code set money=0,status=0 where code_id={$code_data['code_id']}";
+            $CodeModel->db->query($code_update_sql);
+            unset($code_update_sql);
+        }elseif($code_money > $price){
+            $remainder = $code_money-$price;
+            $code_update_sql ="update code set money={$remainder} where code_id={$code_data['code_id']}";
+            $CodeModel->db->query($code_update_sql);
+            $price = 0;
+        }
+
         //可以消费,在这里更新余额
         //构建关联数组
         $money = $money-$price;
@@ -156,7 +174,7 @@ class UserModel extends Model
             $history_data['user_id'] = $data['user_id'];
             $history_data['member_id'] = $data['member_id'];
             $history_data['type'] = 1;
-            $history_data['amount'] = $price;
+            $history_data['amount'] = $plan_data['money'];
             $history_data['content'] = $plan_data['des'];
             $history_data['time'] = time();
             $history_data['remainder'] = $money;

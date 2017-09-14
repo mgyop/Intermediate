@@ -68,6 +68,10 @@ class CodeModel extends Model
         $random_id="ID.".uniqid();
         return $random_id;
     }
+    public function getOneUserCodes($user_id){
+        $sql = "select * from code where user_id={$user_id}";
+        return $this->db->fetchAll($sql);
+    }
 
 
 
