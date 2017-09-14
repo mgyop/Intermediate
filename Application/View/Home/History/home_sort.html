@@ -146,42 +146,55 @@
 			<div class="view-product background-color">
 				<div class="padding-big background-color">
 					<div class="account-info clearfix">
-						<table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0" >
-
-							<div class="page-title">
-								<span class="modular fl"><i class="user"></i><em>预约列表</em></span><br/>
-
-							</div>
-
+						<table class="list-style Interlaced">
 							<tr>
-								<th>电话</th>
-								<th>姓名</th>
-								<th>预约美发师</th>
-								<th>备注</th>
-								<th>预约日期</th>
-								<th>预约状态</th>
-								<th>回复消息</th>
-
+								<th colspan="3">充值之星</th>
 							</tr>
-							<?php foreach($rows['order'] as $v):?>
 							<tr>
-								<td class="center"><?=$v['phone']?></td>
-								<td class="center"><?=$v['realname']?></td>
-								<td class="center"><?=$member[$v['barber']]['username']?></td>
-								<td class="center"><?=$v['content']?></td>
-								<td class="center"><?=date("Y-m-d",$v['date'])?></td>
-								<td class="center"><?=$v['status']==1?"成功":($v['status']==2?"失败":"待处理")?></td>
-								<td class="center"><?=$v['reply']?></td>
+								<th>排名</th>
+								<th>姓名</th>
+								<th>金额</th>
+							</tr>
+							<?php foreach($data['res_recharge'] as $k=>$v):?>
+							<tr>
+								<td class="center"><?=$k+1?></td>
+								<td class="center"><?=$v['username']?></td>
+								<td class="center"><?=$v['money']?></td>
 							</tr>
 							<?php endforeach;?>
-
-						</table><br/>
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 <a href="index.php?p=Home&c=Order&a=select&page=1">第一页</a>　　
-		 <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['page_s']?>">上一页</a>
-　　     <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['page_x']?>">下一页</a>                 　<a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['yeshu']?>">最后一页</a>
-		 共<?=$rows['yeshu']?>页 第<?=$rows['page']?>页 共<?=$rows['zongtiao']?>条
-　　
-
+							<tr><td colspan="3"> </td></tr>
+							<tr>
+								<th colspan="3">消费之星</th>
+							</tr>
+							<tr>
+								<th>排名</th>
+								<th>姓名</th>
+								<th>金额</th>
+							</tr>
+							<?php foreach($data['res_expense'] as $k=>$v):?>
+							<tr>
+								<td class="center"><?=$k+1?></td>
+								<td class="center"><?=$v['username']?></td>
+								<td class="center"><?=$v['money']?></td>
+							</tr>
+							<?php endforeach;?>
+							<tr><td colspan="3"> </td></tr>
+							<tr>
+								<th colspan="3">服务之星</th>
+							</tr>
+							<tr>
+								<th>排名</th>
+								<th>姓名</th>
+								<th>次数</th>
+							</tr>
+							<?php foreach($data['res_member'] as $k=>$v):?>
+							<tr>
+								<td class="center"><?=$k+1?></td>
+								<td class="center"><?=$v['username']?></td>
+								<td class="center"><?=$v['count']?></td>
+							</tr>
+							<?php endforeach;?>
+						</table>
 			</div>
 		</div>
 

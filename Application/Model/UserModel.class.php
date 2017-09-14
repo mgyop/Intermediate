@@ -103,14 +103,20 @@ class UserModel extends Model
      * @param $data
      */
     public function recharge($data){
+        //获取充值规则
+        $recharge_ruleModel = D('recharge_rule');
+        $rule_sql = "select * from recharge_rule order by amount desc";
+        $rules = $recharge_ruleModel->db->fetchAll($rule_sql);
         //充值有惊喜哦
+
         $money = $data['money'];
-        if($money >= 5000){
-            $money += 1000;
-        }elseif($money >= 1000){
-            $money += 800;
-        }elseif($money >= 500){
-            $money += 100;
+        //根据规则加上赠送金额
+        foreach($rules as $v){
+            if($money >= $v['amount']){
+                $money += $v['donation'];
+                break;
+            }
+            unset($v);
         }
         //准备sql
         $sql = "update user set money=money+'{$money}' where user_id='{$data['user_id']}'";

@@ -223,10 +223,20 @@ INSERT INTO `order` VALUES ('33', '222', '撒大声地', '1', '刚刚', '1505491
 INSERT INTO `order` VALUES ('34', '23454665767', '非凡哥', '1', '风高放火', '1505404800', '3', '');
 INSERT INTO `order` VALUES ('35', '12433', '就收到货', '1', '发给', '1505491200', '3', '');
 
+//创建充值赠送金额规则表
+create table recharge_rule(
+   recharge_rule_id int unsigned not null auto_increment primary key,
+   amount decimal(9,2) not null default 0 comment '充值金额',
+   donation decimal(9,2) not null default 0 comment '赠送金额'
+)engine=myisam default charset=utf8;
 
-
-
-
+//会员级别
+create table vip(
+   vip_id int unsigned auto_increment primary key,
+   vipname varchar(50) not null comment '级别名称',
+   recharge decimal(9,2) not null default 0 comment '充值金额',
+   discount decimal(3,2) not null default 9.9 comment '会员折扣'
+)engine=myisam default charset=utf8;
 
 
 

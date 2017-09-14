@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>修改部门</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>修改部门</em></span>
+    <span class="modular fr"><a href="?p=Admin&c=Member&a=index" class="pt-link-btn">部门列表</a></span>
+  </div>
+  <form action="index.php?p=Admin&c=recharge_rule&a=edit" method="post">
+  <table class="list-style">
+   <tr>
+    <td style="text-align:right;width:15%;">充值金额：</td>
+    <td>
+     <input type="hidden" name="recharge_rule_id" value="<?=$row['recharge_rule_id']?>">
+     <input type="number" name="amount" value="<?=$row['amount']?>" class="textBox length-long"/>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;width:15%;">赠送金额：</td>
+    <td>
+     <input type="number" name="donation" value="<?=$row['donation']?>" class="textBox length-long"/>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" value="修改" class="tdBtn"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>
