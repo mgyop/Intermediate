@@ -246,9 +246,11 @@ create table vip(
 
 create table integrate(
   integrate_id int unsigned not null auto_increment primary key,
+  user_id int not null comment '会员id',
   type tinyint not null comment '获得 1 兑换 2',
   intro varchar(50) not null comment '描述',
-  integrate int not null default 0 comment '积分'
+  integrate int not null default 0 comment '积分',
+  time int not null default 0 comment '消费时间'
 )engine=innodb default charset=utf8;
 
 

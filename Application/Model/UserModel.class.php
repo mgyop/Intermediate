@@ -200,29 +200,55 @@ class UserModel extends Model
             $this->error = "余额不足";
             return false;
         }
-        //根据消费的实际金额 $price 10元 -->>  1积分 换算所得积分
-        $integrats = round($price/10);  //四舍五入机制
 
-        dump($integrats);die;
         //准备sql
         $sql = "update user set money='{$money}' where user_id={$data['user_id']}";
         //执行sql
         $result = $this->db->query($sql);
-        if($result){ //执行成功,写历史记录
-            //拼装关联数组,记录日志
-            $history_data = [];
-            $history_data['user_id'] = $data['user_id'];
-            $history_data['member_id'] = $data['member_id'];
-            $history_data['type'] = 1;
-            $history_data['amount'] = $plan_data['money'];
-            $history_data['content'] = $plan_data['des'];
-            $history_data['time'] = time();
-            $history_data['remainder'] = $money;
-            //创建history模型
-            $HistoryModel = D('history');
-            //插入记录
-            return $HistoryModel->insert($history_data);
+        if(!$result){
+            $this->error = "执行sql失败";
+            return false;
         }
+        //消费成功
+        //根据消费的实际金额 $price 10元 -->>  1积分 换算所得积分
+        $integrats = round($price/10);  //四舍五入机制
+        //组装积分数据
+        $integrate_data = [];
+        //类型
+        $integrate_data['type']= 1 ;
+        //描述
+        $integrate_data['intro']= $plan_data['name'] ;
+        //所获积分
+        $integrate_data['integrate']= $integrats;
+        //会员id
+        $integrate_data['user_id']= $data['user_id'];
+        //时间
+        $integrate_data['time']= time();
+        $integrate_sql = D('integrate')->setInsertSql($integrate_data);
+        $integrate_result = D('integrate')->db->query($integrate_sql);
+        if(!$integrate_result){
+            $this->error = "记录积分出错";
+            return false;
+        }
+        //执行成功,写历史记录
+        //拼装关联数组,记录日志
+        $history_data = [];
+        $history_data['user_id'] = $data['user_id'];
+        $history_data['member_id'] = $data['member_id'];
+        $history_data['type'] = 1;
+        $history_data['amount'] = $plan_data['money'];
+        $history_data['content'] = $plan_data['des'];
+        $history_data['time'] = time();
+        $history_data['remainder'] = $money;
+        //创建history模型
+        $HistoryModel = D('history');
+        //插入记录
+        $history_result = $HistoryModel->insert($history_data);
+        if(!$history_result){
+            $this->error = "记录日志失败";
+            return false;
+        }
+
     }
     public function update($data){
         //去除xss
