@@ -21,7 +21,6 @@ class OrderModel extends Model
         $page_s=($page-1)<1?1:($page-1);
         $page_x=($page+1)>$yeshu?$page:($page+1);
 
-
         $sql = "select * from `order` limit $x,$y";
         $order = $this->db->fetchAll($sql);
         //var_dump($order);die;
@@ -43,6 +42,7 @@ class OrderModel extends Model
      */
     public function insert($post)
     {
+        //var_dump($post);die;
         $date = strtotime($post['date']);//转成时间戳
        //dump(date("Y-m-d",$date)) ;die;
         $sql = "insert into `order` set phone='{$post['phone']}',
@@ -78,9 +78,9 @@ class OrderModel extends Model
      * 根据员工id查询员工名字
      */
 
-    public function member_id($member2)
+    public function member_id($barber)
     {
-        $sql = "select * from member where member_id='{'$member2'}'";
+        $sql = "select * from member where member_id='{$barber}'";
         $member = $this->db->fetchRow($sql);
         //var_dump($rows);die;
         if ($member == false) {

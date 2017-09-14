@@ -2,31 +2,34 @@
 
 class OrderController extends Controller
 {
-
     /**
      * 查询预约数据并显示前台首页上
      */
     public function select()
     {
-        //接收数据page计算出总条数和总页数
-        $page=$_GET['page'];
-        //查询所有的数据
-        //var_dump($page);die;
-        $orderModel = D("order");
-        $row = $orderModel->order($page);
-        //dump($row);die;
+        /**
+         * 查询预员工的数据
+         */
+        $memberModel = D("order");
+        $row = $memberModel->slect_member();//查询出所有数据
+        //var_dump($row);die;
+        //获取id对应的名字
+        foreach ($row as $key=>$v){
+            $member[$v['member_id']]=$v;
+        }
+        //var_dump($member);die;
+        //分配数据到页面上
+        $this->assign('member',$member);
 
-
-//       foreach ($row as &$value){
-//            $value['status']==1?($value['status']="成功"):($value['status']==2?($value['status']="失败"):$value['status']='未处理');
-//        }
-       // dump($row);die;
-        $this->assign('rows', $row);
-
-
-        $this->display("index");
+            //接收数据page计算出总条数和总页数
+            $page=$_GET['page'];
+            //查询所有的数据
+            //var_dump($page);die;
+            $orderModel = D("order");
+            $row = $orderModel->order($page);//查询出所有数据
+            $this->assign('rows', $row);
+            $this->display("index");
     }
-
     /**
      * 预约美发师功能
      */
@@ -34,26 +37,20 @@ class OrderController extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == "GET") {//显示预约添加表单
             /**
-             * 查询员工数据
+             * 查询员工数据,获取美发师的id
              */
             $OrderModel=D("order");
             $member=$OrderModel->slect_member();
-            $this->assign('member',$member);
+            //var_dump($member);die;
+            $this->assign('member',$member);//回显到添加表单中
             $this->display("insert");
            //var_dump($member);die;
-            /**
-             * 根据member_id查询员工名字
-             */
-             $member2=$member['member_id'];
-            $OrderModel=D("order");
-            $member_id=$OrderModel->member_id($member2);
-            $this->assign('member_id',$member_id);
 
         }else{
             //将预约数据保存到数据库
             //接收数据
             $post = $_POST;
-           // var_dump($post);die;
+           //var_dump($post);die;
             $orderModel = D("order");
             $row = $orderModel->insert($post);
            // var_dump($row);die;
