@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/13
  */
-class HistoryController extends Controller
+class HistoryController extends Base
 {
     /**
      * 充值和消费记录的查询

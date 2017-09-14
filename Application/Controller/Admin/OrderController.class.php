@@ -1,6 +1,6 @@
 <?php
 
-class OrderController extends Controller
+class OrderController extends Base
 {
 
     /**

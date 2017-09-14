@@ -1,6 +1,6 @@
 <?php
 
-class PlanController extends Controller
+class PlanController extends Base
 {
     /**
      * 美发套餐列表数据

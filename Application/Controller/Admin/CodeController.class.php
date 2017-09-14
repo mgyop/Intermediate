@@ -1,5 +1,5 @@
 <?php
-class CodeController extends Controller
+class CodeController extends Base
 {
     /**
      * 代金券相关功能控制器
