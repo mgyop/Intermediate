@@ -9,14 +9,11 @@ class OrderController extends Controller
     public function select()
     {
         //接收数据page计算出总条数和总页数
-
-
-
-
-
+        $page=$_GET['page'];
         //查询所有的数据
         $orderModel = D("order");
-        $row = $orderModel->order();
+
+        $row = $orderModel->order($page);
         //dump($row);die;
         foreach ($row as &$value){
             $value['status']==1?($value['status']="成功"):($value['status']==2?($value['status']="失败"):$value['status']='未处理');

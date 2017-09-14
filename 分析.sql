@@ -148,6 +148,30 @@ create table article(
 
 
 
+//代金券sql和数据
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for code
+-- ----------------------------
+DROP TABLE IF EXISTS `code`;
+CREATE TABLE `code` (
+  `code_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(100) NOT NULL COMMENT '代码',
+  `user_id` varchar(50) NOT NULL COMMENT '所属会员',
+  `money` int(20) unsigned NOT NULL COMMENT '代金券金额',
+  `status` tinyint(10) unsigned NOT NULL DEFAULT '1' COMMENT '1为未使用0为已使用',
+  PRIMARY KEY (`code_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of code
+-- ----------------------------
+INSERT INTO `code` VALUES ('19', 'ID.59b95d587bb47', '黄金会员', '1000', '1');
+INSERT INTO `code` VALUES ('7', 'ass', '阿萨啊', '232', '1');
+INSERT INTO `code` VALUES ('8', 'ass', '阿萨啊', '232', '1');
+INSERT INTO `code` VALUES ('16', '我的速度', '速度', '0', '1');
+INSERT INTO `code` VALUES ('18', 'ID.59b958a2eeb4f', '撒大声地', '333', '1');
 
 
 
