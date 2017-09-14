@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/12
  */
-class MemberController extends Controller
+class MemberController extends Base
 {
     /**
      * 员工列表

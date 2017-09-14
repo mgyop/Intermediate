@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/13
  */
-class GroupController extends Controller
+class GroupController extends Base
 {
     /**
      * 部门列表页

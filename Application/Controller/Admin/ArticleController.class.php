@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/13
  */
-class ArticleController extends Controller
+class ArticleController extends Base
 {
     public function show(){
         $article_id = $_GET['article_id'];

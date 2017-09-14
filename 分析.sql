@@ -97,7 +97,7 @@ CREATE TABLE `plan` (
   `name` varchar(200) NOT NULL COMMENT '套餐名字',
   `des` text COMMENT '套餐描述',
   `money` decimal(9,2) unsigned NOT NULL COMMENT '套餐金额',
-  `status` tinyint NOT NULL COMMENT '状态',
+  `status` tinyint NOT NULL COMMENT '状态 1 上线',
   PRIMARY KEY (`plan_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 

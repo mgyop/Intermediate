@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/11
  */
-class IndexController extends Controller
+class IndexController extends Base
 {
     public function index(){
         //echo "后台首页";
