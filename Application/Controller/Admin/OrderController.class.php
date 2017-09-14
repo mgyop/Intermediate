@@ -66,10 +66,11 @@ class OrderController extends Base
             //接收数据
             $order_id=$_POST['roder_id'];
             $reply=$_POST['reply'];
-            //var_dump($post);die;
+            //var_dump($_POST);
             //处理数据,即添加回复数据
             $orderModer = D("order");
-            $orderModer->reply($order_id,$reply);
+            $rows=$orderModer->reply($order_id,$reply);
+          //  var_dump($rows);die;
             //页面显示
             $this->success("index.php?p=Admin&c=Order&a=select");
         }

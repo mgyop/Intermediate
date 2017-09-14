@@ -6,9 +6,27 @@ class OrderModel extends Model
      * @return array|null|void
      * 显示预约表单
      */
-    public function order()
+    public function order($page)
     {
-        return $this->getAll();
+        $y=3;
+        //计算出总的条数
+        $sql2="select count(*) from `order`";
+        $zongtiao=$this->db->fetchAll($sql2);//总条数
+        $yeshu=$zongtiao/$y;  //计算出总的页数
+        $page<1?1:$page;
+        $page>$yeshu?$yeshu:$page;
+        $x=($page-1)*$y;
+
+        $sql = "select * from `order` limit $x,$y";
+        $order = $this->db->fetchAll($sql);
+        //var_dump($order);die;
+      if ($order==false){
+          return false;
+      }else {
+            return ["page"=>$page,"yeshu"=>$yeshu,"zongtiao"];
+        }
+
+        //return $this->getAll();
     }
 
     /**
@@ -18,14 +36,15 @@ class OrderModel extends Model
      */
     public function insert($post)
     {
-        $date = strtotime($post['date']);
+        $date = strtotime($post['date']);//转成时间戳
+       //dump(date("Y-m-d",$date)) ;die;
         $sql = "insert into `order` set phone='{$post['phone']}',
                 realname='{$post['realname']}',
                 barber='{$post['barber']}',
                 content='{$post['content']}',
                 date='{$date}'";
         $rows = $this->db->query($sql);
-        //var_dump($sql);
+       //var_dump($rows);die;
         //die;
         if ($rows == false) {
             return false;
