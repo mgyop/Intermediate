@@ -174,6 +174,52 @@ INSERT INTO `code` VALUES ('16', '我的速度', '速度', '0', '1');
 INSERT INTO `code` VALUES ('18', 'ID.59b958a2eeb4f', '撒大声地', '333', '1');
 
 
+//预约数据
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for order
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `phone` varchar(11) NOT NULL DEFAULT '' COMMENT '电话',
+  `realname` varchar(50) NOT NULL DEFAULT '' COMMENT '真实姓名',
+  `barber` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '美发师的member_id',
+  `content` varchar(200) NOT NULL DEFAULT '' COMMENT '备注',
+  `date` int(11) NOT NULL DEFAULT '3' COMMENT '预约日期',
+  `status` tinyint(4) NOT NULL DEFAULT '3' COMMENT '1 成功 2 失败 3 未处理',
+  `reply` varchar(200) NOT NULL DEFAULT '' COMMENT '回复消息',
+  PRIMARY KEY (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+INSERT INTO `order` VALUES ('10', '12123234', '打电话', '1', 'wee', '1505404800', '1', '好的');
+INSERT INTO `order` VALUES ('11', '12121111221', '为', '1', '121 ', '1505318400', '1', '');
+INSERT INTO `order` VALUES ('14', '112121212', '是', '1', '121', '1506009600', '1', '');
+INSERT INTO `order` VALUES ('15', '232112121', '22', '1', '121', '1505491200', '1', '');
+INSERT INTO `order` VALUES ('16', '11123131', '所谓', '1', '1212', '1505404800', '3', '');
+INSERT INTO `order` VALUES ('17', '12347828321', '为', '1', '121 ', '1506096000', '3', '');
+INSERT INTO `order` VALUES ('18', '12347828321', '问问', '1', '问问', '1506009600', '1', '');
+INSERT INTO `order` VALUES ('19', '12347828321', '是大神', '1', '12为', '1505491200', '1', '问我');
+INSERT INTO `order` VALUES ('21', '12347828321', '是大神', '1', '', '1505404800', '2', '');
+INSERT INTO `order` VALUES ('22', '12347828321', '麦克', '1', '是是是', '2017', '3', '');
+INSERT INTO `order` VALUES ('23', '12347828321', '过分过分', '1', 'r发', '2017', '3', '');
+INSERT INTO `order` VALUES ('24', '12347828321', '过分过分', '1', 'r发', '1505404800', '3', '');
+INSERT INTO `order` VALUES ('25', '12323434', '微微', '1', '的士速递', '2017', '3', '');
+INSERT INTO `order` VALUES ('26', '12347828321', '实打实地方', '1', '方法地方的', '2017', '3', '');
+INSERT INTO `order` VALUES ('27', '23121323', '大幅度', '1', '地方地方', '2017', '3', '');
+INSERT INTO `order` VALUES ('28', '12347828321', '辅导费', '1', 'wee', '20170915', '3', '');
+INSERT INTO `order` VALUES ('29', '11122323', '大幅度', '1', '大幅度', '2017', '3', '');
+INSERT INTO `order` VALUES ('30', '113434656', '速度', '1', '发给', '1506096000', '3', '');
+INSERT INTO `order` VALUES ('31', '2323', '是大神', '1', '发', '1505491200', '3', '');
+INSERT INTO `order` VALUES ('32', '13246677', '方法', '1', '非凡哥', '1505491200', '3', '');
+INSERT INTO `order` VALUES ('33', '222', '撒大声地', '1', '刚刚', '1505491200', '3', '');
+INSERT INTO `order` VALUES ('34', '23454665767', '非凡哥', '1', '风高放火', '1505404800', '3', '');
+INSERT INTO `order` VALUES ('35', '12433', '就收到货', '1', '发给', '1505491200', '3', '');
 
 
 
