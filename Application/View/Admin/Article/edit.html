@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ueditor demo</title>
+</head>
+
+<body>
+<form action="?p=Admin&c=Article&a=edit" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="article_id" value="<?=$row['article_id']?>">
+    活动标题: <input type="text"  value="<?=$row['title']?>" style="width:250px;margin:8px;" name="title"> <br />
+    开始日期: <input type="date" value="<?=date('Y-m-d',$row['start'])?>" style="margin:15px;" name="start">
+    结束日期: <input type="date" value="<?=date('Y-m-d',$row['end'])?>" name="end">
+    <!-- 加载编辑器的容器 -->
+    <textarea id="container" style="height:350px;width:90%;" name="content"><script id="container" name="content" type="text/plain"></script><?=$row['content']?></textarea>
+    <input style="display: inline-block; margin: 15px 40%;" type="submit" value="一键发布">
+</form>
+<!-- 配置文件 -->
+<script type="text/javascript" src="./Public/Admin/Article/ueditor/utf8-php/ueditor.config.js"></script>
+<!-- 编辑器源码文件 -->
+<script type="text/javascript" src="./Public/Admin/Article/ueditor/utf8-php/ueditor.all.js"></script>
+<!-- 实例化编辑器 -->
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
+</body>
+
+</html>

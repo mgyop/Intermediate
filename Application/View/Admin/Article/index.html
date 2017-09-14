@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>活动列表</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="./Public/Admin/Member/js/jquery.js"></script>
+<script src="./Public/Admin/Member/js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>活动列表</em></span>
+    <span class="modular fr"><a href="?p=Admin&c=Article&a=add" class="pt-link-btn">+添加活动</a></span>
+  </div>
+  <table class="list-style Interlaced">
+    <tr>
+     <td colspan="10">
+      <form action="" name="serach" method="get">
+       <input type="hidden" name="p" value="Admin">
+       <input type="hidden" name="c" value="Article">
+       <input type="hidden" name="a" value="index">
+       <img src="./Public/Admin/Member/images/icon_search.gif" width="26" height="22" border="0" alt="search" />
+       活动名称 <input type="text" name="title" size="15" value="<?=$serach['title']??''?>"/>
+       开始时间 <input type="text" name="start" size="15" value="<?=$serach['start']??''?>"/>
+       活动状态 <input type="text" name="status" size="15" value="<?=$serach['status']??''?>"/>
+       <!-- 关键字 -->
+       活动名称关键字 <input type="text" name="keyword" size="15" value="<?=$keyword??''?>"/>
+       <input type="submit" value=" 搜索 " class="button" />
+      </form>
+     </td>
+    </tr>
+   <tr>
+    <th>名称</th>
+    <th>开始时间</th>
+    <th>结束时间</th>
+    <th>发布时间</th>
+    <th>状态</th>
+    <th>操作</th>
+   </tr>
+   <?php foreach($rows[1] as $v):?>
+   <tr>
+    <td class="center"><?=$v['title']?></td>
+    <td class="center"><?=date('Y-m-d',$v['start'])?></td>
+    <td class="center"><?=date('Y-m-d',$v['end'])?></td>
+    <td class="center"><?=date('Y-m-d H:i:s',$v['time'])?></td>
+    <td class="center"><?=$v['status']?></td>
+    <td class="center">
+     <a href="index.php?p=Admin&c=Article&a=show&article_id=<?=$v['article_id']?>">查看 |</a>
+     <a href="index.php?p=Admin&c=Article&a=edit&article_id=<?=$v['article_id']?>">编辑 |</a>
+     <a href="index.php?p=Admin&c=Article&a=delete&article_id=<?=$v['article_id']?>">删除 |</a>
+     <a href="index.php?p=Admin&c=Article&a=end&article_id=<?=$v['article_id']?>">结束活动</a>
+    </td>
+   </tr>
+   <?php endforeach;?>
+   <tr>
+    <td colspan="6">
+     <?=$rows[0]?>
+    </td>
+   </tr>
+  </table>
+ </div>
+</body>
+</html>
