@@ -18,11 +18,11 @@ class OrderController extends Controller
             $member[$v['member_id']]=$v;
         }
         //var_dump($member);die;
-        //分配数据到页面上
+        //分配数据到首页前台预约中
         $this->assign('member',$member);
 
             //接收数据page计算出总条数和总页数
-            $page=$_GET['page'];
+            $page=$_GET['page']??1;
             //查询所有的数据
             //var_dump($page);die;
             $orderModel = D("order");
