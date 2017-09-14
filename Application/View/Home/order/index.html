@@ -163,20 +163,26 @@
 								<th>回复消息</th>
 
 							</tr>
-							<?php foreach($rows as $v):?>
+							<?php foreach($rows['order'] as $v):?>
 							<tr>
 								<td class="center"><?=$v['phone']?></td>
 								<td class="center"><?=$v['realname']?></td>
 								<td class="center"><?=$v['barber']?></td>
 								<td class="center"><?=$v['content']?></td>
 								<td class="center"><?=date("Y-m-d",$v['date'])?></td>
-								<td class="center"><?=($v['status'])==1?"成功":($v['status']==2?"失败":"未处理")?></td>
+								<td class="center"><?=$v['status']==1?"成功":($v['status']==2?"失败":"待处理")?></td>
 								<td class="center"><?=$v['reply']?></td>
 							</tr>
 							<?php endforeach;?>
 
 						</table><br/>
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　<a href="index.php?p=Home&c=Order&a=select&page=1">第一页</a>
+　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　         <a href="index.php?p=Home&c=Order&a=select&page=1">第一页</a>　　
+		 <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['page_s']?>">上一页</a>
+　　     <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['page_x']?>">下一页</a>
+　　     <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['yeshu']?>">最后一页</a>
+		 共<?=$rows['yeshu']?>页 第<?=$rows['page']?>页
+　　
+
 			</div>
 		</div>
 

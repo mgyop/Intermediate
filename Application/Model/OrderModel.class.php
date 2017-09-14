@@ -11,11 +11,16 @@ class OrderModel extends Model
         $y=3;
         //计算出总的条数
         $sql2="select count(*) from `order`";
-        $zongtiao=$this->db->fetchAll($sql2);//总条数
-        $yeshu=$zongtiao/$y;  //计算出总的页数
+        $zongtiao=$this->db->fetchColumn($sql2);//总条数
+        $yeshu=ceil($zongtiao/$y);  //计算出总的页数
+        //dump($yeshu);die;
         $page<1?1:$page;
         $page>$yeshu?$yeshu:$page;
         $x=($page-1)*$y;
+
+        $page_s=($page-1)<1?1:($page-1);
+        $page_x=($page+1)>$yeshu?$page:($page+1);
+
 
         $sql = "select * from `order` limit $x,$y";
         $order = $this->db->fetchAll($sql);
@@ -23,7 +28,9 @@ class OrderModel extends Model
       if ($order==false){
           return false;
       }else {
-            return ["page"=>$page,"yeshu"=>$yeshu,"zongtiao"];
+            return ["page"=>$page,"yeshu"=>$yeshu,"zongtiao"=>$zongtiao,"order"=>$order,
+            "page_s"=>$page_s,"page_x"=>$page_x
+            ];
         }
 
         //return $this->getAll();
