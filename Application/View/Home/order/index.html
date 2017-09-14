@@ -84,7 +84,7 @@
 							<li>
 								<a href="webSet.html">
 									<b class="sidebar-icon"><img src="./Public/Home/order/Images/icon_author.png" width="16" height="16" /></b>
-									<span class="text-normal"><a href="index.php?p=Home&c=Order&a=insert">预约</a></span>
+									<span class="text-normal"><a href="index.php?p=Home&c=Order&a=insert&page=<?=$rows['page']?>">预约</a></span>
 								</a>
 							</li>
 							<li>
@@ -167,7 +167,7 @@
 							<tr>
 								<td class="center"><?=$v['phone']?></td>
 								<td class="center"><?=$v['realname']?></td>
-								<td class="center"><?=$v['barber']?></td>
+								<td class="center"><?=$member[$v['barber']]['username']?></td>
 								<td class="center"><?=$v['content']?></td>
 								<td class="center"><?=date("Y-m-d",$v['date'])?></td>
 								<td class="center"><?=$v['status']==1?"成功":($v['status']==2?"失败":"待处理")?></td>
