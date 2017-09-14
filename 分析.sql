@@ -253,7 +253,14 @@ create table integrate(
   time int not null default 0 comment '消费时间'
 )engine=innodb default charset=utf8;
 
-
+//商品表
+create table goods(
+  goods_id int unsigned not null auto_increment primary key,
+  goods_name varchar(60) not null comment '商品名称',
+  num int not null default 99 comment '库存',
+  price int not null comment '积分价格',
+  logo varchar(200) not null comment '商品图片'
+)engine=innodb default charset=utf8;
 
 
 

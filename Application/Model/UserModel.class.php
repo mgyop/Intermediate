@@ -212,6 +212,11 @@ class UserModel extends Model
         //消费成功
         //根据消费的实际金额 $price 10元 -->>  1积分 换算所得积分
         $integrats = round($price/10);  //四舍五入机制
+        //修改会员表积分现况
+        $integrate_update_sql = "update user set integrate=integrate+{$integrats} where user_id={$data['user_id']}";
+        //原有基础上增加积分
+        $this->db->query($integrate_update_sql);
+
         //组装积分数据
         $integrate_data = [];
         //类型

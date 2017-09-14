@@ -23,7 +23,7 @@
 					<a href="#" class="topbar-logo fl">
 					<span><img src="./Public/Home/order/Images/logo.png" width="20" height="20"/></span>
 					</a>
-					<a href="index.html" class="topbar-home-link topbar-btn text-center fl"><span>前台显示</span></a>
+					<a href="index.php?p=Admin&c=Login&a=login" class="topbar-home-link topbar-btn text-center fl"><span>后台机票</span></a>
 				</div>
 			</div>
 			<div class="topbar-info">
@@ -35,29 +35,29 @@
 					<!--have表示有消息，没有消息去掉have-->
 					</a>
 					</li>
-					<!-- 					<li class="fl topbar-info-item strong">
-					<div class="dropdown">
-						<a href="#" class="dropdown-toggle topbar-btn">
-						<span class="fl">工单服务</span>
-						<span class="icon-arrow-down"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="#">我的工单</a></li>
-							<li><a href="#">提交工单</a></li>
-						</ul>
-					</div>
+					<li class="fl topbar-info-item strong">
+						<div class="dropdown">
+							<a href="#" class="dropdown-toggle topbar-btn">
+								<span class="fl"><?=$_SESSION['user_userinfo']['username']??'未登录'?></span>
+								<span class="icon-arrow-down"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="#">我的资料</a></li>
+								<li><a href="#">我的订单</a></li>
+							</ul>
+						</div>
 					</li>
-					 -->
 					<li class="fl topbar-info-item">
-					<div class="dropdown">
-						<a href="#" class="topbar-btn">
-						<span class="fl text-normal">帮助与文档</span>
-						<span class="icon-arrow-down"></span>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="#">模板开发手册</a></li>
-							<li><a href="#">某某数据字典</a></li>
-						</ul>
+						<div class="dropdown">
+							<a href="#" class="topbar-btn">
+								<span class="fl text-normal">登录与退出</span>
+								<span class="icon-arrow-down"></span>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="index.php?p=Home&c=Login&a=login">登 录</a></li>
+								<li><a href="index.php?p=Home&c=Login&a=logout">退 出</a></li>
+							</ul>
+						</div>
 					</div>
 					</li>
 					<li class="fl topbar-info-item">
@@ -97,6 +97,12 @@
 								<a href="index.php?p=Home&c=Integrate&a=index">
 									<b class="sidebar-icon"><img src="./Public/Home/order/Images/icon_message.png" width="16" height="16" /></b>
 									<span class="text-normal">积分记录</span>
+								</a>
+							</li>
+							<li>
+								<a href="index.php?p=Home&c=Goods&a=index">
+									<b class="sidebar-icon"><img src="./Public/Home/order/Images/icon_message.png" width="16" height="16" /></b>
+									<span class="text-normal">商城</span>
 								</a>
 							</li>
 							<!-- <li>
