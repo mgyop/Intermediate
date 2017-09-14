@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  活动名称:<input type="text" readonly value="<?=$row['title']?>">
+  开始时间:<input type="date" readonly value="<?=date('Y-m-d',$row['start'])?>">
+  结束时间:<input type="date" readonly value="<?=date('Y-m-d',$row['end'])?>">
+  <?=$row['content']?>
+</body>
+</html>
