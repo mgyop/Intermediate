@@ -8,7 +8,21 @@ class OrderModel extends Model
      */
     public function order()
     {
-        return $this->getAll();
+
+
+
+
+
+        $sql = "select * from `order`";
+        $order = $this->db->fetchAll($sql);
+        //var_dump($order);die;
+      if ($order==false){
+          return false;
+      }else {
+            return $order;
+        }
+
+        //return $this->getAll();
     }
 
     /**
@@ -18,14 +32,15 @@ class OrderModel extends Model
      */
     public function insert($post)
     {
-        $date = strtotime($post['date']);
+        $date = strtotime($post['date']);//转成时间戳
+       //dump(date("Y-m-d",$date)) ;die;
         $sql = "insert into `order` set phone='{$post['phone']}',
                 realname='{$post['realname']}',
                 barber='{$post['barber']}',
                 content='{$post['content']}',
                 date='{$date}'";
         $rows = $this->db->query($sql);
-        //var_dump($sql);
+       //var_dump($rows);die;
         //die;
         if ($rows == false) {
             return false;

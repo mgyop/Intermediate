@@ -167,15 +167,14 @@
 							<tr>
 								<td class="center"><?=$v['phone']?></td>
 								<td class="center"><?=$v['realname']?></td>
-
 								<td class="center"><?=$v['barber']?></td>
 								<td class="center"><?=$v['content']?></td>
-								<td class="center"><?=$v['date']?></td>
-								<td class="center"><?=$v['status']==1?"预约成功"?></td>
+								<td class="center"><?=date("Y-m-d",$v['date'])?></td>
+								<td class="center"><?=($v['status'])==1?"成功":($v['status']==2?"失败":"未处理")?></td>
 								<td class="center"><?=$v['reply']?></td>
-
 							</tr>
 							<?php endforeach;?>
+
 						</table><br/>
 			</div>
 		</div>

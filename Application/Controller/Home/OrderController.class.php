@@ -8,6 +8,11 @@ class OrderController extends Controller
      */
     public function select()
     {
+        //接收数据page计算出总条数和总页数
+
+
+
+
 
         //查询所有的数据
         $orderModel = D("order");
@@ -16,7 +21,7 @@ class OrderController extends Controller
         foreach ($row as &$value){
             $value['status']==1?($value['status']="成功"):($value['status']==2?($value['status']="失败"):$value['status']='未处理');
         }
-        dump($row);die;
+       // dump($row);die;
         $this->assign('rows', $row);
 
 
@@ -49,8 +54,10 @@ class OrderController extends Controller
             //将预约数据保存到数据库
             //接收数据
             $post = $_POST;
+           // var_dump($post);die;
             $orderModel = D("order");
             $row = $orderModel->insert($post);
+           // var_dump($row);die;
             if ($row == false) {
                 $this->error("index.php?p=Home&c=Order&a=insert", "提交预约失败", 2);
             }
