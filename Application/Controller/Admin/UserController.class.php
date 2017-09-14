@@ -26,6 +26,15 @@ class UserController extends Base
        //分配数据
        $this->assign('serach',$serach);
        $this->assign('rows',$rows);
+
+       //获取vip表数据
+       $rows_vip = D('vip')->getAll();
+       $new_rows_vip = [];
+       foreach($rows_vip as &$v){
+           $new_rows_vip[$v['vip_id']] = $v;
+       }
+       //分配VIP表数据
+       $this->assign('new_rows_vip',$new_rows_vip);
        //展示页面
        $this->display('index');
    }
@@ -59,6 +68,15 @@ class UserController extends Base
             //根据id获取一条member数据
             $row = $UserModel->getOne($id);
             $this->assign('row',$row);
+
+            //获取vip表数据
+            $rows_vip = D('vip')->getAll();
+            $new_rows_vip = [];
+            foreach($rows_vip as &$v){
+                $new_rows_vip[$v['vip_id']] = $v;
+            }
+            //分配VIP表数据
+            $this->assign('new_rows_vip',$new_rows_vip);
             $this->display('edit');
         }
     }

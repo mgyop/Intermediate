@@ -76,7 +76,8 @@ CREATE TABLE `user` (
   `photo` varchar(150) NOT NULL COMMENT '头像',
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
+//修改vip等级制度
+alter table `user` change column is_vip vip tinyint NOT NULL default 0 COMMENT 'vip等级' after money;
 //user 增加一个缩略图字段
  alter table user add column thumb_photo varchar(200) not null default '' comment '缩略图';
 -- ----------------------------

@@ -35,13 +35,11 @@ class CodeController extends Base
     public function delete(){
         //接收id
         $code_id=$_GET['code_id'];
-//        var_dump($code_id);die;
         $codeModel = D("code");
        $roes= $codeModel->delete($code_id);
        if ($roes==false){
            $this->redirect("index.php?p=Admin&c=Code&a=select");
        }
-        //var_dump($code_id);die;
         $this->redirect("index.php?p=Admin&c=Code&a=select");
     }
     /**

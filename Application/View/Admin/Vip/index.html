@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>VIP级别</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
+<script src="./Public/Admin/Member/js/jquery.js"></script>
+<script src="./Public/Admin/Member/js/public.js"></script>
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="user"></i><em>VIP级别</em></span>
+    <span class="modular fr"><a href="?p=Admin&c=vip&a=add" class="pt-link-btn">+VIP级别</a></span>
+  </div>
+  <table class="list-style Interlaced">
+   <tr>
+    <th>vip</th>
+    <th>充值金额</th>
+    <th>折扣</th>
+    <th>操作</th>
+   </tr>
+   <?php foreach($rows as $v):?>
+   <tr>
+    <td class="center"><?=$v['vipname']?></td>
+    <td class="center"><?=$v['recharge']?></td>
+    <td class="center"><?=$v['discount']?></td>
+    <td class="center">
+     <a href="index.php?p=Admin&c=vip&a=edit&id=<?=$v['vip_id']?>">编辑 |</a>
+     <a href="index.php?p=Admin&c=vip&a=delete&id=<?=$v['vip_id']?>">删除</a>
+    </td>
+   </tr>
+   <?php endforeach;?>
+  </table>
+ </div>
+</body>
+</html>

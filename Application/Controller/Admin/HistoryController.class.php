@@ -54,6 +54,15 @@ class HistoryController extends Base
             }
         }
         $this->assign('new_arr',$new_arr);
+
+        //获取vip表数据
+        $rows_vip = D('vip')->getAll();
+        $new_rows_vip = [];
+        foreach($rows_vip as &$v){
+            $new_rows_vip[$v['vip_id']] = $v;
+        }
+        //分配VIP表数据
+        $this->assign('new_rows_vip',$new_rows_vip);
         //展示页面
         $this->display('record');
     }
