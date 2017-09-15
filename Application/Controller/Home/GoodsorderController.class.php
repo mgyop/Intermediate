@@ -22,9 +22,9 @@ class GoodsorderController extends PlatController
         //改装
         $new_goods_data = [];
         foreach($goods_data as $v){
-
+           $new_goods_data[$v['goods_id']] = $v;
         }
-        $this->assign('goods_data',$goods_data);
+        $this->assign('new_goods_data',$new_goods_data);
         $this->assign('user_data',$user_data);
         $this->display('index');
     }

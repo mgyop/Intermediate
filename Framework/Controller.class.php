@@ -18,6 +18,10 @@ class Controller
     public $memory;
     public function __construct()
     {
+        if(isset($_SESSION['user_userinfo'])){
+            $integrate = D('user')->getIntegrate($_SESSION['user_userinfo']['user_id']);
+            $_SESSION['user_userinfo']['integrate'] = $integrate;
+        }
         $this->startTime=explode(' ', microtime());
         //初始化默认路径
         $this->thumb_path = str_replace(ROOT_PATH,'./',PUBLIC_PATH."commen/logo_59b7bd174d368_46x46.jpeg");

@@ -175,15 +175,15 @@
 								<tr>
 									<td class="center"><?=$v['order_num']?></td>
 									<td class="center"><?=$user_data['username']?></td>
-									<td class="center"><?=$v['goods_id']?></td>
-									<td class="center"><img width="60px" src="<?=$v['logo']?>" alt="logo"></td>
-									<td class="center"><?=$v['addr']?>积分</td>
+									<td class="center"><?=$new_goods_data[$v['goods_id']]['price']?>积分</td>
+									<td class="center"><img width="60px" src="<?=$new_goods_data[$v['goods_id']]['logo']?>" alt="logo"></td>
+									<td class="center"><?=$v['addr']?></td>
 									<td class="center"><?=$v['is_pay']?></td>
 									<td class="center"><?=$v['is_send']?></td>
 									<td class="center"><?=$v['time']?></td>
 									<td class="center">
-										<a href="index.php?p=Home&c=goods&a=conversion&id=<?=$v['goods_id']?>" onclick="this.href=this.href+'&addr='+window.prompt('请输入地址')">兑换 |</a>
-										<a href="#" onclick="window.alert('加入成功')">加入购物车</a>
+										<a href="#" onclick="window.alert('看不得')">查看详情 |</a>
+										<a href="#" onclick="window.alert('不得行')">删除记录</a>
 									</td>
 								</tr>
 								<?php endforeach;?>

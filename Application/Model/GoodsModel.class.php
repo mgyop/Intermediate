@@ -108,7 +108,7 @@ class GoodsModel extends Model
                $log = [];
                $log['user_id'] = $user_row['user_id'];
                $log['type'] = 0;
-               $log['intro'] = "兑换商品 ".$goods_data['goods_name'];
+               $log['intro'] = "- ".$goods_data['goods_name'];
                $log['integrate'] = $goods_data['price'];
                $log['time'] = time();
                $res = D('integrate')->setLog($log);

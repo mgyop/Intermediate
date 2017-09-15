@@ -16,14 +16,6 @@ class GoodsorderModel extends Model
        $sql = $this->setInsertSql($data);
        return $this->db->query($sql);
    }
-
-    /**
-     * 订单列表
-     */
-   public function index(){
-
-   }
-
     /**
      * 获取指定用户的订单记录
      * @param $user_id
