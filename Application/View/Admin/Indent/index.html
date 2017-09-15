@@ -14,8 +14,22 @@
 <table class="list-style Interlaced" border="1px" cellspacing="0" cellpadding="0" >
 
     <div class="page-title">
-        <span class="modular fl"><i class="user"></i><em>预约列表</em></span>
-
+        <span class="modular fl"><i class="user"></i><em>订单系统</em></span>　　　　　
+        　　<form action="" name="serach" method="get">
+            <input type="hidden" name="p" value="Admin">
+            <input type="hidden" name="c" value="Indent">
+            <input type="hidden" name="a" value="index">
+               是否付款 <select name="is_pay" id="">
+            <?php foreach ($indent as $v):?>
+            <option value="">
+                <?=$v['is_pay']==1?"已付款":"未付款"?>
+            </option>
+            <?php endforeach;?>
+        </select>
+        <!-- 关键字 -->
+        关键字 <input type="text" name="keyword" size="15" value="<?=$keyword??''?>"/>
+        <input type="submit" value=" 搜索 " class="button" />
+        </form>
     </div>
 
     <tr>
@@ -29,27 +43,28 @@
         <th>操作</th>
 
     </tr>
-    <?php foreach($rows as $v):?>
+    <?php foreach($rows['indent'] as $v):?>
     <tr>
-        <td class="center"><?=$v['user_id']?></td>
-        <td class="center"><?=$v['goods_id']?></td>
+
+        <td class="center"><?=$user[$v['user_id']]['username']?></td>
+
+        <td class="center"><?=$goods[$v['goods_id']]['goods_name']?></td>
         <td class="center"><?=$v['order_num']?></td>
         <td class="center"><?=$v['is_pay']==1?"已付款":"未付款"?></td>
         <td class="center"><?=$v['addr']?></td>
-        <td class="center"><?=$v['is_send']==1?"已发货":"未发货"?></td>
-        <td class="center"><?=$v['time']?></td>
+        <td class="center"><?=$v['is_send']==1?"已发货":"待发货"?></td>
+        <td class="center"><?=date("Y-m-d",$v['time'])?></td>
         <td>
-            <a href="index.php?p=Admin&c=Order&a=update&order_id=<?=$v['order_id']?>&ty=1">同意</a>
-            <a href="index.php?p=Admin&c=Order&a=update_no&order_id=<?=$v['order_id']?>&ty=2">不同意</a>
-            <a href="index.php?p=Admin&c=Order&a=insert&order_id=<?=$v['order_id']?>">回复</a>
+
+
         </td>
     </tr>
     <?php endforeach;?>
 </table>
-<a href="index.php?p=Admin&c=Order&a=select&page=1">第一页</a>
-<a href="index.php?p=Admin&c=Order&a=select&page=<?=$rows['page_s']?>">上一页</a>
-<a href="index.php?p=Admin&c=Order&a=select&page=<?=$rows['page_x']?>">下一页</a>
-<a href="index.php?p=Admin&c=Order&a=select&page=<?=$rows['yeshu']?>">最后一页</a>
-　　第<?=$rows['page']?>页　共<?=$rows['zongtiao']?>条　共<?=$rows['yeshu']?>页
+                <a href="index.php?p=Admin&c=Indent&a=index&page=1">第一页</a>
+                <a href="index.php?p=Admin&c=Indent&a=index&page=<?=$rows['page_s']?>">上一页</a>
+                <a href="index.php?p=Admin&c=Indent&a=index&page=<?=$rows['page_x']?>">下一页</a>
+                <a href="index.php?p=Admin&c=Indent&a=index&page=<?=$rows['yeshu']?>">最后一页</a>
+                　　第<?=$rows['page']??'?'?>页　共<?=$rows['zongtiao']??'?'?>条　共<?=$rows['yeshu']??'?'?>页
 </body>
 </html>
