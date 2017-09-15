@@ -263,6 +263,16 @@ create table goods(
 )engine=innodb default charset=utf8;
 
 //创建订单表
+create table goodsorder(
+  goodsordr_id int unsigned auto_increment primary key,
+  user_id int not null comment '会员id',
+  goods_id int not null comment '商品id',
+  order_num varchar(30) not null comment '订单号',
+  is_pay tinyint not null default 0 comment '0 未付款 1 已付款',
+  addr varchar(200) not null comment '收货地址',
+  is_send tinyint not null default 0 comment '0 未发货 1 已发货',
+  time int not null default 0 comment '下单时间'
+)engine innodb default charset utf8;
 
 
 

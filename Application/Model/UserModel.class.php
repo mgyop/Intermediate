@@ -215,7 +215,11 @@ class UserModel extends Model
         //修改会员表积分现况
         $integrate_update_sql = "update user set integrate=integrate+{$integrats} where user_id={$data['user_id']}";
         //原有基础上增加积分
-        $this->db->query($integrate_update_sql);
+        $res = $this->db->query($integrate_update_sql);
+        if(!$res){
+            $this->error = "操作出错";
+            return false;
+        }
 
         //组装积分数据
         $integrate_data = [];
