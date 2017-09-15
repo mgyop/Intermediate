@@ -30,6 +30,6 @@ class GoodsorderModel extends Model
      */
    public function getAllByUserId($user_id){
        $sql = "select * from goodsorder where user_id={$user_id}";
-       return $this->db->query($sql);
+       return $this->db->fetchAll($sql);
    }
 }

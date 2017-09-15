@@ -8,19 +8,24 @@
 class GoodsorderController extends PlatController
 {
     /**
-     * 添加订单
-     */
-    public function add(){
-
-    }
-
-    /**
      * 显示个人订单列表
      */
     public function index(){
+        $user_id = $_SESSION['user_userinfo']['user_id'];
         //获取所有数据
-        $rows = D('goodsorder')->getAllByUserId($_SESSION['user_userinfo']['user_id']);
+        $rows = D('goodsorder')->getAllByUserId($user_id);
         $this->assign('rows',$rows);
+        //获取会员信息
+        $user_data = D('user')->getOne($user_id);
+        //获取商品信息
+        $goods_data = D('goods')->getAll();
+        //改装
+        $new_goods_data = [];
+        foreach($goods_data as $v){
+
+        }
+        $this->assign('goods_data',$goods_data);
+        $this->assign('user_data',$user_data);
         $this->display('index');
     }
     /**
