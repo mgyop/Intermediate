@@ -95,7 +95,7 @@ class OrderModel extends Model
     {
         $y=3;
         //计算出总的条数
-        $sql2="select count(*) from `order` where status='3'";
+        $sql2="select count(*) from `order` where status='3'ORDER BY order_id DESC";
         $zongtiao=$this->db->fetchColumn($sql2);//总条数
         $yeshu=ceil($zongtiao/$y);  //计算出总的页数并且向上取整
         //dump($yeshu);die;
@@ -104,7 +104,7 @@ class OrderModel extends Model
         $x=($page-1)*$y;
         $page_s=($page-1)<1?1:($page-1);
         $page_x=($page+1)>$yeshu?$page:($page+1);
-        $sql = "select * from `order` where status='3' limit $x,$y";
+        $sql = "select * from `order` where status='3'ORDER BY order_id DESC limit $x,$y";
         $order = $this->db->fetchAll($sql);
         //var_dump($sql);die;
         if ($order==false){

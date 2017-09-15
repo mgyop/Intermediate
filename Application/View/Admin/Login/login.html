@@ -31,33 +31,31 @@
 				<input type="text" class="text" name="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
 			</li>
 				<div class="clear"> </div>
-			<li>
-				<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
-			</li>
-			<li>
-				<input type="text" name="captcha" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}">
-			</li>
-			<li>
-				<img src="" width="150" height="30" alt="验证码">
-			</li>
-			<li>
-				记住密码<input type="checkbox" name="bear">
-			</li>
+				<li>
+				<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a><br/>
+				</li>
+				<li>
+				<input type="text" name="captcha" value="请输入验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}"><br/></li>
+			<img src="index.php?p=Admin&c=Captcha&a=yan"alt="" onclick="this.src='index.php?p=Admin&c=Captcha&a=yan&'+Math.random()">
+
+
 			<div class="clear"> </div>
 
+			<div class="clear"> </div>
 			<div class="submit">
-				<input type="submit" onclick="myFunction()" value="登陆" >
+				<input type="submit" onclick="myFunction()" value="登陆" >	记住密码<input type="checkbox" name="bear">
 						  <div class="clear">  </div>	
 			</div>
-				
+
 		</form>
 		</div>					
 	</div>
 	</div>
+
 	<div class="clear"> </div>
 <!--- footer --->
 <div class="footer">
-	<p>Copyright &copy; 2014.</p>
+
 </div>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
