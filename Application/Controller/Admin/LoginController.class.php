@@ -17,11 +17,11 @@ class LoginController extends Controller
            // var_dump($post['captcha']);die;
             //判断验证码是否正确
             if (!isset($post['captcha'])){
-                $this->error("index.php?p=Admin&c=Login&a=login", "验证码不能为空", 3);
+                $this->error("index.php?p=Admin&c=Login&a=login", "验证码不能为空", 2);
             }
 
             if ( $post['captcha']!=$_SESSION['muns']){//底层session已经开启了不需要在开启
-                $this->error("index.php?p=Admin&c=Login&a=login", "验证码错误", 3);
+                $this->error("index.php?p=Admin&c=Login&a=login", "验证码错误", 2);
             }
 
             //处理数据
@@ -29,7 +29,7 @@ class LoginController extends Controller
             $rows = $login->login($post);
             //如果登陆失败
             if ($rows == false) {
-                $this->error("index.php?p=Admin&c=Login&a=login", "用户名或者密码错误", 3);
+                $this->error("index.php?p=Admin&c=Login&a=login", "用户名或者密码错误", 2);
             }
             //密码正确保存到session中
             //修改最后登录ip
@@ -56,9 +56,8 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        setcookie('PHPSESSID', null, time() - 1, '/', '.vipmanager.com');
-        session_unset();
-        session_destroy();
+        //删除对应的session数据
+        unset($_SESSION['member_userinfo']);
         $this->redirect('index.php?p=Admin&c=Login&a=login');
     }
 }

@@ -24,27 +24,23 @@
 <div class="inset">
 	<div class="login-head">
 		<h1>Login Form</h1>
-		 <div class="alert-close"> </div> 			
 	</div>
 		<form action="index.php?p=Admin&c=Login&a=login" method="post">
 			<li>
-				<input type="text" class="text" name="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
+				<input type="text" class="text" name="username" placeholder="username">
 			</li>
-				<div class="clear"> </div>
-				<li>
-				<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a><br/>
-				</li>
-				<li>
-				<input type="text" name="captcha" value="请输入验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}"><br/></li>
-			<img src="index.php?p=Admin&c=Captcha&a=yan"alt="" onclick="this.src='index.php?p=Admin&c=Captcha&a=yan&'+Math.random()">
-
-
-			<div class="clear"> </div>
-
-			<div class="clear"> </div>
+				   <div class="clear"> </div>
+			<li>
+			   <input type="password" name="password" placeholder="password"><br/>
+			</li>
+			<li>
+			   <input type="text" name="captcha" placeholder="captcha"><br/>
+			</li>
+			<img width="150" style="padding-right:200px;" src="index.php?p=Admin&c=Captcha&a=yan"alt="" onclick="this.src='index.php?p=Admin&c=Captcha&a=yan&'+Math.random()" />
 			<div class="submit">
-				<input type="submit" onclick="myFunction()" value="登陆" >	记住密码<input type="checkbox" name="bear">
-						  <div class="clear">  </div>	
+				<input type="submit" onclick="myFunction()" value="login" >
+				<div style="padding:15px 80px 0 0;float:right;"><label>remember me <input type="checkbox" name="bear"></label> </div>
+			<div class="clear">  </div>
 			</div>
 
 		</form>

@@ -93,7 +93,7 @@ class GoodsModel extends Model
                $goodsorder_data['goods_id'] = $goods_data['goods_id'];
                $goodsorder_data['order_num'] = uniqid('goods_');
                $goodsorder_data['addr'] = $addr;
-               $goodsorder_data['is_pay'] = 0;
+               $goodsorder_data['is_pay'] = 1;
                $goodsorder_data['is_send'] = 0;
                $goodsorder_data['time'] = time();
                //插入订单记录

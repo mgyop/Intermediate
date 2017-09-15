@@ -16,11 +16,22 @@ class MemberModel extends Model
      */
     public function login($post)
     {
+        if(empty($post['username'])){
+            $this->error = "请输入用户名";
+            return false;
+        }
+
+        if(empty($post['password'])){
+            $this->error = "请输入密码";
+            return false;
+        }
+
         /**
          * 验证登陆功能
          */
         $password = md5($post['password']);
-        $sql = "select * from member where username='{$post['username']}'and password='{$password}'";
+        //非管理员不能登录
+        $sql = "select * from member where username='{$post['username']}'and password='{$password}' and is_admin=1;";
         $rows = $this->db->fetchRow($sql);
         //dump($rows);die;
         if ($rows == false) {
@@ -36,9 +47,34 @@ class MemberModel extends Model
      * @param $post
      * @return bool|mysqli_result|void
      */
-    public function insert($post)
+    public function insert($data)
     {
-        $sql = $this->setInsertSql($post);
+        //密码为空不修改
+        if(empty($data['password'])) {
+            $this->error = "密码不能为空";
+            return false;
+        }else{
+            //密码必须为数字字符串
+            if (!is_numeric($data['password'])) {
+                $this->error = "必须为数字";
+            }
+        }
+        //用户名不能为空
+        if (empty($data['username'])) {
+            $this->error = "用户名不能为空";
+            return false;
+        }
+        //姓名不能为空
+        if (empty($data['realname'])) {
+            $this->error = "姓名不能为空";
+            return false;
+        }
+        //手机不能为空
+        if (empty($data['realname'])) {
+            $this->error = "手机不能为空";
+            return false;
+        }
+        $sql = $this->setInsertSql($data);
         return $this->db->query($sql);
     }
 
