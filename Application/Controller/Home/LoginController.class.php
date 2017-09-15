@@ -68,14 +68,11 @@ class LoginController extends Controller
 
     /**
      * 退出登录
-     * 清空session  和 cookie
      */
     public function logout(){
-        setcookie('PHPSESSID',null,time()-1,'/','.vipmanager.com');
-        session_unset();
-        session_destroy();
+        //清除cookie
+        unset($_SESSION['user_userinfo']);
         $this->redirect('index.php?p=Home&c=Login&a=login');
-
     }
 
 }
