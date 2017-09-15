@@ -174,8 +174,8 @@
 									<td class="center"><?=$v['price']?>积分</td>
 									<td class="center"><?=$v['num']?></td>
 									<td class="center">
-										<a href="index.php?p=Home&c=goods&a=conversion&id=<?=$v['goods_id']?>">兑换 |</a>
-										<a href="#">加入购物车</a>
+										<a href="index.php?p=Home&c=goods&a=conversion&id=<?=$v['goods_id']?>" onclick="this.href=this.href+'&addr='+window.prompt('请输入地址')">兑换 |</a>
+										<a href="#" onclick="window.alert('加入成功')">加入购物车</a>
 									</td>
 								</tr>
 								<?php endforeach;?>

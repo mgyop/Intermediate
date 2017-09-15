@@ -47,7 +47,7 @@ class GoodsModel extends Model
      * @param $goods_id
      * @param $user_row
      */
-   public function conversion($goods_id,$user_row){
+   public function conversion($goods_id,$user_row,$addr=''){
        //获取会员的积分
        $user_integrate = $user_row['integrate'];
        //获取商品的积分价格,库存
@@ -84,12 +84,25 @@ class GoodsModel extends Model
                $this->db->user_rollback();
                return false;
            }
-           //成功提交事物
-           $this->db->user_commit();
 
            //生成订单在这里完成
            //待完成.........
-
+               //构造订单信息,生成订单
+               $goodsorder_data = [];
+               $goodsorder_data['user_id'] = $user_row['user_id'];
+               $goodsorder_data['goods_id'] = $goods_data['goods_id'];
+               $goodsorder_data['order_num'] = uniqid('goods_');
+               $goodsorder_data['addr'] = $addr;
+               $goodsorder_data['is_pay'] = 0;
+               $goodsorder_data['is_send'] = 0;
+               $goodsorder_data['time'] = time();
+               //插入订单记录
+                   $res_goods_order = D('goodsorder')->add($goodsorder_data);
+                   if(!$res_goods_order){
+                       $this->error = "下单失败";
+                       $this->db->user_rollback();
+                       return false;
+                   }
            //兑换成功记录积分消费记录
                //构造消费记录的信息数组
                $log = [];
@@ -101,7 +114,11 @@ class GoodsModel extends Model
                $res = D('integrate')->setLog($log);
                if(!$res){
                    $this->error = "记录日志错误";
+                   $this->db->user_rollback();
                    return false;
                }
+
+           //成功提交事物
+           $this->db->user_commit();
    }
 }
