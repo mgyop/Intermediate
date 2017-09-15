@@ -10,7 +10,9 @@ class MemberController extends Base
     /**
      * 员工列表
      */
+
    public function index(){
+
        $GroupModel = D('group');
        $MemberModel = D('member');
        //获取条件

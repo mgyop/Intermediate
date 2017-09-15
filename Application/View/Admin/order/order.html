@@ -29,11 +29,11 @@
         <th>操作</th>
 
     </tr>
-    <?php foreach($order as $v):?>
+    <?php foreach($rows['order'] as $v):?>
     <tr>
         <td class="center"><?=$v['phone']?></td>
         <td class="center"><?=$v['realname']?></td>
-        <td class="center"><?=$v['barber']?></td>
+        <td class="center"><?=$member[$v['barber']]['username']?></td>
         <td class="center"><?=$v['content']?></td>
         <td class="center"><?=$v['date']?></td>
         <td class="center"><?=$v['status']==3?"未处理":"已处理"?></td>
@@ -46,5 +46,10 @@
     </tr>
     <?php endforeach;?>
 </table>
+            <a href="index.php?p=Admin&c=Order&a=select&page=1">第一页</a>
+            <a href="index.php?p=Admin&c=Order&a=select&page=<?=$rows['page_s']?>">上一页</a>
+            <a href="index.php?p=Admin&c=Order&a=select&page=<?=$rows['page_x']?>">下一页</a>
+            <a href="index.php?p=Admin&c=Order&a=select&page=<?=$rows['yeshu']?>">最后一页</a>
+            　　第<?=$rows['page']?>页　共<?=$rows['zongtiao']?>条　共<?=$rows['yeshu']?>页
 </body>
 </html>
