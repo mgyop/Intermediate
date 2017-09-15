@@ -73,26 +73,6 @@ function D($tableName){
 
 
 /**
- * 功能:新建目录 //mkNewDir('./',$options,2);
- * @param $filename 根路径
- * @param $options   每个单元化作文件名 $options = ['a','b','c','d','e','f','g','h'];
- * @param int $deep  目录的深度
- * @param int $count 注: 不需设置此参数
- */
-function mkNewDir($filename,$options,$deep=1,$count=1){
-    if($count > $deep ){
-        return;
-    }
-    foreach($options as $v){
-        $newFileName = $filename.$v.DIRECTORY_SEPARATOR;
-        if(!file_exists($newFileName)){
-            mkdir($newFileName,0777,true);
-            mkNewDir($newFileName,$options,$deep,$count+1);
-        }
-    }
-}
-
-/**
  * 打印
  * @param $data
  */

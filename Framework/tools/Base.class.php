@@ -13,9 +13,9 @@ class Base extends Controller
         if(!isset($_SESSION['member_userinfo']) ){
             //>>2.cookie
             if( isset($_COOKIE['member_id']) && isset($_COOKIE['member_password'])){
-                $UserModel = D('user');
-                $row = $UserModel->getOne($_COOKIE['member_id']);
-                if(!empty($row) && ($row['password'] == $_COOKIE['manager_pass']) ){
+                $MemberModel = D('member');
+                $row = $MemberModel->getOne($_COOKIE['member_id']);
+                if(!empty($row) && ($row['password'] == $_COOKIE['member_password']) ){
                     //有数据,而且相等
                     //保存session
                     $_SESSION['member_userinfo'] = $row;

@@ -1,6 +1,6 @@
 <?php
 
-class OrderController extends Controller
+class OrderController extends PlatController
 {
     /**
      * 查询预约数据并显示前台首页上

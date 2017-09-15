@@ -62,10 +62,14 @@
     </td>
    </tr>
    <tr>
-    <td style="text-align:right;">是否VIP：</td>
+    <td style="text-align:right;">VIP等级：</td>
     <td>
-     是 <input type="radio" value="1" name="is_vip" <?=$row['is_vip']==1?'checked':'';?>>
-     否 <input type="radio" value="0" name="is_vip" <?=$row['is_vip']==0?'checked':'';?> ></td>
+     <select name="vip_id">
+         <?php foreach($new_rows_vip as $v):?>
+         <option value="<?=$v['vip_id']?>" <?=$row['vip']==$v['vip_id']?'selected':''?> ><?=$v['vipname']?></option>
+         <?php endforeach;?>
+     </select>
+    </td>
    </tr>
    <tr>
     <td style="text-align:right;">头像：</td>

@@ -25,7 +25,7 @@ class LoginController extends Controller
                 $this->error("index.php?p=Home&c=Login&a=login", "用户名或者密码错误", 3);
             }
             //密码正确保存到session中
-            $_SESSION['userinfo_q'] = $rows;//sesssion在底层代码已打开
+            $_SESSION['user_userinfo'] = $rows;//sesssion在底层代码已打开
             if (isset($post['rememb_password'])) {//判断是否记住密码
                 setcookie('user_id',$rows['user_id'],time()+60*60*7,'/','.vipmanager.com');
                 setcookie('user_password',$rows['password'],time()+60*60*7,'/','.vipmanager.com');
@@ -74,7 +74,7 @@ class LoginController extends Controller
         setcookie('PHPSESSID',null,time()-1,'/','.vipmanager.com');
         session_unset();
         session_destroy();
-        $this->redirect('index.php?p=Home&c=index&a=index');
+        $this->redirect('index.php?p=Home&c=Login&a=login');
 
     }
 

@@ -77,6 +77,10 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
+//增加会员积分字段
+alter table `user` add column integrate int unsigned not null default 0 comment '会员积分' after `money`;
+//修改vip等级制度
+alter table `user` change column is_vip vip tinyint NOT NULL default 0 COMMENT 'vip等级' after money;
 //user 增加一个缩略图字段
  alter table user add column thumb_photo varchar(200) not null default '' comment '缩略图';
 -- ----------------------------
@@ -223,15 +227,40 @@ INSERT INTO `order` VALUES ('33', '222', '撒大声地', '1', '刚刚', '1505491
 INSERT INTO `order` VALUES ('34', '23454665767', '非凡哥', '1', '风高放火', '1505404800', '3', '');
 INSERT INTO `order` VALUES ('35', '12433', '就收到货', '1', '发给', '1505491200', '3', '');
 
+//创建充值赠送金额规则表
+create table recharge_rule(
+   recharge_rule_id int unsigned not null auto_increment primary key,
+   amount decimal(9,2) not null default 0 comment '充值金额',
+   donation decimal(9,2) not null default 0 comment '赠送金额'
+)engine=myisam default charset=utf8;
 
+//会员级别
+create table vip(
+   vip_id int unsigned auto_increment primary key,
+   vipname varchar(50) not null comment '级别名称',
+   recharge decimal(9,2) not null default 0 comment '充值金额',
+   discount decimal(3,2) not null default 9.9 comment '会员折扣'
+)engine=myisam default charset=utf8;
 
+//会员积分记录表
 
+create table integrate(
+  integrate_id int unsigned not null auto_increment primary key,
+  user_id int not null comment '会员id',
+  type tinyint not null comment '获得 1 兑换 2',
+  intro varchar(50) not null comment '描述',
+  integrate int not null default 0 comment '积分',
+  time int not null default 0 comment '消费时间'
+)engine=innodb default charset=utf8;
 
-
-
-
-
-
+//商品表
+create table goods(
+  goods_id int unsigned not null auto_increment primary key,
+  goods_name varchar(60) not null comment '商品名称',
+  num int not null default 99 comment '库存',
+  price int not null comment '积分价格',
+  logo varchar(200) not null comment '商品图片'
+)engine=innodb default charset=utf8;
 
 
 

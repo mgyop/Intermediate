@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>控制台</title>
+		<title>vip管理系统</title>
 		<link rel="stylesheet" type="text/css" href="./Public/Home/order/Css/identify.css" />
 		<link rel="stylesheet" type="text/css" href="./Public/Home/order/Css/layout.css" />
 		<link rel="stylesheet" type="text/css" href="./Public/Home/order/Css/account.css" />
@@ -158,41 +158,28 @@
 				<div class="padding-big background-color">
 					<div class="account-info clearfix">
 						<table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0" >
-
-							<div class="page-title">
-								<span class="modular fl"><i class="user"></i><em>预约列表</em></span><br/>
-
-							</div>
-
-							<tr>
-								<th>电话</th>
-								<th>姓名</th>
-								<th>预约美发师</th>
-								<th>备注</th>
-								<th>预约日期</th>
-								<th>预约状态</th>
-								<th>回复消息</th>
-
-							</tr>
-							<?php foreach($rows['order'] as $v):?>
-							<tr>
-								<td class="center"><?=$v['phone']?></td>
-								<td class="center"><?=$v['realname']?></td>
-								<td class="center"><?=$member[$v['barber']]['username']?></td>
-								<td class="center"><?=$v['content']?></td>
-								<td class="center"><?=date("Y-m-d",$v['date'])?></td>
-								<td class="center"><?=$v['status']==1?"成功":($v['status']==2?"失败":"待处理")?></td>
-								<td class="center"><?=$v['reply']?></td>
-							</tr>
-							<?php endforeach;?>
-
-						</table><br/>
-　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　 <a href="index.php?p=Home&c=Order&a=select&page=1">第一页</a>　　
-		 <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['page_s']?>">上一页</a>
-　　     <a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['page_x']?>">下一页</a>                 　<a href="index.php?p=Home&c=Order&a=select&page=<?=$rows['yeshu']?>">最后一页</a>
-		 共<?=$rows['yeshu']?>页 第<?=$rows['page']?>页 共<?=$rows['zongtiao']?>条
-　　
-
+							<table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0" >
+								<tr><td colspan="5"> &emsp;&emsp;&emsp;&nbsp;当前积分: <?=$user_row['integrate']??'---'?></td></tr>
+								<tr>
+									<th>商品名称</th>
+									<th>商品logo</th>
+									<th>商品价格</th>
+									<th>库存</th>
+									<th>操作</th>
+								</tr>
+								<?php foreach($rows as $v):?>
+								<tr>
+									<td class="center"><?=$v['goods_name']?></td>
+									<td class="center"><img width="60px" src="<?=$v['logo']?>" alt="logo"></td>
+									<td class="center"><?=$v['price']?>积分</td>
+									<td class="center"><?=$v['num']?></td>
+									<td class="center">
+										<a href="index.php?p=Home&c=goods&a=conversion&id=<?=$v['goods_id']?>">兑换 |</a>
+										<a href="#">加入购物车</a>
+									</td>
+								</tr>
+								<?php endforeach;?>
+							</table>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
 			</div>
 		</div>
 

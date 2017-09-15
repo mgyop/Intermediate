@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>修改商品</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+ <div class="wrap">
+  <div class="page-title">
+    <span class="modular fl"><i class="add"></i><em>修改商品</em></span>
+    <span class="modular fr"><a href="?p=Admin&c=Member&a=index" class="pt-link-btn">商品列表</a></span>
+  </div>
+  <form action="index.php?p=Admin&c=goods&a=edit" method="post" enctype="multipart/form-data">
+  <table class="list-style">
+   <tr>
+    <td style="text-align:right;width:15%;">商品名称：</td>
+    <td>
+     <input type="hidden" name="goods_id" value="<?=$row['goods_id']?>">
+     <input type="text" name="goods_name" value="<?=$row['goods_name']?>" class="textBox length-long"/>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;width:15%;">积分价格：</td>
+    <td>
+     <input type="text" name="price" value="<?=$row['price']?>" class="textBox length-long"/>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;width:15%;">库存：</td>
+    <td>
+     <input type="text" name="num" value="<?=$row['num']?>" class="textBox length-long"/>
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;width:15%;">logo：</td>
+    <td>
+     <input type="file" name="logo" value="<?=$row['logo']?>" class="textBox length-long"/>
+     <img width="50px" src="<?=$row['logo']?>" alt="">
+    </td>
+   </tr>
+   <tr>
+    <td style="text-align:right;"></td>
+    <td><input type="submit" value="修改" class="tdBtn"/></td>
+   </tr>
+  </table>
+  </form>
+ </div>
+</body>
+</html>

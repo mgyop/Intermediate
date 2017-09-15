@@ -103,19 +103,46 @@ class UserModel extends Model
      * @param $data
      */
     public function recharge($data){
+        //获取当前会员级别
+        $user_vip_deep = D('user')->db->fetchColumn("select vip from user where user_id={$data['user_id']}");
+        //会员级别判断,是否可以晋级会员
+        //获取会员级别数据
+        $vip_sql = "select * from vip where recharge <= {$data['money']} order by recharge desc limit 1";
+        $VipModel = D('vip');
+        $vip_result = $VipModel->db->fetchRow($vip_sql);
+        //不为空说明充值达到晋级条件
+        if(!empty($vip_result)){
+            //会员充值达到级别低于时可升级
+            if($vip_result['vip_id'] > $user_vip_deep){
+                //升级会员
+                $vip_update_sql = "update user set vip={$vip_result['vip_id']} where user_id={$data['user_id']}";
+                D('user')->db->query($vip_update_sql);
+            }
+        }
+        //获取充值规则
+        $recharge_ruleModel = D('recharge_rule');
+        $rule_sql = "select * from recharge_rule order by amount desc";
+        $rules = $recharge_ruleModel->db->fetchAll($rule_sql);
         //充值有惊喜哦
         $money = $data['money'];
-        if($money >= 5000){
-            $money += 1000;
-        }elseif($money >= 1000){
-            $money += 800;
-        }elseif($money >= 500){
-            $money += 100;
+        //根据规则加上赠送金额
+        foreach($rules as $v){
+            if($money >= $v['amount']){
+                $money += $v['donation'];
+                break;
+            }
+            unset($v);
         }
         //准备sql
         $sql = "update user set money=money+'{$money}' where user_id='{$data['user_id']}'";
         return $this->db->query($sql);
     }
+
+    /**
+     * 消费
+     * @param $data
+     * @return bool
+     */
     public function expense($data){
 
         //根据user_id取得会员余额
@@ -128,11 +155,13 @@ class UserModel extends Model
         $plan_data = $PlanModel->getOne($data['plan_id']);
         //套餐价格
         $price = $plan_data['money'];
-
-        //根据是否是会员自动打折5折
-        if($user_data['is_vip'] == 1){
+        //根据vip等级打折
+        //等级为0 不打折
+        if($user_data['vip'] != 0){
+            //获取折扣
+            $discount = D('vip')->db->fetchColumn("select discount from vip where vip_id={$user_data['vip']}");
             //打折后的消费金额
-            $price = floor($price/2);
+            $price = floor($price*($discount/10));
         }
         //在这里处理代金券
         $code = $data['code'];
@@ -140,49 +169,91 @@ class UserModel extends Model
         $CodeModel = D('code');
         $sql_code = "select * from code where code='{$code}' and status=1 and user_id={$data['user_id']}";
         $code_data = $CodeModel->db->fetchRow($sql_code);
-        if($code_data == null ){
+        if( ($code_data==null) && (!empty($code)) ){
             $this->error = "代金券已使用";
             return false;
         }
-//        dump($code_data);die;
-        //代金券所指示金额
-        $code_money = $code_data['money'];
-        //代金券的金额小于套餐价格,抵消并更新代金券状态
-        if($code_money <= $price){
-            $price -= $code_money;
-            //更新code状态
-            $code_update_sql ="update code set money=0,status=0 where code_id={$code_data['code_id']}";
-            $CodeModel->db->query($code_update_sql);
-            unset($code_update_sql);
-        }elseif($code_money > $price){
-            $remainder = $code_money-$price;
-            $code_update_sql ="update code set money={$remainder} where code_id={$code_data['code_id']}";
-            $CodeModel->db->query($code_update_sql);
-            $price = 0;
+        //输入了代金券
+        if(!empty($code)){
+            //代金券所指示金额
+            $code_money = $code_data['money'];
+            //代金券的金额小于套餐价格,抵消并更新代金券状态
+            if($code_money <= $price){
+                $price -= $code_money;
+                //更新code状态
+                $code_update_sql ="update code set money=0,status=0 where code_id={$code_data['code_id']}";
+                $CodeModel->db->query($code_update_sql);
+                unset($code_update_sql);
+            }elseif($code_money > $price){
+                $remainder = $code_money-$price;
+                $code_update_sql ="update code set money={$remainder} where code_id={$code_data['code_id']}";
+                $CodeModel->db->query($code_update_sql);
+                $price = 0;
+            }
         }
 
         //可以消费,在这里更新余额
         //构建关联数组
         $money = $money-$price;
+        //判断余额是否足够消费
+        if($money < 0){
+            $this->error = "余额不足";
+            return false;
+        }
+
         //准备sql
         $sql = "update user set money='{$money}' where user_id={$data['user_id']}";
         //执行sql
         $result = $this->db->query($sql);
-        if($result){ //执行成功,写历史记录
-            //拼装关联数组,记录日志
-            $history_data = [];
-            $history_data['user_id'] = $data['user_id'];
-            $history_data['member_id'] = $data['member_id'];
-            $history_data['type'] = 1;
-            $history_data['amount'] = $plan_data['money'];
-            $history_data['content'] = $plan_data['des'];
-            $history_data['time'] = time();
-            $history_data['remainder'] = $money;
-            //创建history模型
-            $HistoryModel = D('history');
-            //插入记录
-            return $HistoryModel->insert($history_data);
+        if(!$result){
+            $this->error = "执行sql失败";
+            return false;
         }
+        //消费成功
+        //根据消费的实际金额 $price 10元 -->>  1积分 换算所得积分
+        $integrats = round($price/10);  //四舍五入机制
+        //修改会员表积分现况
+        $integrate_update_sql = "update user set integrate=integrate+{$integrats} where user_id={$data['user_id']}";
+        //原有基础上增加积分
+        $this->db->query($integrate_update_sql);
+
+        //组装积分数据
+        $integrate_data = [];
+        //类型
+        $integrate_data['type']= 1 ;
+        //描述
+        $integrate_data['intro']= $plan_data['name'] ;
+        //所获积分
+        $integrate_data['integrate']= $integrats;
+        //会员id
+        $integrate_data['user_id']= $data['user_id'];
+        //时间
+        $integrate_data['time']= time();
+        $integrate_sql = D('integrate')->setInsertSql($integrate_data);
+        $integrate_result = D('integrate')->db->query($integrate_sql);
+        if(!$integrate_result){
+            $this->error = "记录积分出错";
+            return false;
+        }
+        //执行成功,写历史记录
+        //拼装关联数组,记录日志
+        $history_data = [];
+        $history_data['user_id'] = $data['user_id'];
+        $history_data['member_id'] = $data['member_id'];
+        $history_data['type'] = 1;
+        $history_data['amount'] = $plan_data['money'];
+        $history_data['content'] = $plan_data['des'];
+        $history_data['time'] = time();
+        $history_data['remainder'] = $money;
+        //创建history模型
+        $HistoryModel = D('history');
+        //插入记录
+        $history_result = $HistoryModel->insert($history_data);
+        if(!$history_result){
+            $this->error = "记录日志失败";
+            return false;
+        }
+
     }
     public function update($data){
         //去除xss
