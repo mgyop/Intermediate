@@ -8,6 +8,7 @@ class PlatController extends Controller
 {
     public function __construct()
     {
+        parent::__construct();
         //验证是否登录
         //>>1 session,没有session , 验证 cookie
         if(!isset($_SESSION['user_userinfo']) ){

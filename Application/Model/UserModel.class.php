@@ -20,6 +20,11 @@ class UserModel extends Model
         $row = $this->db->fetchColumn($sql);
         return $row;
     }
+
+    public function getIntegrate($user_id){
+        $sql = "select integrate from user where user_id={$user_id}";
+        return $this->db->fetchColumn($sql);
+    }
     /**
      * 验证前台登陆信息
      */
@@ -228,7 +233,7 @@ class UserModel extends Model
         //描述
         $integrate_data['intro']= $plan_data['name'] ;
         //所获积分
-        $integrate_data['integrate']= $integrats;
+        $integrate_data['integrate']= "+ ".$integrats;
         //会员id
         $integrate_data['user_id']= $data['user_id'];
         //时间
