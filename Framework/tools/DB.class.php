@@ -28,6 +28,26 @@ class DB
         return self::$instance;
     }
 
+    /**
+     * 开启事物
+     */
+    public function user_begin_transaction (){
+        mysqli_begin_transaction($this->link);
+    }
+
+    /**
+     * 提交事物
+     */
+    public function user_commit(){
+        mysqli_commit($this->link);
+    }
+
+    /**
+     * 回滚事物
+     */
+    public function user_rollback(){
+        mysqli_rollback($this->link);
+    }
 
     private function __construct($config)
     {

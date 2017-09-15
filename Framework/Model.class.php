@@ -95,6 +95,12 @@ abstract class Model
         $str  = implode(',',$new_arr);
         return $sql.$str." where {$column}={$id}";
     }
+
+    /**
+     * 生成insert语句
+     * @param $arr
+     * @return string
+     */
     public function setInsertSql($arr){
         $names = [];
         $values = [];

@@ -21,13 +21,19 @@ class GoodsController extends Controller
     }
 
     /**
-     * 处理兑换
+     * 处理商品兑换
      */
     public function conversion(){
         $goods_id = $_GET['id'];
         //获取用户信息
         $user_row = $_SESSION['user_userinfo'];
-        dump($user_row);die;
+        $GoodsModel = D('goods');
+        //处理兑换,失败返回false
+        $res = $GoodsModel->conversion($goods_id,$user_row);
+        if($res === false){
+            $this->error("index.php?p=Home&c=Goods&a=index",$GoodsModel->getError(),3);
+        }
+        $this->success("index.php?p=Home&c=Goods&a=index",$GoodsModel->getError(),3);
     }
 
 }

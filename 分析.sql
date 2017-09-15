@@ -262,7 +262,7 @@ create table goods(
   logo varchar(200) not null comment '商品图片'
 )engine=innodb default charset=utf8;
 
-
+//创建订单表
 
 
 
