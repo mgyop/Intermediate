@@ -2,19 +2,37 @@
 
 class OrderController extends Base
 {
-
     /**
      * 处理预约状态
      */
 
     public function select()
     {
+        /**
+         * 查询预美发师的数据回显到页面中
+         */
+        $memberModel = D("order");
+        $row = $memberModel->slect_member();//查询出所有数据
+        //var_dump($row);die;
+        //获取id对应的名字
+        foreach ($row as $key=>$v){
+            $member[$v['member_id']]=$v;
+        }
+        //var_dump($member);die;
+        $this->assign('member',$member);
+
+        //分页接收数据page
+        $page=$_GET['page']??1;
+        //var_dump($page);die;
+        /*foreach ($order['order'] as $value){
+
+        }*/
         //查询出所有未处理的状态
         $orderModel = D("order");
-        $order = $orderModel->select();
-        // var_dump($order);die;
+        $order = $orderModel->select($page);
+        //var_dump($order);die;
         //回显到表单
-        $this->assign("order", $order);
+        $this->assign("rows",$order);
         //页面显示
         $this->display("order");
     }

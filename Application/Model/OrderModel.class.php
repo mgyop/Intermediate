@@ -4,7 +4,7 @@ class OrderModel extends Model
 {
     /**
      * @return array|null|void
-     * 显示预约表单
+     * 前台显示预约表单
      */
     public function order($page)
     {
@@ -34,7 +34,6 @@ class OrderModel extends Model
 
         //return $this->getAll();
     }
-
     /**
      * @param $post 预约内容
      * @return bool
@@ -92,16 +91,28 @@ class OrderModel extends Model
     /**
      * 后台预约查询所有数据
      */
-    public function select()
+    public function select($page)
     {
-
-        $sql = "select * from `order` where status=3";
+        $y=3;
+        //计算出总的条数
+        $sql2="select count(*) from `order` where status='3'";
+        $zongtiao=$this->db->fetchColumn($sql2);//总条数
+        $yeshu=ceil($zongtiao/$y);  //计算出总的页数并且向上取整
+        //dump($yeshu);die;
+        $page<1?1:$page;
+        $page>$yeshu ? $yeshu:$page;
+        $x=($page-1)*$y;
+        $page_s=($page-1)<1?1:($page-1);
+        $page_x=($page+1)>$yeshu?$page:($page+1);
+        $sql = "select * from `order` where status='3' limit $x,$y";
         $order = $this->db->fetchAll($sql);
-        //var_dump($order);die;
-        if ($order == false) {//3表示未处理状态 1成功2失败
-            return false;//查询出所有未处理的数据
-        } else {
-            return $order;
+        //var_dump($sql);die;
+        if ($order==false){
+            return false;
+        }else {
+            return ["page"=>$page,"yeshu"=>$yeshu,"zongtiao"=>$zongtiao,"order"=>$order,
+                "page_s"=>$page_s,"page_x"=>$page_x
+            ];
         }
     }
 
