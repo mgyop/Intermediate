@@ -11,8 +11,23 @@ class GoodsController extends Controller
      * 显示列表
      */
     public function index(){
-        //获取所有数据
-        $rows = D('goods')->getAll();
+        $GoodsModel = D('goods');
+        //获取条件
+        $get = $_GET;
+        //取得有效条件
+        $where = $GoodsModel->serach($get);
+        $page = $_GET['page'] ?? 1;
+        //加入条件到分页中
+        $rows= getPage('goods',3,$page,5,'goods_id desc',$where);
+        //改装下搜索数据
+        $serach=[];
+        foreach ($get as $k=>&$v){
+            if(!empty($v)){
+                $serach[$k] = $v;
+            }
+        }
+        //分配数据
+        $this->assign('serach',$serach);
         $this->assign('rows',$rows);
         //获取用户信息
         $user_row = $_SESSION['user_userinfo']??'';

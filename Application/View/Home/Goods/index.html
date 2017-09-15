@@ -13,6 +13,9 @@
 		<script type="text/javascript" src="./Public/Home/order/Js/haidao.offcial.general.js"></script>
 		<script type="text/javascript" src="./Public/Home/order/Js/select.js"></script>
 		<script type="text/javascript" src="./Public/Home/order/Js/haidao.validate.js"></script>
+		<link type="text/css" href="./Public/Home/Goods/css/zzsc.css" rel="stylesheet" />
+		<script type="text/javascript" src="./Public/Home/Goods/js/jquery.js"></script>
+		<script type="text/javascript" src="./Public/Home/Goods/js/zzsc.js"></script>
 		<link href="./Public/Admin/Member/css/adminStyle.css" rel="stylesheet" type="text/css" />
 	</head>
 
@@ -23,7 +26,7 @@
 					<a href="#" class="topbar-logo fl">
 					<span><img src="./Public/Home/order/Images/logo.png" width="20" height="20"/></span>
 					</a>
-					<a href="index.php?p=Admin&c=Login&a=login" class="topbar-home-link topbar-btn text-center fl"><span>后台机票</span></a>
+					<a target="_blank" href="index.php?p=Admin&c=Login&a=login" class="topbar-home-link topbar-btn text-center fl"><span>后台机票</span></a>
 				</div>
 			</div>
 			<div class="topbar-info">
@@ -157,9 +160,24 @@
 			<div class="view-product background-color">
 				<div class="padding-big background-color">
 					<div class="account-info clearfix">
-						<table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0" >
 							<table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0" >
 								<tr><td colspan="5"> &emsp;&emsp;&emsp;&nbsp;当前积分: <?=$user_row['integrate']??'---'?></td></tr>
+								<tr>
+									<td class="center">商品搜索</td>
+									<td colspan="4">
+										<form action="" name="serach" method="get">
+											<input type="hidden" name="p" value="Home">
+											<input type="hidden" name="c" value="Goods">
+											<input type="hidden" name="a" value="index">
+											<img src="./Public/Admin/Member/images/icon_search.gif" width="26" height="22" border="0" alt="search" />
+											价格大于 <input type="text" name="price" size="15" value="<?=$serach['price']??''?>" />
+											<!-- 关键字 -->
+											商品名称关键字 <input type="text" name="keyword" size="15" value="<?=$serach['keyword']??''?>"/>
+											<input type="submit" value=" 搜索 " class="button" />
+										</form>
+								    </td>
+								</tr>
+								<tr><td onclose="5"></td></tr>
 								<tr>
 									<th>商品名称</th>
 									<th>商品logo</th>
@@ -167,7 +185,7 @@
 									<th>库存</th>
 									<th>操作</th>
 								</tr>
-								<?php foreach($rows as $v):?>
+								<?php foreach($rows[1] as $v):?>
 								<tr>
 									<td class="center"><?=$v['goods_name']?></td>
 									<td class="center"><img width="60px" src="<?=$v['logo']?>" alt="logo"></td>
@@ -179,7 +197,25 @@
 									</td>
 								</tr>
 								<?php endforeach;?>
-							</table>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+								<tr><td colspan="5"><?=$rows[0]?></td></tr>
+							</table>　　　
+						<div class="box" style="margin-top:50px;">
+							<div class="picbox">
+								<ul class="piclist mainlist">
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/1.jpg" width="220" height="105" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/2.jpg" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/3.jpg" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/4.jpg" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/1.jpg" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/2.jpg" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/3.jpg" /></a></li>
+									<li><a href="#" target="_blank"><img src="./Public/Home/Goods/images/4.jpg" /></a></li>
+								</ul>
+								<ul class="piclist swaplist"></ul>
+							</div>
+							<div class="og_prev"></div>
+							<div class="og_next"></div>
+						</div>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
 			</div>
 		</div>
 

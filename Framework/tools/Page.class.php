@@ -49,8 +49,8 @@ class Page{
         if($res === false){
             $url .= '?';
         }
-        //如果参数 p 存在  去除 p 参数,已备下面赋值
-        $res = strstr($url,'&p',true);
+        //如果参数 page存在  去除 page 参数,已备下面赋值
+        $res = strstr($url,'&page',true);
         if($res != false){
             $url = $res;
         }
