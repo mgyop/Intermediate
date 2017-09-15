@@ -38,8 +38,9 @@ class Controller
         //排除特例
         if(ACTION_NAME == 'menu' || ACTION_NAME == 'login' || ACTION_NAME == 'register'){
              die;
+        }else{
+            require COMMEN_PATH."footer.html";
         }
-        require COMMEN_PATH."footer.html";
     }
 
     /**

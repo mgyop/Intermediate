@@ -226,7 +226,7 @@ class UserModel extends Model
             return false;
         }
 
-        //组装积分数据
+        //组装积分数据,记录积分消费和增加记录
         $integrate_data = [];
         //类型
         $integrate_data['type']= 1 ;

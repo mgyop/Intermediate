@@ -12,6 +12,29 @@
  */
 class GoodsModel extends Model
 {
+    private $arr_condition = [];  //保存条件
+    private $str_condition = '';  //保存拼接过后的字符串
+    private $where='';
+    /**
+     * 查询
+     * @param $data
+     * @return string
+     */
+    public function serach($data){
+        //价格
+        if(!empty($data['price'])){
+            $this->arr_condition[] = "price>'{$data['price']}'";
+        }
+        //keyword
+        if(!empty($data['keyword'])){
+            $this->arr_condition[] = "(goods_name like '%{$data['keyword']}%')";
+        }
+        $this->str_condition =implode(" and ",$this->arr_condition);
+        if(!empty($this->str_condition)){
+            $this->where = " where ".$this->str_condition;
+        }
+        return $this->where;
+    }
     /**
      * 添加商品
      * @param $data
@@ -93,7 +116,7 @@ class GoodsModel extends Model
                $goodsorder_data['goods_id'] = $goods_data['goods_id'];
                $goodsorder_data['order_num'] = uniqid('goods_');
                $goodsorder_data['addr'] = $addr;
-               $goodsorder_data['is_pay'] = 0;
+               $goodsorder_data['is_pay'] = 1;
                $goodsorder_data['is_send'] = 0;
                $goodsorder_data['time'] = time();
                //插入订单记录

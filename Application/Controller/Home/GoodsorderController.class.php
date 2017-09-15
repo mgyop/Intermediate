@@ -13,8 +13,28 @@ class GoodsorderController extends PlatController
     public function index(){
         $user_id = $_SESSION['user_userinfo']['user_id'];
         //获取所有数据
-        $rows = D('goodsorder')->getAllByUserId($user_id);
+        $goodsorderModel = D('goodsorder');
+        //获取条件
+        //加入user_id条件
+        $get['user_id'] = $user_id;
+        $get = $_GET;
+        //取得有效条件
+        $where = $goodsorderModel->serach($get);
+        $page = $_GET['page'] ?? 1;
+        //加入条件到分页中
+        $rows= getPage('goodsorder',3,$page,5,'time desc',$where);
+        //改装下搜索数据
+        $serach=[];
+        foreach ($get as $k=>&$v){
+            if(!empty($v)){
+                $serach[$k] = $v;
+            }
+        }
+        //分配数据
+        $this->assign('serach',$serach);
         $this->assign('rows',$rows);
+
+
         //获取会员信息
         $user_data = D('user')->getOne($user_id);
         //获取商品信息

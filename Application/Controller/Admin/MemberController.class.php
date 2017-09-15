@@ -72,7 +72,7 @@ class MemberController extends Base
            if($result){
                $this->success('index.php?p=Admin&c=Member&a=index','添加成功',2);
            }
-           $this->error('index.php?p=Admin&c=Member&a=add','添加失败',2);
+           $this->error('index.php?p=Admin&c=Member&a=add',$MemberModel->getError(),2);
        }
        //获取部门表数据
        $GroupModel = D('group');
