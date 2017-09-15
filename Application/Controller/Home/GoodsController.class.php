@@ -15,7 +15,7 @@ class GoodsController extends Controller
         $rows = D('goods')->getAll();
         $this->assign('rows',$rows);
         //获取用户信息
-        $user_row = $_SESSION['user_userinfo'];
+        $user_row = $_SESSION['user_userinfo']??'';
         $this->assign('user_row',$user_row);
         $this->display('index');
     }

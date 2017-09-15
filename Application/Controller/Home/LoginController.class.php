@@ -74,7 +74,7 @@ class LoginController extends Controller
         setcookie('PHPSESSID',null,time()-1,'/','.vipmanager.com');
         session_unset();
         session_destroy();
-        $this->redirect('index.php?p=Home&c=index&a=index');
+        $this->redirect('index.php?p=Home&c=Login&a=login');
 
     }
 
