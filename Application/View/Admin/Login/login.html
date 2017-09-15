@@ -31,24 +31,26 @@
 				<input type="text" class="text" name="username" value="Username" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
 			</li>
 				<div class="clear"> </div>
-			<li>
-				<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
-			</li>
-				记住密码<input type="checkbox" name="bear"><br/>
 
-		
+				<input type="password" name="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a><br/>
+
+				<input type="text" name="captcha" value="验证码" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}"><br/>
+			<img src="index.php?p=Admin&c=Captcha&a=yan"alt="">
 
 
 			<div class="clear"> </div>
+
+			<div class="clear"> </div>
 			<div class="submit">
-				<input type="submit" onclick="myFunction()" value="登陆" >
+				<input type="submit" onclick="myFunction()" value="登陆" >	记住密码<input type="checkbox" name="bear">
 						  <div class="clear">  </div>	
 			</div>
-				
+
 		</form>
 		</div>					
 	</div>
 	</div>
+
 	<div class="clear"> </div>
 <!--- footer --->
 <div class="footer">
