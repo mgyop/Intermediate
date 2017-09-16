@@ -32,7 +32,7 @@ class Controller
         // TODO: Implement __destruct() method.
         //当前时间(微秒 秒)
         $this->lastTime=explode(' ', microtime());
-        $time = ($this->lastTime[0] - $this->startTime[0])+($this->lastTime[1]-$this->startTime[1]);
+        $time = $this->lastTime[0]/100;
         //内存峰值
         $memory = $this->memory =memory_get_peak_usage()/(1024*1024);
         //排除特例
