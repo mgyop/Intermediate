@@ -1,6 +1,6 @@
 <?php
 
-class IndentController extends Controller
+class IndentController extends PlatController
 {
     public function index(){
         /**

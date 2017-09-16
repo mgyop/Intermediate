@@ -13,7 +13,7 @@ class IndentController extends Controller
     public function index()
     {
         $get = $_GET;
-        //var_dump($get);die;
+        $this->assign('get',$get);
         //创建一个对象
         //1.查询所有数据
         //创建一个对象帮我们完成

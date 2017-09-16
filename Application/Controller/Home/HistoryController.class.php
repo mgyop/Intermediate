@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/14
  */
-class HistoryController extends Controller
+class HistoryController extends PlatController
 {
     /**
      * 获取排行榜

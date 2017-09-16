@@ -20,14 +20,12 @@
             <input type="hidden" name="c" value="Indent">
             <input type="hidden" name="a" value="index">
                是否付款 <select name="is_pay" id="">
-            <?php foreach ($indent as $v):?>
-            <option value="">
-                <?=$v['is_pay']==1?"已付款":"未付款"?>
-            </option>
-            <?php endforeach;?>
+            <option value="">全部</option>
+            <option value="0" <?=($get['is_pay']??'')==0?'selected':''?>>未付款</option>
+            <option value="1" <?=($get['is_pay']??'')==1?'selected':''?>>已付款</option>
         </select>
         <!-- 关键字 -->
-        关键字 <input type="text" name="keyword" size="15" value="<?=$keyword??''?>"/>
+        地址和订单号关键字 <input type="text" name="keyword"  size="15" value="<?=$get['keyword']??''?>"/>
         <input type="submit" value=" 搜索 " class="button" />
         </form>
     </div>

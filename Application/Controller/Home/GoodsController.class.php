@@ -5,7 +5,7 @@
  * User: Administrator
  * Date: 2017/9/15
  */
-class GoodsController extends Controller
+class GoodsController extends PlatController
 {
     /**
      * 显示列表
