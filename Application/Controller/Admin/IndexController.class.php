@@ -24,6 +24,7 @@ class IndexController extends Base
     //页面主体
     public function main()
     {
+        //获取会员级别统计信息
         $this->display('main');
     }
 }
