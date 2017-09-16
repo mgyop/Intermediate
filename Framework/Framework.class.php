@@ -87,6 +87,7 @@ class Framework
             die;
         }
         $controller_path = $c_path. "Controller.class.php";
+        
         if(!file_exists($controller_path)){
             require PUBLIC_PATH.'commen/404/'."404.html";
             die;
