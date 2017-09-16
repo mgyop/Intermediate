@@ -95,20 +95,21 @@ class IndentModel extends Model
         // var_dump($rowss);
         return $goods;
     }
-
     /**
      * 对发货进行操作
      */
     public function update_send($goodsordr_id){
-   /*     $sql="select * from goodsorder where goodsordr_id='{$goodsordr_id}'";
-        $row=$this->db->fetchRow($sql);
-        $row['is_send']=1;*/
-
-
       $sql="update goodsorder set is_send=1 where goodsordr_id='{$goodsordr_id}'";
       $rows=$this->db->query($sql);
       return $rows;
     }
 
-
+    /**
+     * 前台订单回显
+     */
+    public function home_indent(){
+        $sql="select * from goodsorder";
+        $rows=$this->db->fetchAll($sql);
+        return $rows;
+    }
 }
