@@ -70,6 +70,9 @@ class Framework
      * 分发请求: 根据c找到控制器从而执行a指定的方法
      */
     private static  function dispache(){
+        $p_path = CONTROLLER_PATH.PLATFORM_NAME;
+        $a_path = $p_path.DS.CONTROLLER_NAME;
+        self::errorLogShow($p_path,$a_path);
         $controller_name = CONTROLLER_NAME . "Controller"; //控制器类的名字
         //>>2.加载控制器类文件并且创建对象
         $controller = new $controller_name();  //根据控制器的名字创建对象
@@ -78,7 +81,13 @@ class Framework
         $a =  ACTION_NAME;
         $controller->$a();
     }
+    private static function errorLogShow($p_path,$a_path){
+        if(!file_exists($p_path)){
+            require PUBLIC_PATH.'commen/404/'."404.html";
+            die;
+        }
 
+    }
     /**
      * 类名和类文件的映射
      */

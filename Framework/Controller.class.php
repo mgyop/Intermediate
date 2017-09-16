@@ -18,6 +18,7 @@ class Controller
     public $memory;
     public function __construct()
     {
+        //判断是否登录
         if(isset($_SESSION['user_userinfo'])){
             $integrate = D('user')->getIntegrate($_SESSION['user_userinfo']['user_id']);
             $_SESSION['user_userinfo']['integrate'] = $integrate;
