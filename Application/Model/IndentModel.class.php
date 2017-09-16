@@ -100,14 +100,14 @@ class IndentModel extends Model
      * 对发货进行操作
      */
     public function update_send($goodsordr_id){
-        $sql="select * from goodsorder where goodsordr_id='{$goodsordr_id}'";
+   /*     $sql="select * from goodsorder where goodsordr_id='{$goodsordr_id}'";
         $row=$this->db->fetchRow($sql);
-        $row['is_send']=1;
+        $row['is_send']=1;*/
 
 
-      $sql="update goodsorder set is_send='{$row['is_send']}' where goodsordr_id='{$goodsordr_id}'";
-     $rows=$this->db->query($sql);
-    return $rows;
+      $sql="update goodsorder set is_send=1 where goodsordr_id='{$goodsordr_id}'";
+      $rows=$this->db->query($sql);
+      return $rows;
     }
 
 

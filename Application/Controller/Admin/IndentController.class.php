@@ -6,8 +6,6 @@
  */
 class IndentController extends Controller
 {
-
-
     /**
      * 查询订单表单数据显示在表单上
      * 显示订单表单
@@ -38,6 +36,10 @@ class IndentController extends Controller
         /**
          * 查询会员数据user表
          */
+<<<<<<< HEAD
+=======
+       // $indentMode = D("Indent");
+>>>>>>> 775257af31a45cecfc39ebddae9d4499a5c6b17f
         $rowss = $indentMode->select_user();
 
         foreach ($rowss as $key => $v) {
@@ -51,7 +53,7 @@ class IndentController extends Controller
         /**
          * 查询商品所有数据
          */
-        $indentMode = D("Indent");
+       // $indentMode = D("Indent");
         $goods = $indentMode->select_goods();
         //var_dump($goods);die;
         foreach ($goods as $key => $val) {
@@ -66,15 +68,13 @@ class IndentController extends Controller
 
     public function send()
     {
-
         //接收数据
         $goodsordr_id = $_GET['goodsordr_id'];
         // var_dump($goodsordr_id);
         $indentMode = new IndentModel();
         $indentMode->update_send($goodsordr_id);
         //var_dump($rows);die;
-        $this->display("index");
-
+        $this->redirect("index.php?p=Admin&c=Indent&a=index");
     }
 
 
