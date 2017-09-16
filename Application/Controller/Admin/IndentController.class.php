@@ -36,12 +36,9 @@ class IndentController extends Controller
         /**
          * 查询会员数据user表
          */
-<<<<<<< HEAD
-=======
-       // $indentMode = D("Indent");
->>>>>>> 775257af31a45cecfc39ebddae9d4499a5c6b17f
-        $rowss = $indentMode->select_user();
 
+       // $indentMode = D("Indent");
+        $rowss = $indentMode->select_user();
         foreach ($rowss as $key => $v) {
             $user_username[$v['user_id']] = $v;
             unset($v);
