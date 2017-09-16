@@ -8,7 +8,7 @@ return array(
     ),
     'app' => array(
         'default_platform' => 'Home',
-        'default_controller' => 'Login',
-        'default_action' => 'Login'
+        'default_controller' => 'Order',
+        'default_action' => 'select'
     )
 );
