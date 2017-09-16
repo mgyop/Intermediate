@@ -54,10 +54,10 @@
         <td class="center"><?=$v['addr']?></td>
         <td class="center"><?=$v['is_send']==1?"已发货":"待发货"?></td>
         <td class="center"><?=date("Y-m-d",$v['time'])?></td>
+
         <td class="center">
-        <td>
             <?php if($v['is_send'] == 0){ ?>
-            <a href="index.php?p=Admin&c=Indent&a=send&goodsordr_id=<?=$v['goodsordr_id']?>">发货</a>
+
             <a href="index.php?p=Admin&c=Indent&a=send&goodsordr_id=<?=$v['goodsordr_id']?>" onclick="window.confirm('确认发货?')">发货</a>
             <?php   }else{?>
             <a href="#" onclick="javascript:void(0)"> -- </a>
