@@ -90,11 +90,11 @@ class MemberController extends Base
        $id = $_GET['id']??0;
        //创建员工模型
        $MemberModel = D('member');
-       $result = $MemberModel->delOne($id);
+       $result = $MemberModel->delete($id);
        if($result){
           $this->success('index.php?p=Admin&c=Member&a=index');
        }else{
-          $this->error('index.php?p=Admin&c=Member&a=index','删除失败',2);
+          $this->error('index.php?p=Admin&c=Member&a=index',$MemberModel->getError(),2);
        }
    }
    public function edit(){

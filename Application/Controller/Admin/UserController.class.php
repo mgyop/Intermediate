@@ -114,7 +114,7 @@ class UserController extends Base
             //失败 返回 false
             $result = $UserModel->recharge($post);
             if(!$result){
-                $this->error('index.php?p=Admin&c=User&a=recharge&id='.$post['user_id']);
+                $this->error('index.php?p=Admin&c=User&a=recharge&id='.$post['user_id'],$UserModel->getError(),2);
             }else{
                 //生成充值记录
                 $HistoryModel = D('history');

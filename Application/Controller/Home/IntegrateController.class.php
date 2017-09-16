@@ -8,7 +8,10 @@
 class IntegrateController extends PlatController
 {
     public function index(){
-        $rows = D('integrate')->getUserAll($_SESSION['user_userinfo']['user_id']);
+        $page = $_GET['page'] ?? 1;
+        //加入条件到分页中
+        $rows= getPage('integrate',6,$page,5,'user_id desc','');
+        //改装下搜索数据
         $this->assign('rows',$rows);
         $this->display('index');
     }

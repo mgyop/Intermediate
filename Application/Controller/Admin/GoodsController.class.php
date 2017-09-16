@@ -72,7 +72,7 @@ class GoodsController extends Base
     public function delete(){
         $goods_id = $_GET['id']??0;
         $GoodsModel = D('goods');
-        $GoodsModel->delete($goods_id);
+        $GoodsModel->delOne($goods_id);
         $this->redirect("index.php?p=Admin&c=goods&a=index");
 
     }

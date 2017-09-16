@@ -104,6 +104,8 @@ class MemberModel extends Model
             $this->error = "手机不能为空";
             return false;
         }
+        //密码加密
+        $data['password'] = md5($data['password']);
         //准备sql
         $update_sql = $this->setUpdateSql($data, $data['member_id']);
         //执行
@@ -149,6 +151,17 @@ class MemberModel extends Model
             $this->where = " where ".$this->str_condition;
         }
         return $this->where;
+    }
+
+    public function delete($member_id){
+        $rows = D('history')->db->fetchAll("select * from history where member_id={$member_id}");
+//        dump($rows);
+        if(!$rows){
+            $this->delOne($member_id);
+        }else{
+            $this->error = "该员工有服务记录不能被删除...";
+            return false;
+        }
     }
 }
 

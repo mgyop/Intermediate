@@ -108,6 +108,10 @@ class UserModel extends Model
      * @param $data
      */
     public function recharge($data){
+        if($data['money']<0){
+            $this->error = "充值的金额不合法";
+            return false;
+        }
         //获取当前会员级别
         $user_vip_deep = D('user')->db->fetchColumn("select vip from user where user_id={$data['user_id']}");
         //会员级别判断,是否可以晋级会员
@@ -233,7 +237,7 @@ class UserModel extends Model
         //描述
         $integrate_data['intro']= $plan_data['name'] ;
         //所获积分
-        $integrate_data['integrate']= "+ ".$integrats;
+        $integrate_data['integrate']= $integrats;
         //会员id
         $integrate_data['user_id']= $data['user_id'];
         //时间
@@ -285,21 +289,21 @@ class UserModel extends Model
             return false;
         }
         //密码为空不修改
-        if(isset($data['password'])){
-            if(empty($data['password'])){
-                unset($data['password']);
+        if(empty($data['password'])){
+            unset($data['password']);
+
+        }else{
+            $data['password'] = md5($data['password']);
+            if(isset($data['repassword'])){
+                //输入的密码不一致
+                if($data['password'] != $data['repassword']){
+                    $this->error = "输入的密码不一致";
+                    return false;
+                }
             }
         }
-        if(isset($data['repassword'])){
-            //输入的密码不一致
-            if($data['password'] != $data['repassword']){
-                $this->error = "输入的密码不一致";
-                return false;
-            }
-        }
-        //删除data中的repassword;
+        //删除data中的确认密码 repassword;
         unset($data['repassword']);
-        $data['password'] = md5($data['password']);
 //        $sql = $this->setInsertSql($data);
         $user_id = array_shift($data);
         $sql = $this->setUpdateSql($data,$user_id);

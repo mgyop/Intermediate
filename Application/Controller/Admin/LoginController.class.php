@@ -36,8 +36,12 @@ class LoginController extends Controller
            // dump($_SERVER);die;
             $ip = getClientIP();
             $ip_int = ip2long($ip);
+            $res =  strpos($ip_int,'-');
+            if($res===0){
+                $ip_int = substr($ip_int,1);
+            }
             //修改员工表 last_loginip
-            $update_sql = $login->setUpdateSql(['last_loginip'=>$ip_int],$rows['member_id']);
+            $update_sql = $login->setUpdateSql(['last_loginip'=>$ip_int,'last_login'=>time()],$rows['member_id']);
             $login->editLoginIp($update_sql);
             $_SESSION['member_userinfo'] = $rows;//sesssion在底层代码已打开
             if (isset($post['bear'])) {//判断是否记住密码,保存cookie

@@ -64,7 +64,7 @@
    <tr>
     <td style="text-align:right;">VIP等级：</td>
     <td>
-     <select name="vip_id">
+     <select name="vip">
          <?php foreach($new_rows_vip as $v):?>
          <option value="<?=$v['vip_id']?>" <?=$row['vip']==$v['vip_id']?'selected':''?> ><?=$v['vipname']?></option>
          <?php endforeach;?>

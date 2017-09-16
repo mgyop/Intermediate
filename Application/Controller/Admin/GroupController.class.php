@@ -63,8 +63,10 @@ class GroupController extends Base
    public function delete(){
        $group_id = $_GET['id']??0;
        $GroupModel = D('group');
-       $GroupModel->delete($group_id);
+       $res = $GroupModel->delete($group_id);
+       if($res === false){
+           $this->error("index.php?p=Admin&c=Group&a=index",$GroupModel->getError(),2);
+       }
        $this->redirect("index.php?p=Admin&c=Group&a=index");
-
    }
 }

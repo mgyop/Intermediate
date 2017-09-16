@@ -172,7 +172,7 @@
 								<th>积分</th>
 								<th>日期</th>
 							</tr>
-							<?php foreach($rows as $v):?>
+							<?php foreach($rows[1] as $v):?>
 							<tr>
 								<td class="center"><?=$v['integrate_id']?></td>
 								<td class="center"><?=$_SESSION['user_userinfo']['username']?></td>
@@ -181,7 +181,7 @@
 								<td class="center"><?=date("Y-m-d",$v['time'])?></td>
 							</tr>
 							<?php endforeach;?>
-
+                            <tr><td colspan="5"><?=$rows[0]?></td></tr>
 						</table>
 			</div>
 		</div>
