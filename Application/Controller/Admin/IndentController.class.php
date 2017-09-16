@@ -57,7 +57,7 @@ class IndentController extends Controller
             $goods[$val['goods_id']] = $val;
             unset($val);
         }
-        var_dump($goods);die;
+        //var_dump($goods);die;
         $this->assign("goods", $goods);
         $this->display("index");
     }
