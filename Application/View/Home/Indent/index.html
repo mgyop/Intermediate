@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>vip管理系统</title>
+    <title>控制台</title>
     <link rel="stylesheet" type="text/css" href="./Public/Home/order/Css/identify.css" />
     <link rel="stylesheet" type="text/css" href="./Public/Home/order/Css/layout.css" />
     <link rel="stylesheet" type="text/css" href="./Public/Home/order/Css/account.css" />
@@ -58,16 +58,17 @@
                         <li><a href="index.php?p=Home&c=Login&a=logout">退 出</a></li>
                     </ul>
                 </div>
-            </li>
-            <li class="fl topbar-info-item">
-                <div class="dropdown">
-                    <ul class="dropdown-menu">
-                        <li><a href="login.html">退出</a></li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
     </div>
+    </li>
+    <li class="fl topbar-info-item">
+        <div class="dropdown">
+            <ul class="dropdown-menu">
+                <li><a href="login.html">退出</a></li>
+            </ul>
+        </div>
+    </li>
+    </ul>
+</div>
 </div>
 <div class="view-body">
     <div class="view-sidebar">
@@ -158,50 +159,34 @@
         <div class="padding-big background-color">
             <div class="account-info clearfix">
                 <table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0" >
-                        <form action="index.php?p=Home&c=order&a=insert" method="post" enctype="multipart/form-data">
-                            <table class="list-style Interlaced"width="800px"  border="1px" cellspacing="0" cellpadding="0">
-                                <td style="text-align:right;width:15%;">名字：</td>
-                                <td><input type="text" name="realname" class="textBox length-long"/></td>
-                                </tr>
 
-                                <tr>
-                                    <td style="text-align:right;">电话：</td>
-                                    <td>
-                                        <input type="number" name="phone" class="textBox length-long"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:right;">预约美发师：</td>
+                    <div class="page-title">
+                        <span class="modular fl"><i class="user"></i><em>积分记录一览</em></span><br/>
 
-                                    <td>
-                                        <select name="barber" >
-                                            <?php foreach($member as $v):?>
-                                            <option value="<?=$v['member_id']?>"><?=$v['username']?></option>
-                                            <?php endforeach;?>
-                                        </select>
-                                    </td>
+                    </div>
 
-                                </tr>
-                                <tr>
-                                <tr>
-                                    <td style="text-align:right;">预约时间：</td>
-                                    <td>
-                                        <input type="date" name="date" class="textBox length-long"/></td><br/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                <tr>
-                                    <td style="text-align:right;">备注：</td>
-                                    <td>
-                                        <input type="text" name="content" class="textBox length-long"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="text-align:right;"></td>
-                                    <td><input type="submit" value="预约" class="tdBtn"/></td>
-                                </tr>
-                            </table>
-                        </form>　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+                    <tr>
+                        <th>会员</th>
+                        <th>商品</th>
+                        <th>订单号</th>
+                        <th>是否付款</th>
+                        <th>收货地址</th>
+                        <th>是否发货</th>
+                        <th>下单时间</th>
+                    </tr>
+                    <?php foreach($rows as $v):?>
+                    <tr>
+                        <td class="center"><?=$user[$v['user_id']]['username']?></td>
+                        <td class="center"><?=$goods[$v['goods_id']]['goods_name']?></td>
+                        <td class="center"><?=$v['order_num']?></td>
+                        <td class="center"><?=$v['is_pay']==1?"已付款":"未付款"?></td>
+                        <td class="center"><?=$v['addr']?></td>
+                        <td class="center"><?=$v['is_send']==1?"已发货":"未发货"?></td>
+                        <td class="center"><?=date("Y-m-d",$v['time'])?></td>
+                    </tr>
+                    <?php endforeach;?>
+
+                </table>
             </div>
         </div>
 
