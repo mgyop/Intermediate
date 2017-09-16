@@ -28,7 +28,7 @@
     <?php foreach($codes as $v):?>
     <tr>
         <td class="center"><?=$v['code']?></td>
-        <td class="center"><?=$new_userData[$v['user_id']]['realname']?></td>
+        <td class="center"><?=$new_userData[$v['user_id']]['realname']??1?></td>
         <td class="center"><?=$v['money']?></td>
         <td class="center"><?=$v['status']==1?"未使用":"已使用"?></td>
         <td class="center">
